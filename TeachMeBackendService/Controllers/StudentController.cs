@@ -81,9 +81,9 @@ namespace TeachMeBackendService.Controllers
                 //item.RegisterDate = System.DateTime.Now;
                 current = await InsertAsync(item);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                string gsgdf = ex.Message;
+                Configuration.Services.GetTraceWriter().Error(ex, category: "PostStudent");
             }
             
             return CreatedAtRoute("Tables", new { id = current.Id }, current);

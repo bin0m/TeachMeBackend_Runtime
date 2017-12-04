@@ -9,6 +9,7 @@ using Microsoft.Azure.Mobile.Server.Config;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 using Owin;
+using System.Web.Http.Tracing;
 
 namespace TeachMeBackendService
 {
@@ -20,6 +21,9 @@ namespace TeachMeBackendService
 
             //For more information on Web API tracing, see http://go.microsoft.com/fwlink/?LinkId=620686 
             config.EnableSystemDiagnosticsTracing();
+            SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
+            traceWriter.IsVerbose = true;
+            traceWriter.MinimumLevel = TraceLevel.Debug;
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
