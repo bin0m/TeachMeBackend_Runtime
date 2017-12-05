@@ -84,6 +84,7 @@ namespace TeachMeBackendService.Controllers
             catch (Exception ex)
             {
                 Configuration.Services.GetTraceWriter().Error(ex, category: "PostStudent");
+                throw ex;
             }
             
             return CreatedAtRoute("Tables", new { id = current.Id }, current);

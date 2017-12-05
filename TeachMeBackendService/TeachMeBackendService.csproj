@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201712031052426_InitialCreate.Designer.cs">
       <DependentUpon>201712031052426_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.cs" />
+    <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.Designer.cs">
+      <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -190,6 +194,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712031052426_InitialCreate.resx">
       <DependentUpon>201712031052426_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.resx">
+      <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
