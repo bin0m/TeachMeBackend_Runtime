@@ -161,6 +161,11 @@
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\Course.cs" />
+    <Compile Include="DataObjects\Lesson.cs" />
+    <Compile Include="DataObjects\Pattern.cs" />
+    <Compile Include="DataObjects\Section.cs" />
+    <Compile Include="DataObjects\Section2.cs" />
+    <Compile Include="DataObjects\Section3.cs" />
     <Compile Include="DataObjects\Student.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Migrations\201712031052426_InitialCreate.cs" />
@@ -170,6 +175,10 @@
     <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.cs" />
     <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.Designer.cs">
       <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.cs" />
+    <Compile Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.Designer.cs">
+      <DependentUpon>201712071503143_CreateTablesSectionsLessonsPatterns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -197,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.resx">
       <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.resx">
+      <DependentUpon>201712071503143_CreateTablesSectionsLessonsPatterns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

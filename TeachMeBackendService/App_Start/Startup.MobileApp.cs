@@ -56,7 +56,7 @@ namespace TeachMeBackendService
 
     // DropCreateDatabaseIfModelChanges Указывает EF, что если модель изменилась,
     // нужно воссоздать базу данных с новой структурой
-    public class TeachMeBackendInitializer : DropCreateDatabaseIfModelChanges<TeachMeBackendContext>
+    public class TeachMeBackendInitializer : CreateDatabaseIfNotExists<TeachMeBackendContext>
     {
         protected override void Seed(TeachMeBackendContext context)
         {

@@ -23,16 +23,69 @@ namespace TeachMeBackendService.Models
         } 
 
         public DbSet<TodoItem> TodoItems { get; set; }
-
         public DbSet<Student> Students { get; set; }
-
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Section2> Section2s { get; set; }
+        public DbSet<Section3> Section3s { get; set; }
+        public DbSet<Pattern> Patterns { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+            // Course <one-to-many> Sections
+            modelBuilder.Entity<Section>()
+               .HasRequired(c => c.Course)
+               .WithMany(p => p.Sections)
+               .HasForeignKey(c => c.CourseId);
+
+            // Section <one-to-many> Section2s
+            modelBuilder.Entity<Section2>()
+               .HasRequired(c => c.Section)
+               .WithMany(p => p.Section2s)
+               .HasForeignKey(c => c.SectionId);
+
+            // Section2 <one-to-many> Section3s
+            modelBuilder.Entity<Section3>()
+               .HasRequired(c => c.Section2)
+               .WithMany(p => p.Section3s)
+               .HasForeignKey(c => c.Section2Id);
+
+            // Section <01-to-many> Lessons
+            modelBuilder.Entity<Lesson>()
+               .HasOptional(c => c.Section)
+               .WithMany(p => p.Lessons)
+               .HasForeignKey(c => c.SectionId);
+
+            // Section2 <01-to-many> Lessons
+            modelBuilder.Entity<Lesson>()
+               .HasOptional(c => c.Section3)
+               .WithMany(p => p.Lessons)
+               .HasForeignKey(c => c.Section2Id);
+
+            // Section3 <01-to-many> Lessons
+            modelBuilder.Entity<Lesson>()
+               .HasOptional(c => c.Section3)
+               .WithMany(p => p.Lessons)
+               .HasForeignKey(c => c.Section3Id);
+
+            // Lessons <many-to-many> Patterns
+            modelBuilder.Entity<Lesson>()
+                .HasMany(l => l.Patterns)
+                .WithMany(p => p.Lessons)
+                .Map(m =>
+                {
+                    // Link to intermediate table
+                    m.ToTable("LessonPatterns");
+
+                    // Set up foreign keys in intermediate table
+                    m.MapLeftKey("LessonId");
+                    m.MapRightKey("PatternId");
+                })
+                ;
+
         }
     }
 
