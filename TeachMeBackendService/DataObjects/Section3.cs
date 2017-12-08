@@ -1,11 +1,13 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace TeachMeBackendService.DataObjects
 {
+    [Table("Section3s")]
     public class Section3 : EntityData
     {
         // parent Section2 FK

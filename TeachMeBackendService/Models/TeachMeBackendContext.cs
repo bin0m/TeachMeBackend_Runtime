@@ -25,11 +25,12 @@ namespace TeachMeBackendService.Models
         } 
 
         public DbSet<TodoItem> TodoItems { get; set; }
-        public DbSet<Student> Students { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Section2> Section2s { get; set; }
         public DbSet<Section3> Section3s { get; set; }
         public DbSet<Pattern> Patterns { get; set; }
+ 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

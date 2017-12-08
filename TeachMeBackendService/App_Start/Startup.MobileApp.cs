@@ -71,8 +71,8 @@ namespace TeachMeBackendService
                 context.Set<TodoItem>().Add(todoItem);
             }
 
-            List<Student> testStudentsSet = new List<Student> {
-                new Student {
+            List<User> testUsersSet = new List<User> {
+                new User {
                     Id = Guid.NewGuid().ToString(),
                     CompletedСoursesCount = 0,
                     Email = "nikolaev12@mail.ru",
@@ -81,7 +81,7 @@ namespace TeachMeBackendService
                     Password = "aFA4baf34B9e83b3876e=",
                     RegisterDate = new DateTime(2017, 12, 1),
                     },
-                new Student {
+                new User {
                     Id = Guid.NewGuid().ToString(),
                     CompletedСoursesCount = 0,
                     Email = "pugaeva.verchik@yandex.ru",
@@ -92,9 +92,9 @@ namespace TeachMeBackendService
                     }
             };
 
-            foreach (Student student in testStudentsSet)
+            foreach (User user in testUsersSet)
             {
-                context.Set<Student>().Add(student);
+                context.Set<User>().Add(user);
             }
 
             context.SaveChanges();
