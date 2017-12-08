@@ -11,32 +11,32 @@ using System;
 
 namespace TeachMeBackendService.Controllers
 {
-    public class StudentController : TableController<Student>
+    public class UserController : TableController<User>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             TeachMeBackendContext context = new TeachMeBackendContext();
-            DomainManager = new EntityDomainManager<Student>(context, Request);
+            DomainManager = new EntityDomainManager<User>(context, Request);
         }
 
-        // GET tables/Student
-        public IQueryable<Student> GetAllStudent()
+        // GET tables/User
+        public IQueryable<User> GetAllUser()
         {
             var query = Query();
-            if (query.Count<Student>() == 0)
+            if (query.Count<User>() == 0)
             {
-                List<Student> testStudentsSet = new List<Student> {
-                new Student {
+                List<User> testUsersSet = new List<User> {
+                new User {
                     Id = Guid.NewGuid().ToString(),
                     CompletedСoursesCount = 0,
                     Email = "nikolaev12@mail.ru",
                     FullName = "Сергей Николаев",
                     Login = "nikolaev",
-                    Password = "aFA4baf34B9e83b3876e=",
+                    Password = "ThisisMyPassw0rd",
                     RegisterDate = new DateTime(2017, 12, 1),
                     },
-                new Student {
+                new User {
                     Id = Guid.NewGuid().ToString(),
                     CompletedСoursesCount = 0,
                     Email = "pugaeva.verchik@yandex.ru",
@@ -49,9 +49,9 @@ namespace TeachMeBackendService.Controllers
 
                 using (TeachMeBackendContext context = new TeachMeBackendContext())
                 {
-                    foreach (Student Student in testStudentsSet)
+                    foreach (User User in testUsersSet)
                     {
-                        context.Set<Student>().Add(Student);
+                        context.Set<User>().Add(User);
                     }
                     context.SaveChanges();
                 }
@@ -60,38 +60,45 @@ namespace TeachMeBackendService.Controllers
             return query;
         }
 
-        // GET tables/Student/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public SingleResult<Student> GetStudent(string id)
+        // GET tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public SingleResult<User> GetUser(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/Student/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<Student> PatchStudent(string id, Delta<Student> patch)
+        // PATCH tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task<User> PatchUser(string id, Delta<User> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/Student
-        public async Task<IHttpActionResult> PostStudent(Student item)
+        // POST tables/User
+        public async Task<IHttpActionResult> PostUser(User item)
         {
-            Student current = new Student();
-            try
+            User current = new User();
+
+            // Password hashihg with salt
+            var keyNew = Logic.Helper.GenerateSalt(10);
+            var password = Logic.Helper.EncodePassword(item.Password, keyNew);
+            item.Password = password;
+            item.Salt = keyNew;
+
+             try
             {
                 //item.RegisterDate = System.DateTime.Now;
                 current = await InsertAsync(item);
             }
             catch (Exception ex)
             {
-                Configuration.Services.GetTraceWriter().Error(ex, category: "PostStudent");
+                Configuration.Services.GetTraceWriter().Error(ex, category: "PostUser");
                 throw ex;
             }
             
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        // DELETE tables/Student/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task DeleteStudent(string id)
+        // DELETE tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task DeleteUser(string id)
         {
              return DeleteAsync(id);
         }
