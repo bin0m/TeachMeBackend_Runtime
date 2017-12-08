@@ -7,6 +7,8 @@ using TeachMeBackendService.DataObjects;
 
 namespace TeachMeBackendService.Models
 {
+    //For MySql future use 
+    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class TeachMeBackendContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
