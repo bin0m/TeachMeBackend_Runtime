@@ -78,10 +78,10 @@ namespace TeachMeBackendService.Controllers
             User current = new User();
 
             // Password hashihg with salt
-            var keyNew = Logic.Helper.GenerateSalt(10);
-            var password = Logic.Helper.EncodePassword(item.Password, keyNew);
-            item.Password = password;
-            item.Salt = keyNew;
+            //var keyNew = Logic.Helper.GenerateSalt(10);
+            //var password = Logic.Helper.EncodePassword(item.Password, keyNew);
+            //item.Password = password;
+            //item.Salt = keyNew;
 
              try
             {

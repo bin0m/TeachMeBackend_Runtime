@@ -7,13 +7,13 @@ namespace TeachMeBackendService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CreateIndexUniqueOnStudentEmail : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateIndexUniqueOnStudentEmail));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712051510498_CreateIndexUniqueOnStudentEmail"; }
+            get { return "201712091749523_Initial"; }
         }
         
         string IMigrationMetadata.Source

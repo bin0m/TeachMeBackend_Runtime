@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TeachMeBackendService.DataObjects
 {
     public enum UserRole {
-        Student = 1,
-        Teacher = 2,
-        Admin= 3
+        Student = 0,
+        Teacher = 1,
+        Admin= 2
     }
 
     public class User : EntityData

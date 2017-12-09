@@ -169,21 +169,9 @@
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Logic\Helper.cs" />
-    <Compile Include="Migrations\201712031052426_InitialCreate.cs" />
-    <Compile Include="Migrations\201712031052426_InitialCreate.Designer.cs">
-      <DependentUpon>201712031052426_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.cs" />
-    <Compile Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.Designer.cs">
-      <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.cs" />
-    <Compile Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.Designer.cs">
-      <DependentUpon>201712071503143_CreateTablesSectionsLessonsPatterns.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712082138376_ChangeStudentToUser.cs" />
-    <Compile Include="Migrations\201712082138376_ChangeStudentToUser.Designer.cs">
-      <DependentUpon>201712082138376_ChangeStudentToUser.cs</DependentUpon>
+    <Compile Include="Migrations\201712091749523_Initial.cs" />
+    <Compile Include="Migrations\201712091749523_Initial.Designer.cs">
+      <DependentUpon>201712091749523_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -206,17 +194,8 @@
     <None Include="Properties\PublishProfiles\TeachMeBackend - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712031052426_InitialCreate.resx">
-      <DependentUpon>201712031052426_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712051510498_CreateIndexUniqueOnStudentEmail.resx">
-      <DependentUpon>201712051510498_CreateIndexUniqueOnStudentEmail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712071503143_CreateTablesSectionsLessonsPatterns.resx">
-      <DependentUpon>201712071503143_CreateTablesSectionsLessonsPatterns.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712082138376_ChangeStudentToUser.resx">
-      <DependentUpon>201712082138376_ChangeStudentToUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712091749523_Initial.resx">
+      <DependentUpon>201712091749523_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
