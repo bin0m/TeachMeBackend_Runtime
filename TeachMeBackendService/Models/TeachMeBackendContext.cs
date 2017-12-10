@@ -30,7 +30,8 @@ namespace TeachMeBackendService.Models
         public DbSet<Section2> Section2s { get; set; }
         public DbSet<Section3> Section3s { get; set; }
         public DbSet<Pattern> Patterns { get; set; }
- 
+        public DbSet<Course> Courses { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -90,6 +91,8 @@ namespace TeachMeBackendService.Models
                 ;
 
         }
+
+        
     }
 
 }
