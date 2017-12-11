@@ -2,6 +2,7 @@
 using Microsoft.Azure.Mobile.Server;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace TeachMeBackendService.DataObjects
 {
@@ -36,6 +37,8 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public UserRole UserRole { get; set; }
 
-       
+        // Children Sections
+        public List<Course> Courses { get; set; }
+
     }
 }

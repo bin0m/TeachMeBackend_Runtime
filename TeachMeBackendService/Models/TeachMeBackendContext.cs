@@ -39,6 +39,12 @@ namespace TeachMeBackendService.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
 
+            // Teachers <one-to-many> Courses
+            modelBuilder.Entity<Course>()
+               .HasRequired(c => c.User)
+               .WithMany(t => t.Courses)
+               .HasForeignKey(c => c.UserId);
+
             // Course <one-to-many> Sections
             modelBuilder.Entity<Section>()
                .HasRequired(c => c.Course)
