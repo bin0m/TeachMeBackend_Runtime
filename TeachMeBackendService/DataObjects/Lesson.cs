@@ -29,7 +29,7 @@ namespace TeachMeBackendService.DataObjects
         // parent Section3 link
         public Section3 Section3 { get; set; }
 
-        //link to many Patterns which are used in this lesson
+        //children Patterns
         public List<Pattern> Patterns { get; set; }
     }
 }

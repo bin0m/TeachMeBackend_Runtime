@@ -11,7 +11,10 @@ namespace TeachMeBackendService.DataObjects
         public string Name { get; set; }
         public string JsonText { get; set; }
 
-        //link to Lessons where Pattern is Used
-        public List<Lesson> Lessons { get; set; }
+        // parent Lesson FK
+        public String LessonId { get; set; }
+
+        // parent Lesson link
+        public Lesson Lesson { get; set; }
     }
 }

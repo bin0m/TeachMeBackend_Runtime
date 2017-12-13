@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201712111436196_AddCoursesToTeacherRelationship.Designer.cs">
       <DependentUpon>201712111436196_AddCoursesToTeacherRelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.cs" />
+    <Compile Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.Designer.cs">
+      <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -209,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712111436196_AddCoursesToTeacherRelationship.resx">
       <DependentUpon>201712111436196_AddCoursesToTeacherRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.resx">
+      <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

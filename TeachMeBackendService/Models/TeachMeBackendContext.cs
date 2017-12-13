@@ -82,20 +82,12 @@ namespace TeachMeBackendService.Models
                .WithMany(p => p.Lessons)
                .HasForeignKey(c => c.Section3Id);
 
-            // Lessons <many-to-many> Patterns
-            modelBuilder.Entity<Lesson>()
-                .HasMany(l => l.Patterns)
-                .WithMany(p => p.Lessons)
-                .Map(m =>
-                {
-                    // Link to intermediate table
-                    m.ToTable("LessonPatterns");
-
-                    // Set up foreign keys in intermediate table
-                    m.MapLeftKey("LessonId");
-                    m.MapRightKey("PatternId");
-                })
-                ;
+            // Lessons <1-to-many> Patterns
+            modelBuilder.Entity<Pattern>()
+                .HasRequired(p => p.Lesson)
+               .WithMany(l => l.Patterns)
+               .HasForeignKey(p => p.LessonId);
+            
 
         }
     
