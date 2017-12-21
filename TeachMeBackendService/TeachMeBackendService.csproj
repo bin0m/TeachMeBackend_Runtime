@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.Designer.cs">
       <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211713325_AddColumnTypeToPattern.cs" />
+    <Compile Include="Migrations\201712211713325_AddColumnTypeToPattern.Designer.cs">
+      <DependentUpon>201712211713325_AddColumnTypeToPattern.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.resx">
       <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211713325_AddColumnTypeToPattern.resx">
+      <DependentUpon>201712211713325_AddColumnTypeToPattern.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
