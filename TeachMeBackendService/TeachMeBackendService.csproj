@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
