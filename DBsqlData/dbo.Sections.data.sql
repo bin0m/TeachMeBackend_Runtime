@@ -1,0 +1,2 @@
+﻿INSERT INTO [dbo].[Sections] ([Id], [Name], [CourseId], [CreatedAt], [UpdatedAt], [Deleted]) VALUES (N'692ed055f7c7472da483efd26abaffcf', N'Human biology ', N'c2ea7d5796384b6f88cdf3299f3470d6', N'15.12.2017 13:57:13 +00:00', N'15.12.2017 13:57:13 +00:00', 0)
+INSERT INTO [dbo].[Sections] ([Id], [Name], [CourseId], [CreatedAt], [UpdatedAt], [Deleted]) VALUES (N'40bb36ab360a46519352bda066b54838', N'Animal biology', N'c2ea7d5796384b6f88cdf3299f3470d6', N'22.12.2017 19:35:43 +00:00', N'22.12.2017 19:35:43 +00:00', 0)

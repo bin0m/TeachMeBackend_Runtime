@@ -1,0 +1,2 @@
+﻿INSERT INTO [dbo].[Courses] ([Id], [Name], [Days], [CreatedAt], [UpdatedAt], [Deleted], [UserId]) VALUES (N'3311b847c5fa4878a1afef722fa8b7a0', N'курс 2', 0, N'14.12.2017 12:15:33 +00:00', N'14.12.2017 12:15:33 +00:00', 0, N'50a1191aae7940d89c6e506eaa1974d7')
+INSERT INTO [dbo].[Courses] ([Id], [Name], [Days], [CreatedAt], [UpdatedAt], [Deleted], [UserId]) VALUES (N'c2ea7d5796384b6f88cdf3299f3470d6', N'Biology', 60, N'14.12.2017 22:33:33 +00:00', N'14.12.2017 22:33:33 +00:00', 0, N'175d3f1625fd4c87bd57bafabaac7942')
