@@ -13,7 +13,7 @@ namespace TeachMeBackendService.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712091749523_Initial"; }
+            get { return "201712251355027_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -177,21 +177,9 @@
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Logic\Helper.cs" />
-    <Compile Include="Migrations\201712091749523_Initial.cs" />
-    <Compile Include="Migrations\201712091749523_Initial.Designer.cs">
-      <DependentUpon>201712091749523_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712111436196_AddCoursesToTeacherRelationship.cs" />
-    <Compile Include="Migrations\201712111436196_AddCoursesToTeacherRelationship.Designer.cs">
-      <DependentUpon>201712111436196_AddCoursesToTeacherRelationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.cs" />
-    <Compile Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.Designer.cs">
-      <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712211713325_AddColumnTypeToPattern.cs" />
-    <Compile Include="Migrations\201712211713325_AddColumnTypeToPattern.Designer.cs">
-      <DependentUpon>201712211713325_AddColumnTypeToPattern.cs</DependentUpon>
+    <Compile Include="Migrations\201712251355027_Initial.cs" />
+    <Compile Include="Migrations\201712251355027_Initial.Designer.cs">
+      <DependentUpon>201712251355027_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -214,17 +202,8 @@
     <None Include="Properties\PublishProfiles\TeachMeBackend - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712091749523_Initial.resx">
-      <DependentUpon>201712091749523_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712111436196_AddCoursesToTeacherRelationship.resx">
-      <DependentUpon>201712111436196_AddCoursesToTeacherRelationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712131454284_ALterPatternsToLessonRelationship.resx">
-      <DependentUpon>201712131454284_ALterPatternsToLessonRelationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712211713325_AddColumnTypeToPattern.resx">
-      <DependentUpon>201712211713325_AddColumnTypeToPattern.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712251355027_Initial.resx">
+      <DependentUpon>201712251355027_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
