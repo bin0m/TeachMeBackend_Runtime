@@ -90,7 +90,54 @@ namespace TeachMeBackendService.Models
             
 
         }
-    
+
+        /// <summary>
+        /// Delete Section And ALL Its Children
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>1)section, when deletes all succesfully  2) null, when failed to delete section or one of its children</returns>
+        public Section DeleteSectionAndChildren(string id)
+        {
+            var section = Sections.Include(c => c.Lessons).FirstOrDefault(c => c.Id == id);
+
+            if (section != null)
+            {
+                Lessons.RemoveRange(section.Lessons);
+                Sections.Remove(section);
+                return section;
+            }            
+
+            return null;
+        }
+
+
+        /// <summary>
+        /// Delete Course And ALL Its Children
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>1)course, when deletes all succesfully  2) null, when failed to delete course or one of its children</returns>
+        public Course DeleteCourseAndChildren(string id)
+        {
+            var course = Courses.Include(c => c.Sections).FirstOrDefault(c => c.Id == id);
+
+            if (course != null)
+            {
+                var ids = course.Sections.Select(s => s.Id).ToList();
+                foreach (var sectionId in ids)
+                {
+                    var result = DeleteSectionAndChildren(sectionId);
+                    if (result == null)
+                    {
+                        return null;
+                    }
+                }
+                Courses.Remove(course);
+                return course;
+            }
+
+            return null;
+        }
+
     }
 
 }

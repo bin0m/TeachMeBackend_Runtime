@@ -65,7 +65,8 @@ namespace TeachMeBackendService.Controllers
                 {
                     return NotFound();
                 }
-                
+
+                dbContext.Lessons.RemoveRange(section.Lessons);
                 dbContext.Sections.Remove(section);
                 dbContext.SaveChanges();
                           

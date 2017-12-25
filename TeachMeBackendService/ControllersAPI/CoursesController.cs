@@ -15,46 +15,45 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
-
     [MobileAppController]
-    public class SectionsController : ApiController
+    public class CoursesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
-        // GET: api/Sections
-        public IQueryable<Section> GetSections()
+        // GET: api/Courses
+        public IQueryable<Course> GetCourses()
         {
-            return db.Sections;
+            return db.Courses;
         }
 
-        // GET: api/Sections/5
-        [ResponseType(typeof(Section))]
-        public IHttpActionResult GetSection(string id)
+        // GET: api/Courses/5
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult GetCourse(string id)
         {
-            Section section = db.Sections.Find(id);
-            if (section == null)
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return Ok(section);
+            return Ok(course);
         }
 
-        // PUT: api/Sections/5
+        // PUT: api/Courses/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSection(string id, Section section)
+        public IHttpActionResult PutCourse(string id, Course course)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != section.Id)
+            if (id != course.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(section).State = EntityState.Modified;
+            db.Entry(course).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +61,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SectionExists(id))
+                if (!CourseExists(id))
                 {
                     return NotFound();
                 }
@@ -75,16 +74,16 @@ namespace TeachMeBackendService.ControllersAPI
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Sections
-        [ResponseType(typeof(Section))]
-        public IHttpActionResult PostSection(Section section)
+        // POST: api/Courses
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult PostCourse(Course course)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sections.Add(section);
+            db.Courses.Add(course);
 
             try
             {
@@ -92,7 +91,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
             catch (DbUpdateException)
             {
-                if (SectionExists(section.Id))
+                if (CourseExists(course.Id))
                 {
                     return Conflict();
                 }
@@ -102,25 +101,25 @@ namespace TeachMeBackendService.ControllersAPI
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = section.Id }, section);
+            return CreatedAtRoute("DefaultApi", new { id = course.Id }, course);
         }
 
-        // DELETE: api/Sections/5
-        [ResponseType(typeof(Section))]
-        public IHttpActionResult DeleteSection(string id)
+        // DELETE: api/Courses/5
+        [ResponseType(typeof(Course))]
+        public IHttpActionResult DeleteCourse(string id)
         {
-            Section section = null;
+            Course course = null;
             using (var dbContext = new Models.TeachMeBackendContext())
             {
-                section = dbContext.DeleteSectionAndChildren(id);
-                if (section == null)
+                course = dbContext.DeleteCourseAndChildren(id);
+                if (course == null)
                 {
                     return NotFound();
                 }
                 dbContext.SaveChanges();
             }
 
-            return Ok(section);
+            return Ok(course);
         }
 
         protected override void Dispose(bool disposing)
@@ -132,9 +131,9 @@ namespace TeachMeBackendService.ControllersAPI
             base.Dispose(disposing);
         }
 
-        private bool SectionExists(string id)
+        private bool CourseExists(string id)
         {
-            return db.Sections.Count(e => e.Id == id) > 0;
+            return db.Courses.Count(e => e.Id == id) > 0;
         }
     }
 }
