@@ -25,8 +25,11 @@ namespace TeachMeBackendService
             traceWriter.IsVerbose = true;
             traceWriter.MinimumLevel = TraceLevel.Debug;
 
+            // Enable attribute routing
+            config.MapHttpAttributeRoutes();
+
             new MobileAppConfiguration()
-                .UseDefaultConfiguration()
+                .UseDefaultConfiguration()  
                 .ApplyTo(config);
 
             // Создаем базу каждый раз с тестовым сетом данных
@@ -50,6 +53,7 @@ namespace TeachMeBackendService
                     TokenHandler = config.GetAppServiceTokenHandler()
                 });
             }
+            
             app.UseWebApi(config);
         }
     }

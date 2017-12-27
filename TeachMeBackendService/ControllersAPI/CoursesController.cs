@@ -122,6 +122,14 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(course);
         }
 
+        [Route("~/api/users/{usesrId}/courses")]
+        public IQueryable<Course> GetByUser(string usesrId)
+        {
+            var courses = db.Courses.Where(c => c.UserId == usesrId);
+
+            return courses;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
