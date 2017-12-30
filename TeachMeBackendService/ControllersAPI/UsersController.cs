@@ -8,11 +8,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.Azure.Mobile.Server;
+using Microsoft.Azure.Mobile.Server.Config;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
+
+    [MobileAppController]
     public class UsersController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();

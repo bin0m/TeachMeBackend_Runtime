@@ -8,11 +8,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.Azure.Mobile.Server;
+using Microsoft.Azure.Mobile.Server.Config;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
+
+    [MobileAppController]
     public class LessonsController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
@@ -38,7 +42,7 @@ namespace TeachMeBackendService.ControllersAPI
 
         
         [Route("~/api/sections/{id}/lessons")]
-        public IQueryable<Lesson> GetByCourse(string id)
+        public IQueryable<Lesson> GetBySection(string id)
         {
             var lessons = db.Lessons.Where(c => c.SectionId == id);
 
