@@ -32,6 +32,7 @@ namespace TeachMeBackendService.Models
         public DbSet<Section3> Section3 { get; set; }      
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Pattern> Patterns { get; set; }
+        public DbSet<PatternStudent> PatternStudents { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -84,10 +85,22 @@ namespace TeachMeBackendService.Models
 
             // Lessons <1-to-many> Patterns
             modelBuilder.Entity<Pattern>()
-                .HasRequired(p => p.Lesson)
+               .HasRequired(p => p.Lesson)
                .WithMany(l => l.Patterns)
                .HasForeignKey(p => p.LessonId);
-            
+
+            // Pattern <1-to-many> PatternStudents
+            modelBuilder.Entity<PatternStudent>()
+               .HasRequired(p => p.Pattern)
+               .WithMany(l => l.PatternStudents)
+               .HasForeignKey(p => p.PatternId);
+
+            // User <1-to-many> PatternStudents
+            modelBuilder.Entity<PatternStudent>()
+               .HasRequired(p => p.User)
+               .WithMany(l => l.PatternStudents)
+               .HasForeignKey(p => p.UserId);
+
 
         }
 

@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
+    <Compile Include="Controllers\PatternStudentController.cs" />
     <Compile Include="Controllers\Section2Controller.cs" />
     <Compile Include="Controllers\Section3Controller.cs" />
     <Compile Include="Controllers\SectionController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Pattern.cs" />
+    <Compile Include="DataObjects\PatternStudent.cs" />
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
     <Compile Include="DataObjects\Section3.cs" />
@@ -183,6 +185,14 @@
     <Compile Include="Migrations\201712251355027_Initial.cs" />
     <Compile Include="Migrations\201712251355027_Initial.Designer.cs">
       <DependentUpon>201712251355027_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801011543227_AddedPatternStudentsTable.cs" />
+    <Compile Include="Migrations\201801011543227_AddedPatternStudentsTable.Designer.cs">
+      <DependentUpon>201801011543227_AddedPatternStudentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs" />
+    <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.Designer.cs">
+      <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -208,6 +218,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712251355027_Initial.resx">
       <DependentUpon>201712251355027_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011543227_AddedPatternStudentsTable.resx">
+      <DependentUpon>201801011543227_AddedPatternStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.resx">
+      <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

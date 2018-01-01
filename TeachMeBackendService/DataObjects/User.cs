@@ -37,8 +37,11 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public UserRole UserRole { get; set; }
 
-        // Children Sections
+        // Children Courses
         public List<Course> Courses { get; set; }
+
+        // Children PatternStudents
+        public List<PatternStudent> PatternStudents { get; set; }
 
     }
 }
