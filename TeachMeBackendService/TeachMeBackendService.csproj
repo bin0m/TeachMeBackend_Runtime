@@ -160,6 +160,7 @@
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\PatternsController.cs" />
+    <Compile Include="ControllersAPI\PatternStudentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
