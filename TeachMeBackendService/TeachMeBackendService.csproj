@@ -160,9 +160,11 @@
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\PatternsController.cs" />
+    <Compile Include="ControllersAPI\CommentsController.cs" />
     <Compile Include="ControllersAPI\PatternStudentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Pattern.cs" />
+    <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\PatternStudent.cs" />
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
@@ -194,6 +197,10 @@
     <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs" />
     <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.Designer.cs">
       <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801062012061_AddedCommentsTable.cs" />
+    <Compile Include="Migrations\201801062012061_AddedCommentsTable.Designer.cs">
+      <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -225,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.resx">
       <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801062012061_AddedCommentsTable.resx">
+      <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

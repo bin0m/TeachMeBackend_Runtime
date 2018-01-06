@@ -25,5 +25,8 @@ namespace TeachMeBackendService.DataObjects
 
         // Children PatternStudents
         public List<PatternStudent> PatternStudents { get; set; }
+
+        // Children Comments
+        public List<Comment> Comments { get; set; }
     }
 }
