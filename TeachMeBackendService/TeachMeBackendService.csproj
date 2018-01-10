@@ -220,6 +220,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Diagram\TeachMeAzureDb.schema2.dgml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\TeachMeBackend - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\TeachMeServ - Web Deploy.pubxml" />
   </ItemGroup>
