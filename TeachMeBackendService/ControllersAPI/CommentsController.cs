@@ -44,9 +44,9 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/patterns/{id}/comments")]
         public IQueryable<Comment> GetBySection(string id)
         {
-            var patternStudents = db.Comments.Where(c => c.PatternId == id);
+            var comment = db.Comments.Include(c => c.User).Where(c => c.PatternId == id);
 
-            return patternStudents;
+            return comment;
         }
 
         protected override void Dispose(bool disposing)
