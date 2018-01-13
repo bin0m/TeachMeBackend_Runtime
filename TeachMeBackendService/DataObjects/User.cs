@@ -34,6 +34,12 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public DateTime RegisterDate { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime DateOfBirth { get; set; }
+
+        [StringLength(100)]
+        public string AvatarPath { get; set; }
+
         [Required]
         public UserRole UserRole { get; set; }
 

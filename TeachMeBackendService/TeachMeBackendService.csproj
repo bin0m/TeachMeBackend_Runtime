@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201801130004141_CommentRatingsTable.Designer.cs">
       <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs" />
+    <Compile Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.Designer.cs">
+      <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -248,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801130004141_CommentRatingsTable.resx">
       <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.resx">
+      <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
