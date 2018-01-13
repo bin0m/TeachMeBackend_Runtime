@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\PatternsController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\CommentRatingController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Pattern.cs" />
@@ -201,6 +204,10 @@
     <Compile Include="Migrations\201801062012061_AddedCommentsTable.cs" />
     <Compile Include="Migrations\201801062012061_AddedCommentsTable.Designer.cs">
       <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801130004141_CommentRatingsTable.cs" />
+    <Compile Include="Migrations\201801130004141_CommentRatingsTable.Designer.cs">
+      <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -238,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801062012061_AddedCommentsTable.resx">
       <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801130004141_CommentRatingsTable.resx">
+      <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

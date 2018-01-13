@@ -34,6 +34,7 @@ namespace TeachMeBackendService.Models
         public DbSet<Pattern> Patterns { get; set; }
         public DbSet<PatternStudent> PatternStudents { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentRating> CommentRatings { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -113,6 +114,19 @@ namespace TeachMeBackendService.Models
                .HasRequired(p => p.User)
                .WithMany(l => l.Comments)
                .HasForeignKey(p => p.UserId);
+
+            // Comment <1-to-many> CommentRatings
+            modelBuilder.Entity<CommentRating>()
+               .HasRequired(cr => cr.Comment)
+               .WithMany(l => l.CommentRatings)
+               .HasForeignKey(cr => cr.CommentId);
+
+            // User <1-to-many> CommentRatings
+            modelBuilder.Entity<CommentRating>()
+               .HasRequired(cr => cr.User)
+               .WithMany(l => l.CommentRatings)
+               .HasForeignKey(cr => cr.UserId)
+               .WillCascadeOnDelete(false);
 
 
         }

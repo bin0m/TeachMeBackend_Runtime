@@ -46,5 +46,8 @@ namespace TeachMeBackendService.DataObjects
         // Children Comments
         public List<Comment> Comments { get; set; }
 
+        // Children CommentRatings
+        public List<CommentRating> CommentRatings { get; set; }
+
     }
 }
