@@ -29,7 +29,7 @@ namespace TeachMeBackendService.DataObjects
         public string Password { get; set; }
         public string Salt { get; set; }
 
-        public int CompletedСoursesCount { get; set; }
+        public int CompletedCoursesCount { get; set; }
 
         [Required]
         public DateTime RegisterDate { get; set; }

@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.Designer.cs">
       <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs" />
+    <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.Designer.cs">
+      <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.resx">
       <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.resx">
+      <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

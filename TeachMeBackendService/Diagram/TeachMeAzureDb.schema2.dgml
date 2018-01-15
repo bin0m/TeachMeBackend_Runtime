@@ -85,7 +85,7 @@
     <Node Id="dbo.Sections_Version" Category="Field" Bounds="707.989861297638,729.398039122259,59.7233333333334,25.96" Description="rowversion" Label="Version" />
     <Node Id="dbo.Users" Category="Table" Bounds="1032.33461208445,553.045613893826,388.156045735677,309.811478630317" Group="Expanded" Label="dbo.Users" UseManualLocation="True" />
     <Node Id="dbo.Users_AvatarPath" Category="Field Optional" Bounds="1255.71797200199,704.976791944119,77.6233333333334,25.96" Description="nvarchar(100)" Label="AvatarPath" />
-    <Node Id="dbo.Users_CompletedСoursesCount" Category="Field" Bounds="1052.3346175098,816.896992524143,152.436666666666,25.96" Description="int" Label="CompletedСoursesCount" />
+    <Node Id="dbo.Users_CompletedCoursesCount" Category="Field" Bounds="1052.3346175098,816.896992524143,152.436666666666,25.96" Description="int" Label="CompletedCoursesCount" />
     <Node Id="dbo.Users_CreatedAt" Category="Field" Bounds="1152.51463866866,704.972201362034,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
     <Node Id="dbo.Users_DateOfBirth " Category="Field Optional" Bounds="1160.02130072378,760.936891944119,82.4833333333336,25.96" Description="datetime" Label="DateOfBirth" />
     <Node Id="dbo.Users_Deleted" Category="Field" Bounds="1142.07398030277,649.009336360677,61.2833333333333,25.96" Description="bit" Label="Deleted" />
@@ -198,7 +198,7 @@
     <Link Source="dbo.Sections" Target="dbo.Sections_Version" Category="Contains" />
     <Link Source="dbo.Sections_CourseId" Target="dbo.Courses_Id" Category="Foreign Key" Label="FK_dbo.Sections_dbo.Courses_CourseId" />
     <Link Source="dbo.Users" Target="dbo.Users_AvatarPath" Category="Contains" />
-    <Link Source="dbo.Users" Target="dbo.Users_CompletedСoursesCount" Category="Contains" />
+    <Link Source="dbo.Users" Target="dbo.Users_CompletedCoursesCount" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_CreatedAt" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_DateOfBirth " Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_Deleted" Category="Contains" />

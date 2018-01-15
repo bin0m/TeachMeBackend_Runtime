@@ -346,7 +346,7 @@ namespace TeachMeBackendService.Migrations
                         Login = c.String(nullable: false, maxLength: 100),
                         Password = c.String(nullable: false),
                         Salt = c.String(),
-                        CompletedСoursesCount = c.Int(nullable: false),
+                        CompletedCoursesCount = c.Int(nullable: false),
                         RegisterDate = c.DateTime(nullable: false),
                         UserRole = c.Int(nullable: false),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",

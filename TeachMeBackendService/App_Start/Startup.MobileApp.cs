@@ -79,7 +79,7 @@ namespace TeachMeBackendService
             List<User> testUsersSet = new List<User> {
                 new User {
                     Id = Guid.NewGuid().ToString(),
-                    CompletedСoursesCount = 0,
+                    CompletedCoursesCount = 0,
                     Email = "nikolaev12@mail.ru",
                     FullName = "Сергей Николаев",
                     Login = "nikolaev",
@@ -88,7 +88,7 @@ namespace TeachMeBackendService
                     },
                 new User {
                     Id = Guid.NewGuid().ToString(),
-                    CompletedСoursesCount = 0,
+                    CompletedCoursesCount = 0,
                     Email = "pugaeva.verchik@yandex.ru",
                     FullName = "Вероника Пугаева",
                     Login = "verchik",
