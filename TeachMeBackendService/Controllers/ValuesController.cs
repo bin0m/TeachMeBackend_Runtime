@@ -7,15 +7,19 @@ using System.Data.Entity;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using TeachMeBackendService.DataObjects;
+using Microsoft.Web.Http;
 
 namespace TeachMeBackendService.Controllers
 {
     // Use the MobileAppController attribute for each ApiController you want to use  
     // from your mobile clients 
     [MobileAppController]
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/values")]
     public class ValuesController : ApiController
     {
         // GET api/values
+        [Route("")]
         public string Get()
         {
             MobileAppSettingsDictionary settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
@@ -29,12 +33,14 @@ namespace TeachMeBackendService.Controllers
         }
 
         // POST api/values
+        [Route("")]
         public string Post()
         {
             return "Hello World!";
         }
 
         // GET api/values
+        [Route("{id}")]
         public IHttpActionResult GetValueById(string id)
         {
             Section section = null;
@@ -54,6 +60,7 @@ namespace TeachMeBackendService.Controllers
 
 
         // Delete api/values
+        [Route("{id}")]
         public IHttpActionResult Delete(string id)
         {
             using (var dbContext = new Models.TeachMeBackendContext())

@@ -8,9 +8,12 @@ using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 using System.Collections.Generic;
 using System;
+using Microsoft.Web.Http;
 
 namespace TeachMeBackendService.Controllers
 {
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/user")]
     public class UserController : TableController<User>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -20,7 +23,8 @@ namespace TeachMeBackendService.Controllers
             DomainManager = new EntityDomainManager<User>(context, Request);
         }
 
-        // GET tables/User
+        // GET User
+        [Route("")]
         public IQueryable<User> GetAllUser()
         {
             var query = Query();
@@ -60,19 +64,22 @@ namespace TeachMeBackendService.Controllers
             return query;
         }
 
-        // GET tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // GET User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}", Name = "GetUser")]
         public SingleResult<User> GetUser(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // PATCH User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task<User> PatchUser(string id, Delta<User> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/User
+        // POST User
+        [Route("")]
         public async Task<IHttpActionResult> PostUser(User item)
         {
             User current = new User();
@@ -94,10 +101,11 @@ namespace TeachMeBackendService.Controllers
                 throw ex;
             }
             
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+            return CreatedAtRoute("GetUser", new { id = current.Id }, current);
         }
 
-        // DELETE tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // DELETE User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task DeleteUser(string id)
         {
              return DeleteAsync(id);

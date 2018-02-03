@@ -10,24 +10,28 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
-
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/patternstudents")]
     [MobileAppController]
     public class PatternStudentsController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/PatternStudents
+        [Route("")]
         public IQueryable<PatternStudent> GetPatternStudents()
         {
             return db.PatternStudents;
         }
 
         // GET: api/PatternStudents/5
+        [Route("{id}")]
         [ResponseType(typeof(PatternStudent))]
         public IHttpActionResult GetPatternStudent(string id)
         {
@@ -41,7 +45,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
 
-        [Route("~/api/patterns/{id}/patternStudents")]
+        [Route("~/api/v{version:ApiVersion}/patterns/{id}/patternStudents")]
         public IQueryable<PatternStudent> GetBySection(string id)
         {
             var patternStudents = db.PatternStudents.Where(c => c.PatternId == id);

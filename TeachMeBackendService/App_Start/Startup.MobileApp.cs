@@ -10,6 +10,8 @@ using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 using Owin;
 using System.Web.Http.Tracing;
+using System.Web.Http.Routing;
+using Microsoft.Web.Http.Routing;
 
 namespace TeachMeBackendService
 {
@@ -25,8 +27,27 @@ namespace TeachMeBackendService
             traceWriter.IsVerbose = true;
             traceWriter.MinimumLevel = TraceLevel.Debug;
 
+            // Enable API Versioning
+            config.AddApiVersioning();
+
+            var constraintResolver = new DefaultInlineConstraintResolver()
+                {
+                    ConstraintMap =
+                    {
+                        ["apiVersion"] = typeof( ApiVersionRouteConstraint )
+                    }
+                };
             // Enable attribute routing
-            config.MapHttpAttributeRoutes();
+            config.MapHttpAttributeRoutes(constraintResolver);
+
+            // Convention-based routing (Not sure, it is needed)
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/v{version:ApiVersion}/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()  

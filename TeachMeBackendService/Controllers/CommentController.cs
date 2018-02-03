@@ -4,11 +4,14 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.Controllers
 {
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/comment")]
     public class CommentController : TableController<Comment>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -18,32 +21,37 @@ namespace TeachMeBackendService.Controllers
             DomainManager = new EntityDomainManager<Comment>(context, Request);
         }
 
-        // GET tables/Comment
+        // GET Comment
+        [Route("")]
         public IQueryable<Comment> GetAllComment()
         {
             return Query(); 
         }
 
-        // GET tables/Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // GET Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}", Name = "GetComment")]
         public SingleResult<Comment> GetComment(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // PATCH Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task<Comment> PatchComment(string id, Delta<Comment> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/Comment
+        // POST Comment
+        [Route("")]
         public async Task<IHttpActionResult> PostComment(Comment item)
         {
             Comment current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+            return CreatedAtRoute("GetComment", new { id = current.Id }, current);
         }
 
-        // DELETE tables/Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // DELETE Comment/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task DeleteComment(string id)
         {
              return DeleteAsync(id);

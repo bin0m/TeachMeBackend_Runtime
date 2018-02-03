@@ -10,23 +10,28 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/courses")]
     [MobileAppController]
     public class CoursesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Courses
+        [Route("")]
         public IQueryable<Course> GetCourses()
         {
             return db.Courses;
         }
 
         // GET: api/Courses/5
+        [Route("{id}")]
         [ResponseType(typeof(Course))]
         public IHttpActionResult GetCourse(string id)
         {
@@ -40,6 +45,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // PUT: api/Courses/5
+        [Route("{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCourse(string id, Course course)
         {
@@ -75,6 +81,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // POST: api/Courses
+        [Route("")]
         [ResponseType(typeof(Course))]
         public IHttpActionResult PostCourse(Course course)
         {
@@ -105,6 +112,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // DELETE: api/Courses/5
+        [Route("{id}")]
         [ResponseType(typeof(Course))]
         public IHttpActionResult DeleteCourse(string id)
         {
@@ -122,7 +130,7 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(course);
         }
 
-        [Route("~/api/users/{usesrId}/courses")]
+        [Route("~/api/v{version:ApiVersion}/users/{usesrId}/courses")]
         public IQueryable<Course> GetByUser(string usesrId)
         {
             var courses = db.Courses.Where(c => c.UserId == usesrId);

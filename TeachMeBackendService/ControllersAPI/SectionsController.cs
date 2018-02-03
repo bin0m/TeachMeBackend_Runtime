@@ -10,25 +10,29 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
 {
-
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/sections")]
     [MobileAppController]
     public class SectionsController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Sections
+        [Route("")]
         public IQueryable<Section> GetSections()
         {
             return db.Sections;
         }
 
         // GET: api/Sections/5
-        [ResponseType(typeof(Section))]
+        [Route("{id}")]
+        [ResponseType(typeof(Section))]        
         public IHttpActionResult GetSection(string id)
         {
             Section section = db.Sections.Find(id);
@@ -41,6 +45,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // PUT: api/Sections/5
+        [Route("{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSection(string id, Section section)
         {
@@ -76,6 +81,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // POST: api/Sections
+        [Route("")]
         [ResponseType(typeof(Section))]
         public IHttpActionResult PostSection(Section section)
         {
@@ -106,6 +112,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // DELETE: api/Sections/5
+        [Route("{id}")]
         [ResponseType(typeof(Section))]
         public IHttpActionResult DeleteSection(string id)
         {
@@ -123,7 +130,7 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(section);
         }
 
-        [Route("~/api/courses/{id}/sections")]
+        [Route("~/api/v{version:ApiVersion}/courses/{id}/sections")]
         public IQueryable<Section> GetByCourse(string id)
         {
             var sections = db.Sections.Where(c => c.CourseId == id);

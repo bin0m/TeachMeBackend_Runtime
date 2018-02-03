@@ -70,6 +70,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.WebApi.Versioning, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Versioning.2.2.0\lib\net45\Microsoft.AspNet.WebApi.Versioning.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Server">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.2.0.0\lib\net46\Microsoft.Azure.Mobile.Server.dll</HintPath>
     </Reference>
@@ -183,6 +186,7 @@
     <Compile Include="DataObjects\Pattern.cs" />
     <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\PatternStudent.cs" />
+    <Compile Include="DataObjects\Answer.cs" />
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
     <Compile Include="DataObjects\Section3.cs" />
