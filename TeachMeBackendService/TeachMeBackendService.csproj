@@ -168,9 +168,12 @@
     <Compile Include="ControllersAPI\PatternStudentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
+    <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CommentRatingController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\ExerciseController.cs" />
+    <Compile Include="Controllers\ExerciseStudentController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
     <Compile Include="Controllers\PatternStudentController.cs" />
@@ -182,6 +185,8 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
+    <Compile Include="DataObjects\Exercise.cs" />
+    <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Pattern.cs" />
     <Compile Include="DataObjects\Comment.cs" />

@@ -12,6 +12,7 @@ using Owin;
 using System.Web.Http.Tracing;
 using System.Web.Http.Routing;
 using Microsoft.Web.Http.Routing;
+using Newtonsoft.Json;
 
 namespace TeachMeBackendService
 {
@@ -47,7 +48,8 @@ namespace TeachMeBackendService
                 defaults: new { id = RouteParameter.Optional }
             );
 
-
+            //response json to omit null properties instead of return them as property: null
+            config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()  

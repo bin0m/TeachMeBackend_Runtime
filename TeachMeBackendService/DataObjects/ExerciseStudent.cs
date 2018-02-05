@@ -7,15 +7,11 @@ using System.Web;
 
 namespace TeachMeBackendService.DataObjects
 {
-    public class Comment : EntityData
+    public class ExerciseStudent : EntityData
     {
-        public String CommentText { get; set; }
-
-        // Pattern FK
-        public String PatternId { get; set; }
-
-        // parent Pattern link
-        public Pattern Pattern { get; set; }
+        [Required]
+        public bool IsDone { get; set; }
+        public String StudentAnswer { get; set; }
 
         // Exercise FK
         public String ExerciseId { get; set; }
@@ -23,13 +19,10 @@ namespace TeachMeBackendService.DataObjects
         // parent Exercise link
         public Exercise Exercise { get; set; }
 
-        // parent User FK
+        // Student FK
         public String UserId { get; set; }
 
-        // parent user link
+        // parent Student link
         public User User { get; set; }
-
-        // Children CommentRatings
-        public List<CommentRating> CommentRatings { get; set; }
     }
 }

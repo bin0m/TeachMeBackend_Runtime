@@ -31,5 +31,8 @@ namespace TeachMeBackendService.DataObjects
 
         //children Patterns
         public List<Pattern> Patterns { get; set; }
+
+        //children Exercises
+        public List<Exercise> Exercises { get; set; }
     }
 }
