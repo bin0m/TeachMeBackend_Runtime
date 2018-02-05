@@ -35,13 +35,13 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(CommentRating))]
         public IHttpActionResult GetCommentRating(string id)
         {
-            CommentRating patternStudent = db.CommentRatings.Find(id);
-            if (patternStudent == null)
+            CommentRating CommentRating = db.CommentRatings.Find(id);
+            if (CommentRating == null)
             {
                 return NotFound();
             }
 
-            return Ok(patternStudent);
+            return Ok(CommentRating);
         }
 
 

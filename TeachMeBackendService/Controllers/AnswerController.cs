@@ -29,7 +29,7 @@ namespace TeachMeBackendService.Controllers
         }
 
         // GET tables/Answer/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetExerciseStudent")]
+        [Route("{id}", Name = "GetAnswer")]
         public SingleResult<Answer> GetAnswer(string id)
         {
             return Lookup(id);
@@ -47,7 +47,7 @@ namespace TeachMeBackendService.Controllers
         public async Task<IHttpActionResult> PostAnswer(Answer item)
         {
             Answer current = await InsertAsync(item);
-            return CreatedAtRoute("GetExerciseStudent", new { id = current.Id }, current);
+            return CreatedAtRoute("GetAnswer", new { id = current.Id }, current);
         }
 
         // DELETE tables/Answer/48D68C86-6EA6-4C25-AA33-223FC9A27959

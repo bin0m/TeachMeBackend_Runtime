@@ -29,9 +29,6 @@ namespace TeachMeBackendService.DataObjects
         // parent Section3 link
         public Section3 Section3 { get; set; }
 
-        //children Patterns
-        public List<Pattern> Patterns { get; set; }
-
         //children Exercises
         public List<Exercise> Exercises { get; set; }
     }

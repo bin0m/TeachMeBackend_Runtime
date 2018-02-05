@@ -35,21 +35,21 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Comment))]
         public IHttpActionResult GetComment(string id)
         {
-            Comment patternStudent = db.Comments.Find(id);
-            if (patternStudent == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return Ok(patternStudent);
+            return Ok(comment);
         }
 
 
-        [Route("~/api/v{version:ApiVersion}/patterns/{id}/comments")]
+        [Route("~/api/v{version:ApiVersion}/exercises/{id}/comments")]
         public IQueryable<Comment> GetBySection(string id)
         {
             //todo: rework this attempt to include User
-            var comment = db.Comments.Include(c => c.User).Where(c => c.PatternId == id);
+            var comment = db.Comments.Include(c => c.User).Where(c => c.ExerciseId == id);
 
             return comment;
         }

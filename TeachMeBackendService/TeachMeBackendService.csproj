@@ -163,9 +163,7 @@
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
-    <Compile Include="ControllersAPI\PatternsController.cs" />
     <Compile Include="ControllersAPI\CommentsController.cs" />
-    <Compile Include="ControllersAPI\PatternStudentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
@@ -175,22 +173,20 @@
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseStudentController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
-    <Compile Include="Controllers\PatternController.cs" />
-    <Compile Include="Controllers\PatternStudentController.cs" />
+    <Compile Include="Controllers\PairController.cs" />
     <Compile Include="Controllers\Section2Controller.cs" />
     <Compile Include="Controllers\Section3Controller.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataObjects\Pair.cs" />
     <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Exercise.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\Lesson.cs" />
-    <Compile Include="DataObjects\Pattern.cs" />
     <Compile Include="DataObjects\Comment.cs" />
-    <Compile Include="DataObjects\PatternStudent.cs" />
     <Compile Include="DataObjects\Answer.cs" />
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
@@ -225,6 +221,10 @@
     <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs" />
     <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.Designer.cs">
       <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs" />
+    <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.Designer.cs">
+      <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -271,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.resx">
       <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.resx">
+      <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

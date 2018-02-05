@@ -11,12 +11,6 @@ namespace TeachMeBackendService.DataObjects
     {
         public String CommentText { get; set; }
 
-        // Pattern FK
-        public String PatternId { get; set; }
-
-        // parent Pattern link
-        public Pattern Pattern { get; set; }
-
         // Exercise FK
         public String ExerciseId { get; set; }
 

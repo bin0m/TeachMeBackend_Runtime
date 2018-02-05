@@ -17,9 +17,7 @@ namespace TeachMeBackendService.DataObjects
         public string Answer { get; set; }
 
         public string Image { get; set; }
-
-        public string Pairs { get; set; }
-
+       
         // parent Lesson FK
         public String LessonId { get; set; }
 
@@ -34,5 +32,8 @@ namespace TeachMeBackendService.DataObjects
 
         // Children Answers
         public List<Answer> Answers { get; set; }
+
+        // Children Pairs
+        public List<Pair> Pairs { get; set; }
     }
 }

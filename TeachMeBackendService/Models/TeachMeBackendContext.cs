@@ -31,15 +31,12 @@ namespace TeachMeBackendService.Models
         public DbSet<Section2> Section2 { get; set; }
         public DbSet<Section3> Section3 { get; set; }      
         public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<Pattern> Patterns { get; set; }
-        public DbSet<PatternStudent> PatternStudents { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentRating> CommentRatings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseStudent> ExerciseStudents { get; set; }
         public DbSet<Answer> Answers { get; set; }
-
-
+        public DbSet<Pair> Pairs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -88,31 +85,7 @@ namespace TeachMeBackendService.Models
                .HasOptional(c => c.Section3)
                .WithMany(p => p.Lessons)
                .HasForeignKey(c => c.Section3Id);
-
-            // Lessons <1-to-many> Patterns
-            modelBuilder.Entity<Pattern>()
-               .HasRequired(p => p.Lesson)
-               .WithMany(l => l.Patterns)
-               .HasForeignKey(p => p.LessonId);
-
-            // Pattern <1-to-many> PatternStudents
-            modelBuilder.Entity<PatternStudent>()
-               .HasRequired(p => p.Pattern)
-               .WithMany(l => l.PatternStudents)
-               .HasForeignKey(p => p.PatternId);
-
-            // User <1-to-many> PatternStudents
-            modelBuilder.Entity<PatternStudent>()
-               .HasRequired(p => p.User)
-               .WithMany(l => l.PatternStudents)
-               .HasForeignKey(p => p.UserId);
-
-            // Pattern <1-to-many> Comments
-            modelBuilder.Entity<Comment>()
-               .HasRequired(p => p.Pattern)
-               .WithMany(l => l.Comments)
-               .HasForeignKey(p => p.PatternId);
-
+         
             // User <1-to-many> Comments
             modelBuilder.Entity<Comment>()
                .HasRequired(p => p.User)
@@ -132,17 +105,29 @@ namespace TeachMeBackendService.Models
                .HasForeignKey(cr => cr.UserId)
                .WillCascadeOnDelete(false);
 
+            // Lessons <1-to-many> Exercises
+            modelBuilder.Entity<Exercise>()
+               .HasRequired(p => p.Lesson)
+               .WithMany(l => l.Exercises)
+               .HasForeignKey(p => p.LessonId);
+
+            // Exercise <1-to-many> Comments
+            modelBuilder.Entity<Comment>()
+               .HasRequired(p => p.Exercise)
+               .WithMany(l => l.Comments)
+               .HasForeignKey(p => p.ExerciseId);
+
             // Exercise <1-to-many> Answers
             modelBuilder.Entity<Answer>()
                .HasRequired(p => p.Exercise)
                .WithMany(l => l.Answers)
                .HasForeignKey(p => p.ExerciseId);
 
-            // Lessons <1-to-many> Exercises
-            modelBuilder.Entity<Exercise>()
-               .HasRequired(p => p.Lesson)
-               .WithMany(l => l.Exercises)
-               .HasForeignKey(p => p.LessonId);
+            // Exercise <1-to-many> Pairs
+            modelBuilder.Entity<Pair>()
+               .HasRequired(p => p.Exercise)
+               .WithMany(l => l.Pairs)
+               .HasForeignKey(p => p.ExerciseId);
 
             // Exercise <1-to-many> ExerciseStudents
             modelBuilder.Entity<ExerciseStudent>()
@@ -155,12 +140,6 @@ namespace TeachMeBackendService.Models
                .HasRequired(p => p.User)
                .WithMany(l => l.ExerciseStudents)
                .HasForeignKey(p => p.UserId);
-
-            // Exercise <1-to-many> Comments
-            modelBuilder.Entity<Comment>()
-               .HasRequired(p => p.Exercise)
-               .WithMany(l => l.Comments)
-               .HasForeignKey(p => p.ExerciseId);
 
         }
 
