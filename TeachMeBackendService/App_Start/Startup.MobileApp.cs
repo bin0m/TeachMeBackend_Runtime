@@ -13,13 +13,19 @@ using System.Web.Http.Tracing;
 using System.Web.Http.Routing;
 using Microsoft.Web.Http.Routing;
 using Newtonsoft.Json;
+using System.Net.Http.Formatting;
 
 namespace TeachMeBackendService
 {
     public partial class Startup
     {
         public static void ConfigureMobileApp(IAppBuilder app)
-        {
+        {   
+            //don't serialize null properties in response json
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, };
+
+            var mobileAppCustomConfigProvider = new MobileAppCustomConfigProvider();
+
             HttpConfiguration config = new HttpConfiguration();
 
             //For more information on Web API tracing, see http://go.microsoft.com/fwlink/?LinkId=620686 
@@ -29,8 +35,8 @@ namespace TeachMeBackendService
             traceWriter.MinimumLevel = TraceLevel.Debug;
 
             // Enable API Versioning
-            config.AddApiVersioning();
-
+            config.AddApiVersioning();            
+           
             var constraintResolver = new DefaultInlineConstraintResolver()
                 {
                     ConstraintMap =
@@ -48,15 +54,22 @@ namespace TeachMeBackendService
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            //response json to omit null properties instead of return them as property: null
-            config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+            config.Formatters.JsonFormatter.SerializerSettings = mobileAppCustomConfigProvider.Settings;
+
 
             new MobileAppConfiguration()
-                .UseDefaultConfiguration()  
+                .UseDefaultConfiguration()
+                .WithMobileAppControllerConfigProvider(mobileAppCustomConfigProvider)
                 .ApplyTo(config);
+
+            
 
             // Создаем базу каждый раз с тестовым сетом данных
             Database.SetInitializer(new TeachMeBackendInitializer());
+
+   
 
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
@@ -77,7 +90,8 @@ namespace TeachMeBackendService
                 });
             }
 
-             app.UseWebApi(config);
+
+            app.UseWebApi(config);
         }
     }
 
