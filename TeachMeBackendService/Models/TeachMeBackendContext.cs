@@ -34,7 +34,6 @@ namespace TeachMeBackendService.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentRating> CommentRatings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<ExerciseStudent> ExerciseStudents { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Pair> Pairs { get; set; }
 

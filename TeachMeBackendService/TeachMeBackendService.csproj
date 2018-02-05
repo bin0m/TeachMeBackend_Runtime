@@ -183,9 +183,6 @@
     <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Exercise.cs" />
-    <Compile Include="..\..\..\..\Downloads\ExerciseStudent.cs">
-      <Link>DataObjects\ExerciseStudent.cs</Link>
-    </Compile>
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\Answer.cs" />
@@ -230,6 +227,10 @@
     <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs" />
     <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.Designer.cs">
       <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.cs" />
+    <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.Designer.cs">
+      <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -282,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.resx">
       <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.resx">
+      <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
