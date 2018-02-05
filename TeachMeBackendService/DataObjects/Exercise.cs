@@ -20,7 +20,9 @@ namespace TeachMeBackendService.DataObjects
         public string Answer { get; set; }
 
         public string Image { get; set; }
-       
+
+        public string Text { get; set; }
+
         // parent Lesson FK
         public String LessonId { get; set; }
 

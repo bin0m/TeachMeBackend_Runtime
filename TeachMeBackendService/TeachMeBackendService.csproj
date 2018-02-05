@@ -159,10 +159,12 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MobileAppCustomConfigProvider.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
+    <Compile Include="ControllersAPI\ExerciseStudentsController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\CommentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
@@ -239,6 +241,10 @@
     <Compile Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.Designer.cs">
       <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802052154536_AddTextColumnToExerciseTable.cs" />
+    <Compile Include="Migrations\201802052154536_AddTextColumnToExerciseTable.Designer.cs">
+      <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.resx">
       <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802052154536_AddTextColumnToExerciseTable.resx">
+      <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
