@@ -34,6 +34,7 @@ namespace TeachMeBackendService.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentRating> CommentRatings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseStudent> ExerciseStudents { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Pair> Pairs { get; set; }
 
@@ -127,6 +128,18 @@ namespace TeachMeBackendService.Models
                .HasRequired(p => p.Exercise)
                .WithMany(l => l.Pairs)
                .HasForeignKey(p => p.ExerciseId);
+
+            // Exercise <1-to-many> ExerciseStudents
+            modelBuilder.Entity<ExerciseStudent>()
+               .HasRequired(p => p.Exercise)
+               .WithMany(l => l.ExerciseStudents)
+               .HasForeignKey(p => p.ExerciseId);
+
+            // User <1-to-many> ExerciseStudents
+            modelBuilder.Entity<ExerciseStudent>()
+               .HasRequired(p => p.User)
+               .WithMany(l => l.ExerciseStudents)
+               .HasForeignKey(p => p.UserId);
         }
 
         /// <summary>

@@ -27,6 +27,9 @@ namespace TeachMeBackendService.DataObjects
         // parent Lesson link
         public Lesson Lesson { get; set; }
 
+        // Children ExerciseStudents
+        public List<ExerciseStudent> ExerciseStudents { get; set; }
+
         // Children Comments
         public List<Comment> Comments { get; set; }
 

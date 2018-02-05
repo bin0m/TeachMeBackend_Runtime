@@ -171,6 +171,7 @@
     <Compile Include="Controllers\CommentRatingController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
+    <Compile Include="Controllers\ExerciseStudentController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PairController.cs" />
     <Compile Include="Controllers\Section2Controller.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\Pair.cs" />
     <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
@@ -231,6 +233,10 @@
     <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.cs" />
     <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.Designer.cs">
       <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.cs" />
+    <Compile Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.Designer.cs">
+      <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.resx">
       <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.resx">
+      <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
