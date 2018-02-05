@@ -10,6 +10,9 @@ namespace TeachMeBackendService.DataObjects
     public class Exercise : EntityData
     {
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public string Type { get; set; }
 
         public string Question { get; set; }
@@ -23,9 +26,6 @@ namespace TeachMeBackendService.DataObjects
 
         // parent Lesson link
         public Lesson Lesson { get; set; }
-
-        // Children ExerciseStudents
-        public List<ExerciseStudent> ExerciseStudents { get; set; }
 
         // Children Comments
         public List<Comment> Comments { get; set; }

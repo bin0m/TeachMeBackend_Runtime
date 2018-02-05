@@ -171,7 +171,6 @@
     <Compile Include="Controllers\CommentRatingController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
-    <Compile Include="Controllers\ExerciseStudentController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\PairController.cs" />
     <Compile Include="Controllers\Section2Controller.cs" />
@@ -184,7 +183,9 @@
     <Compile Include="DataObjects\CommentRating.cs" />
     <Compile Include="DataObjects\Course.cs" />
     <Compile Include="DataObjects\Exercise.cs" />
-    <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="..\..\..\..\Downloads\ExerciseStudent.cs">
+      <Link>DataObjects\ExerciseStudent.cs</Link>
+    </Compile>
     <Compile Include="DataObjects\Lesson.cs" />
     <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\Answer.cs" />
@@ -225,6 +226,10 @@
     <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs" />
     <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.Designer.cs">
       <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs" />
+    <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.Designer.cs">
+      <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
@@ -274,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.resx">
       <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.resx">
+      <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

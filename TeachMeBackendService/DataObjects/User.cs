@@ -46,9 +46,6 @@ namespace TeachMeBackendService.DataObjects
         // Children Courses
         public List<Course> Courses { get; set; }
 
-        // Children ExerciseStudent
-        public List<ExerciseStudent> ExerciseStudents { get; set; }
-
         // Children Comments
         public List<Comment> Comments { get; set; }
 
