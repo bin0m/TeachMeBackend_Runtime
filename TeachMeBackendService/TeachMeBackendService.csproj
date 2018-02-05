@@ -162,6 +162,7 @@
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
+    <Compile Include="ControllersAPI\ExercisesController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\CommentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
