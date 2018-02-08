@@ -31,7 +31,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // GET: api/Exercises/5
-        [Route("{id}")]
+        [Route("{id}", Name = "GetExercisesById")]
         [ResponseType(typeof(Exercise))]
         public IHttpActionResult GetExercise(string id)
         {
@@ -51,6 +51,60 @@ namespace TeachMeBackendService.ControllersAPI
             var exercises = db.Exercises.Where(c => c.LessonId == id);
 
             return exercises;
+        }
+
+        // POST: api/Exercises
+        [Route("")]
+        [ResponseType(typeof(Exercise))]
+        public IHttpActionResult PostExercise(Exercise exercise)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            exercise.Id = Guid.NewGuid().ToString("N");
+            if (exercise.Pairs != null)
+            {
+                foreach (var pair in exercise.Pairs)
+                {
+                    pair.Id = Guid.NewGuid().ToString("N");
+                }
+            }
+            //Exercise newExercise = new Exercise
+            //{
+            //    Name = "TestName",
+            //    Type = "TestType",
+            //    LessonId = "c1x6409cf5444d8d866578ad3dd349nk",
+            //    Id = Guid.NewGuid().ToString("N"),
+            //    Pairs = new List<Pair> {
+            //        new Pair{
+            //            Value = "testValue",
+            //            Equal = "testEqual",
+            //            Id = Guid.NewGuid().ToString("N")
+            //        } }
+            //};
+
+            db.Exercises.Add(exercise);
+
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ExerciseExists(exercise.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+
+            return CreatedAtRoute("GetExercisesById", new { id = exercise.Id }, exercise);
         }
 
         protected override void Dispose(bool disposing)

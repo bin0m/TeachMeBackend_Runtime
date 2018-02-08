@@ -22,7 +22,7 @@ namespace TeachMeBackendService
         public static void ConfigureMobileApp(IAppBuilder app)
         {   
             //don't serialize null properties in response json
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, };
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
 
             var mobileAppCustomConfigProvider = new MobileAppCustomConfigProvider();
 
