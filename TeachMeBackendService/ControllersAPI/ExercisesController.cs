@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -106,6 +102,75 @@ namespace TeachMeBackendService.ControllersAPI
 
             return CreatedAtRoute("GetExercisesById", new { id = exercise.Id }, exercise);
         }
+
+
+        // PUT: api/Exercises/5
+        [Route("{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutExercise(string id, Exercise exercise)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != exercise.Id)
+            {
+                return BadRequest();
+            }
+
+            var parentInDb = db.Exercises
+                .Where(p => p.Id == exercise.Id)
+                .Include(p => p.Pairs)
+                .SingleOrDefault();
+
+            if (parentInDb != null)
+            {
+                // to prevent error: "Modifying a column with the 'Identity' pattern is not supported. Column: 'CreatedAt'"
+                exercise.CreatedAt = parentInDb.CreatedAt;
+
+                // Update parent
+                db.Entry(parentInDb).CurrentValues.SetValues(exercise);
+
+                // Delete all previous children
+                db.Pairs.RemoveRange(parentInDb.Pairs);
+
+
+                //  Insert children
+                foreach (var newPair in exercise.Pairs)
+                {
+                    parentInDb.Pairs.Add(new Pair
+                    {
+                        Id = Guid.NewGuid().ToString("N"),
+                        ExerciseId = parentInDb.Id,
+                        Value = newPair.Value,
+                        Equal = newPair.Equal
+                    });
+                }
+
+                // Update the exercise and state that the exercise 'owns' the collection of Pairs,Answers...
+                //db.UpdateGraph<Exercise>(exercise, map => map.OwnedCollection(p => p.Pairs));
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ExerciseExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }           
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
