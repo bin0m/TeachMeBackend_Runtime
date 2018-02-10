@@ -21,6 +21,8 @@ namespace TeachMeBackendService.DataObjects
 
         public string Image { get; set; }
 
+        public string Sound { get; set; }
+
         public string Text { get; set; }
 
         // parent Lesson FK
