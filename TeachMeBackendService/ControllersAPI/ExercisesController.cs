@@ -130,6 +130,7 @@ namespace TeachMeBackendService.ControllersAPI
             var parentInDb = db.Exercises
                 .Where(p => p.Id == exercise.Id)
                 .Include(p => p.Pairs)
+                .Include(p => p.Answers)
                 .SingleOrDefault();
 
             if (parentInDb != null)
@@ -141,20 +142,30 @@ namespace TeachMeBackendService.ControllersAPI
                 db.Entry(parentInDb).CurrentValues.SetValues(exercise);
 
                 // Delete all previous children
-                db.Pairs.RemoveRange(parentInDb.Pairs);
+                if(parentInDb.Pairs != null)
+                {
+                    db.Pairs.RemoveRange(parentInDb.Pairs);
+                }
+                if (parentInDb.Answers != null)
+                {
+                    db.Answers.RemoveRange(parentInDb.Answers);
+                }
 
-
-                //  Insert children
+                //  Insert new children
                 foreach (var newPair in exercise.Pairs)
                 {
-                    parentInDb.Pairs.Add(new Pair
-                    {
-                        Id = Guid.NewGuid().ToString("N"),
-                        ExerciseId = parentInDb.Id,
-                        Value = newPair.Value,
-                        Equal = newPair.Equal
-                    });
+                    newPair.Id = Guid.NewGuid().ToString("N");
+                    newPair.ExerciseId = parentInDb.Id;
+                    parentInDb.Pairs.Add(newPair);
                 }
+
+                foreach (var newAnswer in exercise.Answers)
+                {
+                    newAnswer.Id = Guid.NewGuid().ToString("N");
+                    newAnswer.ExerciseId = parentInDb.Id;
+                    parentInDb.Answers.Add(newAnswer);
+                }
+
 
                 // Update the exercise and state that the exercise 'owns' the collection of Pairs,Answers...
                 //db.UpdateGraph<Exercise>(exercise, map => map.OwnedCollection(p => p.Pairs));
