@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201802052154536_AddTextColumnToExerciseTable.Designer.cs">
       <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802111630088_AddedSoundColumnToExercise.cs" />
+    <Compile Include="Migrations\201802111630088_AddedSoundColumnToExercise.Designer.cs">
+      <DependentUpon>201802111630088_AddedSoundColumnToExercise.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802052154536_AddTextColumnToExerciseTable.resx">
       <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802111630088_AddedSoundColumnToExercise.resx">
+      <DependentUpon>201802111630088_AddedSoundColumnToExercise.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
