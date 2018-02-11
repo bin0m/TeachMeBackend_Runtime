@@ -42,5 +42,8 @@ namespace TeachMeBackendService.DataObjects
 
         // Children Pairs
         public List<Pair> Pairs { get; set; }
+
+        // Children Spaces
+        public List<Space> Spaces { get; set; }
     }
 }

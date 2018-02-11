@@ -37,6 +37,7 @@ namespace TeachMeBackendService.Models
         public DbSet<ExerciseStudent> ExerciseStudents { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Pair> Pairs { get; set; }
+        public DbSet<Space> Spaces { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -127,6 +128,12 @@ namespace TeachMeBackendService.Models
             modelBuilder.Entity<Pair>()
                .HasRequired(p => p.Exercise)
                .WithMany(l => l.Pairs)
+               .HasForeignKey(p => p.ExerciseId);
+
+            // Exercise <1-to-many> Spaces
+            modelBuilder.Entity<Space>()
+               .HasRequired(p => p.Exercise)
+               .WithMany(l => l.Spaces)
                .HasForeignKey(p => p.ExerciseId);
 
             // Exercise <1-to-many> ExerciseStudents
