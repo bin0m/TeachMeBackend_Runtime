@@ -60,6 +60,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
 
             exercise.Id = Guid.NewGuid().ToString("N");
+
             if (exercise.Pairs != null)
             {
                 foreach (var pair in exercise.Pairs)
@@ -73,6 +74,14 @@ namespace TeachMeBackendService.ControllersAPI
                 foreach (var answer in exercise.Answers)
                 {
                     answer.Id = Guid.NewGuid().ToString("N");
+                }
+            }
+
+            if (exercise.Spaces != null)
+            {
+                foreach (var space in exercise.Spaces)
+                {
+                    space.Id = Guid.NewGuid().ToString("N");
                 }
             }
             //Exercise newExercise = new Exercise
@@ -131,6 +140,7 @@ namespace TeachMeBackendService.ControllersAPI
                 .Where(p => p.Id == exercise.Id)
                 .Include(p => p.Pairs)
                 .Include(p => p.Answers)
+                .Include(p => p.Spaces)
                 .SingleOrDefault();
 
             if (parentInDb != null)
@@ -150,6 +160,10 @@ namespace TeachMeBackendService.ControllersAPI
                 {
                     db.Answers.RemoveRange(parentInDb.Answers);
                 }
+                if (parentInDb.Spaces != null)
+                {
+                    db.Spaces.RemoveRange(parentInDb.Spaces);
+                }
 
                 //  Insert new children
                 foreach (var newPair in exercise.Pairs)
@@ -164,6 +178,13 @@ namespace TeachMeBackendService.ControllersAPI
                     newAnswer.Id = Guid.NewGuid().ToString("N");
                     newAnswer.ExerciseId = parentInDb.Id;
                     parentInDb.Answers.Add(newAnswer);
+                }
+
+                foreach (var newSpace in exercise.Spaces)
+                {
+                    newSpace.Id = Guid.NewGuid().ToString("N");
+                    newSpace.ExerciseId = parentInDb.Id;
+                    parentInDb.Spaces.Add(newSpace);
                 }
 
 

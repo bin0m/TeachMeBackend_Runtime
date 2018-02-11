@@ -181,6 +181,7 @@
     <Compile Include="Controllers\Section2Controller.cs" />
     <Compile Include="Controllers\Section3Controller.cs" />
     <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\SpaceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
