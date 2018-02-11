@@ -67,6 +67,14 @@ namespace TeachMeBackendService.ControllersAPI
                     pair.Id = Guid.NewGuid().ToString("N");
                 }
             }
+
+            if (exercise.Answers != null)
+            {
+                foreach (var answer in exercise.Answers)
+                {
+                    answer.Id = Guid.NewGuid().ToString("N");
+                }
+            }
             //Exercise newExercise = new Exercise
             //{
             //    Name = "TestName",
