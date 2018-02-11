@@ -45,7 +45,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         
-        [Route("~/api/v{version:ApiVersion}/exercises/{id}/exerciseStudents")]
+        [Route("~/api/v{version:ApiVersion}/exercises/{id}/exercisestudents")]
         public IQueryable<ExerciseStudent> GetByExercise(string id)
         {
             var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id);

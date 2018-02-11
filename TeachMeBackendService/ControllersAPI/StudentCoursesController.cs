@@ -17,40 +17,40 @@ using TeachMeBackendService.Models;
 namespace TeachMeBackendService.ControllersAPI
 {
     [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/commentratings")]
+    [RoutePrefix("api/v{version:ApiVersion}/studentcourses")]
     [MobileAppController]
-    public class CommentRatingsController : ApiController
+    public class StudentCoursesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
-        // GET: api/CommentRatings
+        // GET: api/StudentCourses
         [Route("")]
-        public IQueryable<CommentRating> GetCommentRatings()
+        public IQueryable<StudentCourse> GetStudentCourses()
         {
-            return db.CommentRatings;
+            return db.StudentCourses;
         }
 
-        // GET: api/CommentRatings/5
+        // GET: api/StudentCourses/5
         [Route("{id}")]
-        [ResponseType(typeof(CommentRating))]
-        public IHttpActionResult GetCommentRating(string id)
+        [ResponseType(typeof(StudentCourse))]
+        public IHttpActionResult GetStudentCourse(string id)
         {
-            CommentRating CommentRating = db.CommentRatings.Find(id);
-            if (CommentRating == null)
+            StudentCourse studentCourse = db.StudentCourses.Find(id);
+            if (studentCourse == null)
             {
                 return NotFound();
             }
 
-            return Ok(CommentRating);
+            return Ok(studentCourse);
         }
 
-
-        [Route("~/api/v{version:ApiVersion}/comments/{id}/commentratings")]
-        public IQueryable<CommentRating> GetBySection(string id)
+        
+        [Route("~/api/v{version:ApiVersion}/users/{id}/studentcourses")]
+        public IQueryable<StudentCourse> GetByExercise(string id)
         {
-            var CommentRating = db.CommentRatings.Where(c => c.CommentId == id);
+            var studentCourses = db.StudentCourses.Where(c => c.UserId == id);
 
-            return CommentRating;
+            return studentCourses;
         }
 
         protected override void Dispose(bool disposing)
@@ -62,9 +62,9 @@ namespace TeachMeBackendService.ControllersAPI
             base.Dispose(disposing);
         }
 
-        private bool CommentRatingExists(string id)
+        private bool StudentCourseExists(string id)
         {
-            return db.CommentRatings.Count(e => e.Id == id) > 0;
+            return db.StudentCourses.Count(e => e.Id == id) > 0;
         }
     }
 }

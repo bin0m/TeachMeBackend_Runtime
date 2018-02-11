@@ -164,6 +164,7 @@
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
+    <Compile Include="ControllersAPI\StudentCoursesController.cs" />
     <Compile Include="ControllersAPI\PairsController.cs" />
     <Compile Include="ControllersAPI\ExerciseStudentsController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Controllers\Section3Controller.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\SpaceController.cs" />
+    <Compile Include="Controllers\StudentCourseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
