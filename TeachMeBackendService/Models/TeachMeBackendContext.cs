@@ -38,6 +38,7 @@ namespace TeachMeBackendService.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Pair> Pairs { get; set; }
         public DbSet<Space> Spaces { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -146,6 +147,19 @@ namespace TeachMeBackendService.Models
             modelBuilder.Entity<ExerciseStudent>()
                .HasRequired(p => p.User)
                .WithMany(l => l.ExerciseStudents)
+               .HasForeignKey(p => p.UserId);
+
+            // Course <1-to-many> StudentCourses
+            modelBuilder.Entity<StudentCourse>()
+               .HasRequired(p => p.Course)
+               .WithMany(l => l.StudentCourses)
+               .HasForeignKey(p => p.CourseId)
+               .WillCascadeOnDelete(false);
+
+            // User <1-to-many> StudentCourses
+            modelBuilder.Entity<StudentCourse>()
+               .HasRequired(p => p.User)
+               .WithMany(l => l.StudentCourses)
                .HasForeignKey(p => p.UserId);
         }
 

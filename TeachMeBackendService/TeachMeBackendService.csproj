@@ -185,6 +185,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\Space.cs" />
     <Compile Include="DataObjects\Pair.cs" />
@@ -256,6 +257,10 @@
     <Compile Include="Migrations\201802111738482_AddSpacesTable.Designer.cs">
       <DependentUpon>201802111738482_AddSpacesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802111816274_AddStudentCourseTable.cs" />
+    <Compile Include="Migrations\201802111816274_AddStudentCourseTable.Designer.cs">
+      <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -322,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802111738482_AddSpacesTable.resx">
       <DependentUpon>201802111738482_AddSpacesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802111816274_AddStudentCourseTable.resx">
+      <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
