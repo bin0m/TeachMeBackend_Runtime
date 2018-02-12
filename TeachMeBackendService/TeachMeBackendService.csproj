@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="App_Start\MobileAppCustomConfigProvider.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="ControllersAPI\SpacesController.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
