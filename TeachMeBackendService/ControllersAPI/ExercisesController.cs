@@ -166,21 +166,21 @@ namespace TeachMeBackendService.ControllersAPI
                 }
 
                 //  Insert new children
-                foreach (var newPair in exercise.Pairs)
+                foreach (var newPair in exercise.Pairs ?? Enumerable.Empty<Pair>())
                 {
                     newPair.Id = Guid.NewGuid().ToString("N");
                     newPair.ExerciseId = parentInDb.Id;
                     parentInDb.Pairs.Add(newPair);
                 }
 
-                foreach (var newAnswer in exercise.Answers)
+                foreach (var newAnswer in exercise.Answers ?? Enumerable.Empty<Answer>())
                 {
                     newAnswer.Id = Guid.NewGuid().ToString("N");
                     newAnswer.ExerciseId = parentInDb.Id;
                     parentInDb.Answers.Add(newAnswer);
                 }
 
-                foreach (var newSpace in exercise.Spaces)
+                foreach (var newSpace in exercise.Spaces ?? Enumerable.Empty<Space>())
                 {
                     newSpace.Id = Guid.NewGuid().ToString("N");
                     newSpace.ExerciseId = parentInDb.Id;
