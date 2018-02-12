@@ -164,6 +164,7 @@
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
+    <Compile Include="ControllersAPI\AnswersController.cs" />
     <Compile Include="ControllersAPI\StudentCoursesController.cs" />
     <Compile Include="ControllersAPI\PairsController.cs" />
     <Compile Include="ControllersAPI\ExerciseStudentsController.cs" />
