@@ -44,73 +44,6 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(course);
         }
 
-        // PUT: api/Courses/5
-        [Route("{id}")]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCourse(string id, Course course)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != course.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(course).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Courses
-        [Route("")]
-        [ResponseType(typeof(Course))]
-        public IHttpActionResult PostCourse(Course course)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Courses.Add(course);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (CourseExists(course.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = course.Id }, course);
-        }
-
         // DELETE: api/Courses/5
         [Route("{id}")]
         [ResponseType(typeof(Course))]
@@ -131,11 +64,20 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         [Route("~/api/v{version:ApiVersion}/users/{usesrId}/courses")]
-        public IQueryable<Course> GetByUser(string usesrId)
+        public IQueryable<Course> GetByUserId(string usesrId, bool isTeacher=false)
         {
-            var courses = db.Courses.Where(c => c.UserId == usesrId);
+            if (isTeacher)
+            {
+                var courses = db.Courses.Where(c => c.UserId == usesrId);
+                return courses;
+            }
 
-            return courses;
+            var query = from course in db.Courses
+                        where course.StudentCourses.Any(c => c.UserId == usesrId)
+                        select course;
+
+            return query;
+
         }
 
         protected override void Dispose(bool disposing)
