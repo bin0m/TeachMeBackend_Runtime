@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201802111816274_AddStudentCourseTable.Designer.cs">
       <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs" />
+    <Compile Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.Designer.cs">
+      <DependentUpon>201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
@@ -334,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802111816274_AddStudentCourseTable.resx">
       <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.resx">
+      <DependentUpon>201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

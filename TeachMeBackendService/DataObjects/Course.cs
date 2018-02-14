@@ -7,7 +7,11 @@ namespace TeachMeBackendService.DataObjects
     public class Course : EntityData
     {
         public string Name { get; set; }
+       
         public int Days { get; set; }
+
+        public string Description { get; set; }
+        public string Keywords { get; set; }
 
         // parent User FK
         public String UserId { get; set; }
