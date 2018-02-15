@@ -64,12 +64,12 @@ namespace TeachMeBackendService
                 .WithMobileAppControllerConfigProvider(mobileAppCustomConfigProvider)
                 .ApplyTo(config);
 
-            
+            // Include in response full exception detail
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
 
             // Создаем базу каждый раз с тестовым сетом данных
-            Database.SetInitializer(new TeachMeBackendInitializer());
-
-   
+            Database.SetInitializer(new TeachMeBackendInitializer());   
 
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
