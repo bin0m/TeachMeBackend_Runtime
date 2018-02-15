@@ -190,7 +190,7 @@ namespace TeachMeBackendService.Models
         /// <returns>1)course, when deletes all succesfully  2) null, when failed to delete course or one of its children</returns>
         public Course DeleteCourseAndChildren(string id)
         {
-            var course = Courses.Include(c => c.Sections).FirstOrDefault(c => c.Id == id);
+            var course = Courses.Include(c => c.Sections).Include(c => c.StudentCourses).FirstOrDefault(c => c.Id == id);
 
             if (course != null)
             {
@@ -203,6 +203,10 @@ namespace TeachMeBackendService.Models
                         return null;
                     }
                 }
+
+                // delete inner StudentCourses
+                StudentCourses.RemoveRange(course.StudentCourses);
+
                 Courses.Remove(course);
                 return course;
             }

@@ -127,7 +127,7 @@ namespace TeachMeBackendService.ControllersAPI
                 dbContext.SaveChanges();
             }
 
-            return Ok(section);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         [Route("~/api/v{version:ApiVersion}/courses/{id}/sections")]
