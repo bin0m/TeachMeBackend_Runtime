@@ -12,6 +12,7 @@ namespace TeachMeBackendService.DataObjects
 
         public string Description { get; set; }
         public string Keywords { get; set; }
+        public string Image { get; set; }
 
         // parent User FK
         public String UserId { get; set; }
