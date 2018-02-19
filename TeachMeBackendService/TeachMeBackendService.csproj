@@ -319,6 +319,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\TeachMeBackend - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\TeachMeServ - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TeachMeTest - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712251355027_Initial.resx">
