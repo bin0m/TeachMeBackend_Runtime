@@ -90,6 +90,14 @@ namespace TeachMeBackendService
                 });
             }
 
+            //get OwinContext
+            var context = HttpContext.Current.GetOwinContext();
+
+            //replace the DbContext inside OwinContext
+            context.Set<ApplicationDbContext>(TeachMeBackendContext);
+
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            //app.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
 
             app.UseWebApi(config);
         }

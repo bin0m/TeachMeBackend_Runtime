@@ -46,12 +46,20 @@ namespace TeachMeBackendService.ControllersAPI
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = "John Lewis"   };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            try
             {
-                return GetErrorResult(result);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
             }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+           
 
             return Ok();
         }

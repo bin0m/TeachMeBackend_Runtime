@@ -90,7 +90,7 @@ namespace TeachMeBackendService.Controllers
             //item.Password = password;
             //item.Salt = keyNew;
 
-             try
+            try
             {
                 //item.RegisterDate = System.DateTime.Now;
                 current = await InsertAsync(item);
@@ -100,9 +100,22 @@ namespace TeachMeBackendService.Controllers
                 Configuration.Services.GetTraceWriter().Error(ex, category: "PostUser");
                 throw ex;
             }
-            
+
             return CreatedAtRoute("GetUser", new { id = current.Id }, current);
+            //catch (HttpResponseException ex)
+            //{
+            //  string message = ((HttpError)((ObjectContent)ex.Response.Content).Value).First().Value.ToString();
+            //      string[] temp = message.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            //      var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            //      {
+            //          Content = new StringContent(message),
+            //          ReasonPhrase = temp[0]
+            //      };
+            //  throw new HttpResponseException(resp);
+            //  }
+
         }
+
 
         // DELETE User/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
