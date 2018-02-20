@@ -32,6 +32,7 @@ namespace TeachMeBackendService.ControllersAPI
                 _userManager = value;
             }
         }
+            
 
 
         // POST api/v1.0/auth/Register
@@ -61,6 +62,28 @@ namespace TeachMeBackendService.ControllersAPI
             }
            
 
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [Route("Login")]
+        public async Task<IHttpActionResult> Login(LoginViewModel model, string returnUrl = null)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            if (user == null)
+            {
+                return BadRequest("user not found");
+            }
+
+
+            // If we got this far, something failed, redisplay form
             return Ok();
         }
 
