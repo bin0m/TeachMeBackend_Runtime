@@ -23,7 +23,12 @@ namespace TeachMeBackendService.Models
 
         public TeachMeBackendContext() : base(connectionStringName, throwIfV1Schema: false)
         {
-        } 
+        }
+
+        public static TeachMeBackendContext Create()    
+        {
+            return new TeachMeBackendContext();
+        }
 
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<Course> Courses { get; set; }

@@ -18,7 +18,7 @@ namespace TeachMeBackendService
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<TeachMeBackendContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -29,10 +29,10 @@ namespace TeachMeBackendService
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+ //               RequireNonLetterOrDigit = true,
+ //               RequireDigit = true,
+ //               RequireLowercase = true,
+//                RequireUppercase = true,
             };
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
