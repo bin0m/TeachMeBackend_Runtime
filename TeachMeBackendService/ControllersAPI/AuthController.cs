@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.Mobile.Server.Login;
 using Microsoft.Web.Http;
 using System;
-using System.Collections.Generic;
+using System.IdentityModel.Tokens;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TeachMeBackendService.Models;
@@ -20,6 +21,9 @@ namespace TeachMeBackendService.ControllersAPI
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private string signingKey;
+        private string audience;
+        private string issuer;
 
         public ApplicationUserManager UserManager
         {
@@ -32,7 +36,36 @@ namespace TeachMeBackendService.ControllersAPI
                 _userManager = value;
             }
         }
-            
+
+        public AuthController()
+        {
+            signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
+            var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
+            audience = $"https://{website}/";
+            issuer = $"https://{website}/";
+        }
+
+        [AllowAnonymous]
+        [Route("user/{id:guid}", Name = "GetUserById")]
+        public async Task<IHttpActionResult> GetUser(string Id)
+        {
+            var user = await UserManager.FindByIdAsync(Id);
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
+
+        }
+
+        [AllowAnonymous]
+        [Route("users")]
+        public IHttpActionResult GetUsers()
+        {
+            return Ok(UserManager.Users.ToList());
+        }
 
 
         // POST api/v1.0/auth/Register
@@ -79,12 +112,23 @@ namespace TeachMeBackendService.ControllersAPI
             var user = await UserManager.FindAsync(model.Email, model.Password);
             if (user == null)
             {
-                return BadRequest("user not found");
+                return Unauthorized();
             }
 
+            var claims = new Claim[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, model.Email)
+            };
 
-            // If we got this far, something failed, redisplay form
-            return Ok();
+            var token = AppServiceLoginHandler.CreateToken(
+                claims, signingKey, audience, issuer, TimeSpan.FromDays(30));
+
+
+            return Ok(new LoginResult()
+            {
+                AuthenticationToken = token.RawData,
+                User = new LoginResultUser { UserId = user.UserName }
+            });
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
