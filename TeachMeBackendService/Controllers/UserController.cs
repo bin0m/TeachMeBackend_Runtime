@@ -37,7 +37,6 @@ namespace TeachMeBackendService.Controllers
                     Email = "nikolaev12@mail.ru",
                     FullName = "Сергей Николаев",
                     Login = "nikolaev",
-                    Password = "ThisisMyPassw0rd",
                     RegisterDate = new DateTime(2017, 12, 1),
                     },
                 new User {
@@ -46,7 +45,6 @@ namespace TeachMeBackendService.Controllers
                     Email = "pugaeva.verchik@yandex.ru",
                     FullName = "Вероника Пугаева",
                     Login = "verchik",
-                    Password = "4C0brainik6EF0B",
                     RegisterDate = new DateTime(2017, 12, 2),
                     }
                 };

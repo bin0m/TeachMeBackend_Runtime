@@ -12,6 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/course")]
+    [Authorize]
     public class CourseController : TableController<Course>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -23,6 +24,7 @@ namespace TeachMeBackendService.Controllers
 
         // GET tables/Course
         [Route("")]
+        [Authorize]
         public IQueryable<Course> GetAllCourse()
         {
             return Query(); 

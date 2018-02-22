@@ -19,12 +19,14 @@ namespace TeachMeBackendService.ControllersAPI
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/courses")]
     [MobileAppController]
+    [Authorize]
     public class CoursesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Courses
         [Route("")]
+        [Authorize]
         public IQueryable<Course> GetCourses()
         {
             return db.Courses;
