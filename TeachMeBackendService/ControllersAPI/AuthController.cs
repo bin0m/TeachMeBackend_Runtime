@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.Mobile.Server.Login;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Web.Http;
 using System;
 using System.IdentityModel.Tokens;
@@ -35,6 +37,11 @@ namespace TeachMeBackendService.ControllersAPI
             {
                 _userManager = value;
             }
+        }
+
+        private IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
         }
 
         public AuthController()
@@ -103,6 +110,10 @@ namespace TeachMeBackendService.ControllersAPI
                 {
                     return GetErrorResult(result);
                 }
+
+
+                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Name, user.Email));
+                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, model.Role));
             }
             catch (Exception ex)
             {
@@ -144,6 +155,14 @@ namespace TeachMeBackendService.ControllersAPI
                 AuthenticationToken = token.RawData,
                 User = new LoginResultUser { UserId = user.Email }
             });
+        }
+
+        // POST api/Account/Logout
+        [Route("Logout")]
+        public IHttpActionResult Logout()
+        {
+            
+            return Ok();
         }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
