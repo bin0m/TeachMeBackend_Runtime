@@ -43,4 +43,10 @@ namespace TeachMeBackendService.Models
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }
     }
+
+    public class ClaimsUserInfo
+    {
+        public string Sid { get; set; }
+        public string Role { get; set; }
+    }
 }

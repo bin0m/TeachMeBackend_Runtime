@@ -68,6 +68,21 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
 
+        [Route("me")]
+        [Authorize]
+        public IHttpActionResult GetMyInfo()
+        {
+            var response = new ClaimsUserInfo();
+            // Get the SID of the current user.
+            var claimsPrincipal = this.User as ClaimsPrincipal;
+            response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+            response.Role = "";
+
+            return Ok(response);
+        }
+
+
         // POST api/v1.0/auth/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -127,7 +142,7 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(new LoginResult()
             {
                 AuthenticationToken = token.RawData,
-                User = new LoginResultUser { UserId = user.UserName }
+                User = new LoginResultUser { UserId = user.Email }
             });
         }
 
