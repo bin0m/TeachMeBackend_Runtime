@@ -14,6 +14,8 @@ using System.Web.Http.Routing;
 using Microsoft.Web.Http.Routing;
 using Newtonsoft.Json;
 using System.Net.Http.Formatting;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace TeachMeBackendService
 {
@@ -91,8 +93,33 @@ namespace TeachMeBackendService
             }
 
             ConfigureAuth(app);
+            CreateRoles();
 
             app.UseWebApi(config);
+        }
+
+        // In this method we will create default User roles
+        private static void CreateRoles()
+        {
+            TeachMeBackendContext context = new TeachMeBackendContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            
+            if (!roleManager.RoleExists(UserRole.Student.ToString()))
+            {
+                roleManager.Create(new IdentityRole { Name = UserRole.Student.ToString()});
+            }
+
+            if (!roleManager.RoleExists(UserRole.Teacher.ToString()))
+            {
+                roleManager.Create(new IdentityRole { Name = UserRole.Teacher.ToString() });
+            }
+
+            if (!roleManager.RoleExists(UserRole.Admin.ToString()))
+            {
+                roleManager.Create(new IdentityRole { Name = UserRole.Admin.ToString() });
+            }
         }
     }
 

@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
@@ -26,6 +27,14 @@ namespace TeachMeBackendService.ControllersAPI
         private string signingKey;
         private string audience;
         private string issuer;
+
+        TeachMeBackendContext dbContext
+        {
+            get
+            {
+                return Request.GetOwinContext().Get<TeachMeBackendContext>();
+            }
+        }
 
         public ApplicationUserManager UserManager
         {
@@ -90,21 +99,22 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
 
-        // POST api/v1.0/auth/Register
+        // POST api/v1.0/auth/Signup
         [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        [Route("Signup")]
+        public async Task<IHttpActionResult> Signup(UserSignUpModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = "John Lewis"   };
+            var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+            User user;
 
             try
             {
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(appUser, model.Password);
 
                 if (!result.Succeeded)
                 {
@@ -112,16 +122,36 @@ namespace TeachMeBackendService.ControllersAPI
                 }
 
 
-                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Name, user.Email));
-                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, model.Role));
+                await UserManager.AddClaimAsync(appUser.Id, new Claim(ClaimTypes.Name, appUser.UserName));
+                await UserManager.AddClaimAsync(appUser.Id, new Claim(ClaimTypes.Role, model.Role.ToString()));
+                await UserManager.AddToRoleAsync(appUser.Id, model.Role.ToString());
+
+                user = new User
+                {
+                    Id = appUser.Id,
+                    Uid = appUser.Id,
+                    CompletedCoursesCount = 0,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    Login = model.UserName,
+                    RegisterDate = DateTime.Now,
+                    AvatarPath = model.AvatarPath,
+                    UserRole = model.Role,
+                    DateOfBirth = model.DateOfBirth
+                };
+
+                dbContext.Set<User>().Add(user);
+                dbContext.SaveChanges();
+
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
+                return BadRequest(message);
             }
            
 
-            return Ok();
+            return Ok(user);
         }
 
         [AllowAnonymous]
@@ -161,7 +191,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
 

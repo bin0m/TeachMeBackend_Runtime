@@ -12,6 +12,7 @@ using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
+using Microsoft.AspNet.Identity.Owin;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersAPI
@@ -21,6 +22,13 @@ namespace TeachMeBackendService.ControllersAPI
     [MobileAppController]
     public class UsersController : ApiController
     {
+        TeachMeBackendContext dbContext
+        {
+            get
+            {
+                return Request.GetOwinContext().Get<TeachMeBackendContext>();
+            }
+        }
         //private TeachMeBackendContext db = new TeachMeBackendContext();
 
         //// GET: api/Users
@@ -43,7 +51,7 @@ namespace TeachMeBackendService.ControllersAPI
 
         //    return Ok(user);
         //}
-        
+
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

@@ -4,9 +4,10 @@ using Newtonsoft.Json;
 
 namespace TeachMeBackendService.Models
 {
-    public class RegisterBindingModel
+    public class UserSignUpModel
     {
         [Required]
+        [StringLength(100)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -16,7 +17,20 @@ namespace TeachMeBackendService.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        public string Role { get; set; }
+        [StringLength(100)]
+        [Required]
+        public string UserName { get; set; }
+
+        [StringLength(100)]
+        public string FullName { get; set; }
+        
+        public DateTime DateOfBirth { get; set; }
+
+        [StringLength(100)]
+        public string AvatarPath { get; set; }
+
+        [Required]
+        public DataObjects.UserRole Role { get; set; }
 
     }
 
