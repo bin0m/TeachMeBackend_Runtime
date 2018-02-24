@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Web.Http;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http;
@@ -28,6 +29,7 @@ namespace TeachMeBackendService.ControllersAPI
         private string signingKey;
         private string audience;
         private string issuer;
+        private int jwtTokenExpirationTimeInHours;
 
         TeachMeBackendContext dbContext
         {
@@ -60,6 +62,16 @@ namespace TeachMeBackendService.ControllersAPI
             var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
             audience = $"https://{website}/";
             issuer = $"https://{website}/";
+
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]))
+            {
+                jwtTokenExpirationTimeInHours = Int32.Parse(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]);
+            }
+            else
+            {
+                jwtTokenExpirationTimeInHours = 72;
+            }
+            
         }
 
         [AllowAnonymous]
@@ -111,8 +123,9 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest(ModelState);
             }
 
-            var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };
-            User user;
+            LoginResult loginResult;
+
+            var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };            
 
             try
             {
@@ -125,7 +138,7 @@ namespace TeachMeBackendService.ControllersAPI
                 
                 await UserManager.AddToRoleAsync(appUser.Id, model.Role.ToString());
 
-                user = new User
+                var user = new User
                 {
                     Id = appUser.Id,
                     Uid = appUser.Id,
@@ -142,15 +155,29 @@ namespace TeachMeBackendService.ControllersAPI
                 dbContext.Set<User>().Add(user);
                 dbContext.SaveChanges();
 
+                // Create token for the new registered user
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, model.Email),
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.Role, model.Role.ToString())
+                };
+
+                var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromDays(jwtTokenExpirationTimeInHours));
+
+                loginResult = new LoginResult()
+                {
+                    AuthenticationToken = token.RawData,
+                    User = user
+                };
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
                 return BadRequest(message);
-            }
-           
+            }           
 
-            return Ok(user);
+            return Ok(loginResult);
         }
 
         [AllowAnonymous]
@@ -185,7 +212,7 @@ namespace TeachMeBackendService.ControllersAPI
                     claims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-                var token = AppServiceLoginHandler.CreateToken( claims, signingKey, audience, issuer, TimeSpan.FromDays(30));
+                var token = AppServiceLoginHandler.CreateToken( claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
 
                 var user = dbContext.Set<User>().Find(appUser.Id);
 
@@ -199,8 +226,7 @@ namespace TeachMeBackendService.ControllersAPI
             {
                 string message = ex.Message;
                 return BadRequest(message);
-            }
-       
+            }       
 
             return Ok(loginResult);
         }
