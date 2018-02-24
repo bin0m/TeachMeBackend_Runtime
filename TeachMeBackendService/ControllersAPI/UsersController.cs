@@ -23,48 +23,48 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class UsersController : ApiController
     {
-        TeachMeBackendContext dbContext
+        TeachMeBackendContext db
         {
             get
             {
                 return Request.GetOwinContext().Get<TeachMeBackendContext>();
             }
         }
-        //private TeachMeBackendContext db = new TeachMeBackendContext();
+    
 
-        //// GET: api/Users
-        //[Route("")]
-        //public IQueryable<User> GetUsers()
-        //{
-        //    return db.Users;
-        //}
+        // GET: api/Users
+        [Route("")]
+        public IQueryable<User> GetUsers()
+        {
+            return db.UserDetails;
+        }
 
-        //// GET: api/Users/5
-        //[Route("{id}")]
-        //[ResponseType(typeof(User))]
-        //public IHttpActionResult GetUser(string id)
-        //{
-        //    User user = db.Users.Find(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Users/5
+        [Route("{id}")]
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(string id)
+        {
+            User user = db.UserDetails.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(user);
-        //}
+            return Ok(user);
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-        //private bool UserExists(string id)
-        //{
-        //    return db.Users.Count(e => e.Id == id) > 0;
-        //}
+        private bool UserExists(string id)
+        {
+            return db.UserDetails.Count(e => e.Id == id) > 0;
+        }
     }
 }

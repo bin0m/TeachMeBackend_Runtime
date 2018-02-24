@@ -44,6 +44,7 @@ namespace TeachMeBackendService.Models
         public DbSet<Pair> Pairs { get; set; }
         public DbSet<Space> Spaces { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<User> UserDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
