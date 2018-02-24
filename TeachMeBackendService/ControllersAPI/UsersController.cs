@@ -20,6 +20,7 @@ namespace TeachMeBackendService.ControllersAPI
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/users")]
     [MobileAppController]
+    [Authorize]
     public class UsersController : ApiController
     {
         TeachMeBackendContext dbContext

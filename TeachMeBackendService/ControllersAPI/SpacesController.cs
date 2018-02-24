@@ -11,6 +11,7 @@ namespace TeachMeBackendService.ControllersAPI
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/spaces")]
     [MobileAppController]
+    [Authorize]
     public class SpacesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();

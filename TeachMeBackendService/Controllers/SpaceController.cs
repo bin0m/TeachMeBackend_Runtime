@@ -12,6 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/space")]
+    [Authorize]
     public class SpaceController : TableController<Space>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

@@ -15,6 +15,7 @@ namespace TeachMeBackendService.ControllersAPI
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/exercises")]
     [MobileAppController]
+    [Authorize]
     public class ExercisesController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();

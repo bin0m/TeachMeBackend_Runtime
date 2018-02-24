@@ -26,7 +26,6 @@ namespace TeachMeBackendService.ControllersAPI
 
         // GET: api/Courses
         [Route("")]
-        [Authorize]
         public IQueryable<Course> GetCourses()
         {
             return db.Courses;

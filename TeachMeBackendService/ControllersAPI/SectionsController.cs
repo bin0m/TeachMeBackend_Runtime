@@ -19,6 +19,7 @@ namespace TeachMeBackendService.ControllersAPI
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/sections")]
     [MobileAppController]
+    [Authorize]
     public class SectionsController : ApiController
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();

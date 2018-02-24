@@ -12,6 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/lesson")]
+    [Authorize]
     public class LessonController : TableController<Lesson>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

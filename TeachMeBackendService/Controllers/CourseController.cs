@@ -24,7 +24,6 @@ namespace TeachMeBackendService.Controllers
 
         // GET tables/Course
         [Route("")]
-        [Authorize]
         public IQueryable<Course> GetAllCourse()
         {
             return Query(); 

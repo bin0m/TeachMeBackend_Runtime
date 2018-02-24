@@ -12,6 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/pair")]
+    [Authorize]
     public class PairController : TableController<Pair>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

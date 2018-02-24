@@ -12,6 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/comment")]
+    [Authorize]
     public class CommentController : TableController<Comment>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
