@@ -6,6 +6,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Web.Http;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http;
@@ -164,27 +165,46 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest(ModelState);
             }
 
+            LoginResult loginResult;
 
-            var user = await UserManager.FindAsync(model.Email, model.Password);
-            if (user == null)
+            try
             {
-                return Unauthorized();
+                var appUser = await UserManager.FindAsync(model.Email, model.Password);
+                if (appUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, model.Email),
+                    new Claim(JwtRegisteredClaimNames.FamilyName, appUser.FullName)
+                };
+
+                var userRoles = await UserManager.GetRolesAsync(appUser.Id);
+                foreach (var userRole in userRoles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+                var token = AppServiceLoginHandler.CreateToken( claims, signingKey, audience, issuer, TimeSpan.FromDays(30));
+
+                var user = dbContext.Set<User>().Find(appUser.Id);
+
+                loginResult = new LoginResult()
+                {
+                    AuthenticationToken = token.RawData,
+                    User = user
+                };
             }
-
-            var claims = new Claim[]
+            catch (Exception ex)
             {
-                new Claim(JwtRegisteredClaimNames.Sub, model.Email)
-            };
+                string message = ex.Message;
+                return BadRequest(message);
+            }
+       
 
-            var token = AppServiceLoginHandler.CreateToken(
-                claims, signingKey, audience, issuer, TimeSpan.FromDays(30));
-
-
-            return Ok(new LoginResult()
-            {
-                AuthenticationToken = token.RawData,
-                User = new LoginResultUser { UserId = user.Email }
-            });
+            return Ok(loginResult);
         }
 
         // POST api/Account/Logout

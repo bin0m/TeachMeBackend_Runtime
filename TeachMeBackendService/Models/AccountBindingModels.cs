@@ -51,13 +51,7 @@ namespace TeachMeBackendService.Models
         public string AuthenticationToken { get; set; }
 
         [JsonProperty(PropertyName = "user")]
-        public LoginResultUser User { get; set; }
-    }
-
-    public class LoginResultUser
-    {
-        [JsonProperty(PropertyName = "userId")]
-        public string UserId { get; set; }
+        public DataObjects.User User { get; set; }
     }
 
     public class ClaimsUserInfo
