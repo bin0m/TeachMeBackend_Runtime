@@ -7,13 +7,13 @@ namespace TeachMeBackendService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddUidToUserTable : IMigrationMetadata
+    public sealed partial class RemovePasswordColumnFromOldUserTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUidToUserTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovePasswordColumnFromOldUserTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802221707467_AddUidToUserTable"; }
+            get { return "201802242258579_RemovePasswordColumnFromOldUserTable"; }
         }
         
         string IMigrationMetadata.Source

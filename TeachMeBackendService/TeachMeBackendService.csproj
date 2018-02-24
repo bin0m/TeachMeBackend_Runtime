@@ -304,9 +304,9 @@
     <Compile Include="Migrations\201802172208411_AddIdentityUserInsteadCustomUser.Designer.cs">
       <DependentUpon>201802172208411_AddIdentityUserInsteadCustomUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802221707467_AddUidToUserTable.cs" />
-    <Compile Include="Migrations\201802221707467_AddUidToUserTable.Designer.cs">
-      <DependentUpon>201802221707467_AddUidToUserTable.cs</DependentUpon>
+    <Compile Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.cs" />
+    <Compile Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.Designer.cs">
+      <DependentUpon>201802242258579_RemovePasswordColumnFromOldUserTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -390,8 +390,8 @@
     <EmbeddedResource Include="Migrations\201802172208411_AddIdentityUserInsteadCustomUser.resx">
       <DependentUpon>201802172208411_AddIdentityUserInsteadCustomUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802221707467_AddUidToUserTable.resx">
-      <DependentUpon>201802221707467_AddUidToUserTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.resx">
+      <DependentUpon>201802242258579_RemovePasswordColumnFromOldUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

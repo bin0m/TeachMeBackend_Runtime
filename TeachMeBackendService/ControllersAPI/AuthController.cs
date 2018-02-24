@@ -141,7 +141,6 @@ namespace TeachMeBackendService.ControllersAPI
                 var user = new User
                 {
                     Id = appUser.Id,
-                    Uid = appUser.Id,
                     CompletedCoursesCount = 0,
                     Email = model.Email,
                     FullName = model.FullName,

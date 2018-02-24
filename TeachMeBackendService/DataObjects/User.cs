@@ -25,8 +25,6 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public string Login { get; set; }
 
-        public string Uid { get; set; }
-
         public int CompletedCoursesCount { get; set; }
 
         [Required]
