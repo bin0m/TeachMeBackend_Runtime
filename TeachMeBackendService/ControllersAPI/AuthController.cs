@@ -90,11 +90,12 @@ namespace TeachMeBackendService.ControllersAPI
         public IHttpActionResult GetMyInfo()
         {
             var response = new ClaimsUserInfo();
-            // Get the SID of the current user.
+
+            // Get the Claims of the current user.
             var claimsPrincipal = this.User as ClaimsPrincipal;
             response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
-            response.Role = "";
+            //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;
+            response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;           
 
             return Ok(response);
         }
@@ -121,10 +122,7 @@ namespace TeachMeBackendService.ControllersAPI
                 {
                     return GetErrorResult(result);
                 }
-
-
-                await UserManager.AddClaimAsync(appUser.Id, new Claim(ClaimTypes.Name, appUser.UserName));
-                await UserManager.AddClaimAsync(appUser.Id, new Claim(ClaimTypes.Role, model.Role.ToString()));
+                
                 await UserManager.AddToRoleAsync(appUser.Id, model.Role.ToString());
 
                 user = new User
@@ -178,7 +176,7 @@ namespace TeachMeBackendService.ControllersAPI
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, model.Email),
-                    new Claim(JwtRegisteredClaimNames.FamilyName, appUser.FullName)
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
                 };
 
                 var userRoles = await UserManager.GetRolesAsync(appUser.Id);
