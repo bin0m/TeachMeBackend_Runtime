@@ -9,14 +9,23 @@ using TeachMeBackendService.Models;
 using System.Collections.Generic;
 using System;
 using Microsoft.Web.Http;
+using System.Net.Http;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/user")]
-    [Authorize]
     public class UserController : TableController<User>
     {
+        TeachMeBackendContext db
+        {
+            get
+            {
+                return Request.GetOwinContext().Get<TeachMeBackendContext>();
+            }
+        }
+
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
@@ -28,38 +37,7 @@ namespace TeachMeBackendService.Controllers
         [Route("")]
         public IQueryable<User> GetAllUser()
         {
-            var query = Query();
-            if (query.Count<User>() == 0)
-            {
-                List<User> testUsersSet = new List<User> {
-                new User {
-                    Id = Guid.NewGuid().ToString(),
-                    CompletedCoursesCount = 0,
-                    Email = "nikolaev12@mail.ru",
-                    FullName = "Сергей Николаев",
-                    Login = "nikolaev",
-                    RegisterDate = new DateTime(2017, 12, 1),
-                    },
-                new User {
-                    Id = Guid.NewGuid().ToString(),
-                    CompletedCoursesCount = 0,
-                    Email = "pugaeva.verchik@yandex.ru",
-                    FullName = "Вероника Пугаева",
-                    Login = "verchik",
-                    RegisterDate = new DateTime(2017, 12, 2),
-                    }
-                };
-
-                using (TeachMeBackendContext context = new TeachMeBackendContext())
-                {
-                    foreach (User User in testUsersSet)
-                    {
-                        context.Set<User>().Add(User);
-                    }
-                    context.SaveChanges();
-                }
-
-            }
+            var query = Query();           
             return query;
         }
 
@@ -74,46 +52,34 @@ namespace TeachMeBackendService.Controllers
         [Route("{id}")]
         public Task<User> PatchUser(string id, Delta<User> patch)
         {
-             return UpdateAsync(id, patch);
-        }
+            // Update AppUser
+            var user = new User();            
+            var propertyNames = patch.GetChangedPropertyNames();
+            bool isEmailChanged = propertyNames.Contains(nameof(user.Email));
+            bool isFullNameChanged = propertyNames.Contains(nameof(user.FullName));
 
-        // POST User
-        [Route("")]
-        public async Task<IHttpActionResult> PostUser(User item)
-        {
-            User current = new User();
-
-            // Password hashihg with salt
-            //var keyNew = Logic.Helper.GenerateSalt(10);
-            //var password = Logic.Helper.EncodePassword(item.Password, keyNew);
-            //item.Password = password;
-            //item.Salt = keyNew;
-
-            try
+            if (isEmailChanged || isFullNameChanged)
             {
-                //item.RegisterDate = System.DateTime.Now;
-                current = await InsertAsync(item);
-            }
-            catch (Exception ex)
-            {
-                Configuration.Services.GetTraceWriter().Error(ex, category: "PostUser");
-                throw ex;
+                var appUser = db.Users.Find(id);
+                if (isEmailChanged)
+                {
+                    object email;
+                    patch.TryGetPropertyValue(nameof(user.Email), out email);
+                    appUser.Email = (string)email;
+                    appUser.UserName = (string)email;
+                }
+                if (isFullNameChanged)
+                {
+                    object fullName;
+                    patch.TryGetPropertyValue(nameof(user.FullName), out fullName);
+                    appUser.FullName = (string)fullName;
+                }
+                db.SaveChanges();
             }
 
-            return CreatedAtRoute("GetUser", new { id = current.Id }, current);
-            //catch (HttpResponseException ex)
-            //{
-            //  string message = ((HttpError)((ObjectContent)ex.Response.Content).Value).First().Value.ToString();
-            //      string[] temp = message.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            //      var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
-            //      {
-            //          Content = new StringContent(message),
-            //          ReasonPhrase = temp[0]
-            //      };
-            //  throw new HttpResponseException(resp);
-            //  }
-
-        }
+            // Update User
+            return UpdateAsync(id, patch);
+        }       
 
 
         // DELETE User/48D68C86-6EA6-4C25-AA33-223FC9A27959
