@@ -24,7 +24,6 @@ namespace TeachMeBackendService.ControllersAPI
     [MobileAppController]
     public class AuthController : ApiController
     {
-        private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private string signingKey;
         private string audience;
@@ -199,27 +198,7 @@ namespace TeachMeBackendService.ControllersAPI
                     return Unauthorized();
                 }
 
-                var claims = new List<Claim>
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, model.Email),
-                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
-                };
-
-                var userRoles = await UserManager.GetRolesAsync(appUser.Id);
-                foreach (var userRole in userRoles)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-
-                var token = AppServiceLoginHandler.CreateToken( claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
-
-                var user = dbContext.Set<User>().Find(appUser.Id);
-
-                loginResult = new LoginResult()
-                {
-                    AuthenticationToken = token.RawData,
-                    User = user
-                };
+                loginResult = await ConstructLoginResult(appUser);
             }
             catch (Exception ex)
             {
@@ -238,6 +217,42 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appUser"></param>
+        /// <returns></returns>
+        private async Task<LoginResult> ConstructLoginResult(ApplicationUser appUser)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, appUser.Email),
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
+                };
+
+            var userRoles = await UserManager.GetRolesAsync(appUser.Id);
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
+
+            var user = dbContext.Set<User>().Find(appUser.Id);
+
+            return new LoginResult()
+            {
+                AuthenticationToken = token.RawData,
+                User = user
+            };
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)

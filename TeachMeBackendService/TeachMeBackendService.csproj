@@ -187,6 +187,7 @@
     <Compile Include="App_Start\MobileAppCustomConfigProvider.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
+    <Compile Include="ControllersAPI\AuthCustomController.cs" />
     <Compile Include="ControllersAPI\AuthController.cs" />
     <Compile Include="ControllersAPI\SpacesController.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />

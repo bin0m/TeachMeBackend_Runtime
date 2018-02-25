@@ -14,8 +14,8 @@ namespace TeachMeBackendService.Controllers
     // Use the MobileAppController attribute for each ApiController you want to use  
     // from your mobile clients 
     [MobileAppController]
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/values")]
+    [ApiVersionNeutral]
+    [RoutePrefix("api/values")]
     public class ValuesController : ApiController
     {
         // GET api/values
