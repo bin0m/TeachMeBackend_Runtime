@@ -140,18 +140,19 @@ namespace TeachMeBackendService
             {
                 context.Set<TodoItem>().Add(todoItem);
             }
-
-            var appUser = new ApplicationUser()
-            {
-                UserName = "levitg@gmail.com",
-                Email = "levitg@gmail.com",
-                FullName = "Administrator"
-            };
-
+                       
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             try
             {
+                //1. Add Admin user
+                var appUser = new ApplicationUser()
+                {
+                    UserName = "levitg@gmail.com",
+                    Email = "levitg@gmail.com",
+                    FullName = "Administrator"
+                };
+
                 IdentityResult result = userManager.Create(appUser, "qweqwe123");
 
                 userManager.AddToRoleAsync(appUser.Id, "Admin");
@@ -169,8 +170,33 @@ namespace TeachMeBackendService
                 };
 
                 context.Set<User>().Add(user);
-                context.SaveChanges();
 
+                //2. Add Simple user
+                var appUser2 = new ApplicationUser()
+                {
+                    UserName = "levitgspam@gmail.com",
+                    Email = "levitgspam@gmail.com",
+                    FullName = "Иван Простов"
+                };
+
+                IdentityResult result2 = userManager.Create(appUser2, "qweqwe123");
+
+                userManager.AddToRoleAsync(appUser2.Id, "Student");
+
+                var user2 = new User
+                {
+                    Id = appUser2.Id,
+                    CompletedCoursesCount = 0,
+                    Email = appUser2.Email,
+                    FullName = appUser2.FullName,
+                    Login = "admin",
+                    RegisterDate = DateTime.Now,
+                    UserRole = UserRole.Student,
+                    DateOfBirth = new DateTime(1985, 03, 15)
+                };
+
+                context.Set<User>().Add(user2);
+                context.SaveChanges();
                 base.Seed(context);
             }
             catch (Exception ex)
