@@ -141,32 +141,42 @@ namespace TeachMeBackendService
                 context.Set<TodoItem>().Add(todoItem);
             }
 
-            List<User> testUsersSet = new List<User> {
-                new User {
-                    Id = Guid.NewGuid().ToString(),
-                    CompletedCoursesCount = 0,
-                    Email = "nikolaev12@mail.ru",
-                    FullName = "Сергей Николаев",
-                    Login = "nikolaev",
-                    RegisterDate = new DateTime(2017, 12, 1),
-                    },
-                new User {
-                    Id = Guid.NewGuid().ToString(),
-                    CompletedCoursesCount = 0,
-                    Email = "pugaeva.verchik@yandex.ru",
-                    FullName = "Вероника Пугаева",
-                    Login = "verchik",
-                    RegisterDate = new DateTime(2017, 12, 2),
-                    }
+            var appUser = new ApplicationUser()
+            {
+                UserName = "levitg@gmail.com",
+                Email = "levitg@gmail.com",
+                FullName = "Administrator"
             };
 
-            foreach (User user in testUsersSet)
-            {
-                context.Set<User>().Add(user);
-            }
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            context.SaveChanges();
-            base.Seed(context);
+            try
+            {
+                IdentityResult result = userManager.Create(appUser, "qweqwe123");
+
+                userManager.AddToRoleAsync(appUser.Id, "Admin");
+
+                var user = new User
+                {
+                    Id = appUser.Id,
+                    CompletedCoursesCount = 0,
+                    Email = appUser.Email,
+                    FullName = appUser.FullName,
+                    Login = "admin",
+                    RegisterDate = DateTime.Now,
+                    UserRole = UserRole.Admin,
+                    DateOfBirth = new DateTime(1985, 03, 15)
+                };
+
+                context.Set<User>().Add(user);
+                context.SaveChanges();
+
+                base.Seed(context);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
