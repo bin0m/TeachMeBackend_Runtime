@@ -49,9 +49,20 @@ namespace TeachMeBackendService.ControllersAPI
         public AuthCustomController()
         {
             signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
-            var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
-            audience = $"https://{website}/";
-            issuer = $"https://{website}/";
+
+            if (string.IsNullOrEmpty(signingKey))
+            {
+                // WEBSITE_AUTH_SIGNING_KEY - is null, when it is run locally for debugging
+                signingKey = ConfigurationManager.AppSettings["SigningKey"];
+                audience = $"http://localhost:59480/";
+                issuer = $"http://localhost:59480/";
+            }
+            else
+            {
+                var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
+                audience = $"https://{website}/";
+                issuer = $"https://{website}/";
+            }
 
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]))
             {
