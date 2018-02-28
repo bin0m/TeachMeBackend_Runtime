@@ -233,81 +233,9 @@
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Logic\Helper.cs" />
-    <Compile Include="Migrations\201712251355027_Initial.cs" />
-    <Compile Include="Migrations\201712251355027_Initial.Designer.cs">
-      <DependentUpon>201712251355027_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011543227_AddedPatternStudentsTable.cs" />
-    <Compile Include="Migrations\201801011543227_AddedPatternStudentsTable.Designer.cs">
-      <DependentUpon>201801011543227_AddedPatternStudentsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs" />
-    <Compile Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.Designer.cs">
-      <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801062012061_AddedCommentsTable.cs" />
-    <Compile Include="Migrations\201801062012061_AddedCommentsTable.Designer.cs">
-      <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801130004141_CommentRatingsTable.cs" />
-    <Compile Include="Migrations\201801130004141_CommentRatingsTable.Designer.cs">
-      <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs" />
-    <Compile Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.Designer.cs">
-      <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs" />
-    <Compile Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.Designer.cs">
-      <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs" />
-    <Compile Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.Designer.cs">
-      <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs" />
-    <Compile Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.Designer.cs">
-      <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.cs" />
-    <Compile Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.Designer.cs">
-      <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.cs" />
-    <Compile Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.Designer.cs">
-      <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802052154536_AddTextColumnToExerciseTable.cs" />
-    <Compile Include="Migrations\201802052154536_AddTextColumnToExerciseTable.Designer.cs">
-      <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111630088_AddedSoundColumnToExercise.cs" />
-    <Compile Include="Migrations\201802111630088_AddedSoundColumnToExercise.Designer.cs">
-      <DependentUpon>201802111630088_AddedSoundColumnToExercise.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111738482_AddSpacesTable.cs" />
-    <Compile Include="Migrations\201802111738482_AddSpacesTable.Designer.cs">
-      <DependentUpon>201802111738482_AddSpacesTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111816274_AddStudentCourseTable.cs" />
-    <Compile Include="Migrations\201802111816274_AddStudentCourseTable.Designer.cs">
-      <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs" />
-    <Compile Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.Designer.cs">
-      <DependentUpon>201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802161826211_AddImageColumnToCoursesTable.cs" />
-    <Compile Include="Migrations\201802161826211_AddImageColumnToCoursesTable.Designer.cs">
-      <DependentUpon>201802161826211_AddImageColumnToCoursesTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802172208411_AddIdentityUserInsteadCustomUser.cs" />
-    <Compile Include="Migrations\201802172208411_AddIdentityUserInsteadCustomUser.Designer.cs">
-      <DependentUpon>201802172208411_AddIdentityUserInsteadCustomUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.cs" />
-    <Compile Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.Designer.cs">
-      <DependentUpon>201802242258579_RemovePasswordColumnFromOldUserTable.cs</DependentUpon>
+    <Compile Include="Migrations\201802272334036_Initial.cs" />
+    <Compile Include="Migrations\201802272334036_Initial.Designer.cs">
+      <DependentUpon>201802272334036_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -337,62 +265,8 @@
     <None Include="Properties\PublishProfiles\TeachMeTest - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712251355027_Initial.resx">
-      <DependentUpon>201712251355027_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011543227_AddedPatternStudentsTable.resx">
-      <DependentUpon>201801011543227_AddedPatternStudentsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011631064_AddedIsDoneColumnToPatternStudentsTable.resx">
-      <DependentUpon>201801011631064_AddedIsDoneColumnToPatternStudentsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801062012061_AddedCommentsTable.resx">
-      <DependentUpon>201801062012061_AddedCommentsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801130004141_CommentRatingsTable.resx">
-      <DependentUpon>201801130004141_CommentRatingsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.resx">
-      <DependentUpon>201801131602380_AddDateOfBirthAndAvatarFieldsToUserTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.resx">
-      <DependentUpon>201801151734346_FixedSyntaxErrorInFieldCompletedCoursesCount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.resx">
-      <DependentUpon>201802051349223_AddTables-Exercises-ExerciseStudents-Answers-Pairs-DeletePatternsTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.resx">
-      <DependentUpon>201802051439443_AddColumnNameToExerciseAndDeleteExerciseStudents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802051446575_DeleteExerciseStudentsTableAgain.resx">
-      <DependentUpon>201802051446575_DeleteExerciseStudentsTableAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802051511225_AddExerciseStudentsTableAgain.resx">
-      <DependentUpon>201802051511225_AddExerciseStudentsTableAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802052154536_AddTextColumnToExerciseTable.resx">
-      <DependentUpon>201802052154536_AddTextColumnToExerciseTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111630088_AddedSoundColumnToExercise.resx">
-      <DependentUpon>201802111630088_AddedSoundColumnToExercise.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111738482_AddSpacesTable.resx">
-      <DependentUpon>201802111738482_AddSpacesTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111816274_AddStudentCourseTable.resx">
-      <DependentUpon>201802111816274_AddStudentCourseTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.resx">
-      <DependentUpon>201802141000471_AddDescriptionAndKeywordsColumnsToCoursesTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802161826211_AddImageColumnToCoursesTable.resx">
-      <DependentUpon>201802161826211_AddImageColumnToCoursesTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802172208411_AddIdentityUserInsteadCustomUser.resx">
-      <DependentUpon>201802172208411_AddIdentityUserInsteadCustomUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802242258579_RemovePasswordColumnFromOldUserTable.resx">
-      <DependentUpon>201802242258579_RemovePasswordColumnFromOldUserTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802272334036_Initial.resx">
+      <DependentUpon>201802272334036_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

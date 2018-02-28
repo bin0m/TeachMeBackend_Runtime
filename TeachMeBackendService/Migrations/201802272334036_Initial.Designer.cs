@@ -7,13 +7,13 @@ namespace TeachMeBackendService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedCommentsTable : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedCommentsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801062012061_AddedCommentsTable"; }
+            get { return "201802272334036_Initial"; }
         }
         
         string IMigrationMetadata.Source
