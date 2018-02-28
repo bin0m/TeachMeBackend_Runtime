@@ -16,6 +16,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/user")]
+    [Authorize]
     public class UserController : TableController<User>
     {
         TeachMeBackendContext db
