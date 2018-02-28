@@ -55,7 +55,12 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/lessons/{id}/exercises")]
         public IQueryable<Exercise> GetBySection(string id)
         {
-            var exercises = db.Exercises.Where(c => c.LessonId == id);
+            var exercises = db
+                .Exercises
+                .Include(ex => ex.Answers)
+                .Include(ex => ex.Pairs)
+                .Include(ex => ex.Spaces)
+                .Where(c => c.LessonId == id);
 
             return exercises;
         }
