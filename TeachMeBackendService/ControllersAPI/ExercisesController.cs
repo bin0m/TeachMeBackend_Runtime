@@ -24,7 +24,11 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("")]
         public IQueryable<Exercise> GetExercises()
         {
-            return db.Exercises;
+            return db
+                .Exercises
+                .Include(ex => ex.Answers)
+                .Include(ex => ex.Pairs)
+                .Include(ex => ex.Spaces);
         }
 
         // GET: api/Exercises/5
@@ -32,7 +36,13 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Exercise))]
         public IHttpActionResult GetExercise(string id)
         {
-            Exercise exercise = db.Exercises.Find(id);
+            Exercise exercise = db
+                .Exercises
+                .Include(ex => ex.Answers)
+                .Include(ex => ex.Pairs)
+                .Include(ex => ex.Spaces)
+                .SingleOrDefault(ex => ex.Id == id);
+
             if (exercise == null)
             {
                 return NotFound();
@@ -124,7 +134,7 @@ namespace TeachMeBackendService.ControllersAPI
 
         // PUT: api/Exercises/5
         [Route("{id}")]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(Exercise))]
         public IHttpActionResult PutExercise(string id, Exercise exercise)
         {
             if (!ModelState.IsValid)
@@ -207,7 +217,45 @@ namespace TeachMeBackendService.ControllersAPI
                         throw;
                     }
                 }
-            }           
+            }
+
+            Exercise freshExercise = db
+                .Exercises
+                .Include(ex => ex.Answers)
+                .Include(ex => ex.Pairs)
+                .Include(ex => ex.Spaces)
+                .SingleOrDefault(ex => ex.Id == id);
+
+            if (freshExercise == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(freshExercise);
+        }
+
+        // DELETE: api/Exercises/5
+        [Route("{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteExercise(string id)
+        {
+            Exercise exercise = db.Exercises.Find(id);
+
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            db.Exercises.Remove(exercise);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
