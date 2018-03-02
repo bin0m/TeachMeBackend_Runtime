@@ -84,8 +84,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
             
         }
-
-        [AllowAnonymous]
+                
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -100,7 +99,6 @@ namespace TeachMeBackendService.ControllersAPI
 
         }
 
-        [AllowAnonymous]
         [Route("users")]
         public IHttpActionResult GetUsers()
         {
