@@ -24,21 +24,29 @@ namespace TeachMeBackendService.ControllersAPI
     [MobileAppController]
     public class AuthController : ApiController
     {
-        private readonly ApplicationUserManager _userManager;
+        private  ApplicationUserManager _userManager;
         private readonly string _signingKey;
         private readonly string _audience;
         private readonly string _issuer;
         private readonly int _jwtTokenExpirationTimeInHours;
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         TeachMeBackendContext DbContext => Request.GetOwinContext().Get<TeachMeBackendContext>();
-
-        private ApplicationUserManager UserManager => _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
         private IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
 
         public AuthController()
         {
-            _userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             _signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
 
             if (string.IsNullOrEmpty(_signingKey))
