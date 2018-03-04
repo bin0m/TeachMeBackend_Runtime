@@ -29,7 +29,7 @@ namespace TeachMeBackendService.Controllers
         public IQueryable<TodoItem> GetAllTodoItems()
         {
             var query = Query();
-            if (query.Count<TodoItem>() == 0)
+            if (!query.Any())
             {
                 List<TodoItem> todoItems = new List<TodoItem>
                 {

@@ -1,8 +1,6 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Tracing;
 using System.Linq;
-using System.Data;
-using System.Data.Common;
 using System.Data.Entity;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -22,8 +20,8 @@ namespace TeachMeBackendService.Controllers
         [Route("")]
         public string Get()
         {
-            MobileAppSettingsDictionary settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
-            ITraceWriter traceWriter = this.Configuration.Services.GetTraceWriter();
+            MobileAppSettingsDictionary settings = Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+            ITraceWriter traceWriter = Configuration.Services.GetTraceWriter();
 
             string host = settings.HostName ?? "localhost";
             string greeting = "Hello from " + host;
@@ -43,7 +41,7 @@ namespace TeachMeBackendService.Controllers
         [Route("{id}")]
         public IHttpActionResult GetValueById(string id)
         {
-            Section section = null;
+            Section section;
 
             using (var ctx = new Models.TeachMeBackendContext())
             {

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -23,20 +16,14 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class UsersController : ApiController
     {
-        TeachMeBackendContext db
-        {
-            get
-            {
-                return Request.GetOwinContext().Get<TeachMeBackendContext>();
-            }
-        }
-    
+        TeachMeBackendContext Db => Request.GetOwinContext().Get<TeachMeBackendContext>();
+
 
         // GET: api/Users
         [Route("")]
         public IQueryable<User> GetUsers()
         {
-            return db.UserDetails;
+            return Db.UserDetails;
         }
 
         // GET: api/Users/5
@@ -44,7 +31,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string id)
         {
-            User user = db.UserDetails.Find(id);
+            User user = Db.UserDetails.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -57,14 +44,9 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                Db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool UserExists(string id)
-        {
-            return db.UserDetails.Count(e => e.Id == id) > 0;
         }
     }
 }

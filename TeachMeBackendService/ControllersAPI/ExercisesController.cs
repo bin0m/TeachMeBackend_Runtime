@@ -121,7 +121,7 @@ namespace TeachMeBackendService.ControllersAPI
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 if (ExerciseExists(exercise.Id))
                 {
@@ -129,7 +129,7 @@ namespace TeachMeBackendService.ControllersAPI
                 }
                 else
                 {
-                    throw ex;
+                    throw;
                 }
             }
 
@@ -186,21 +186,21 @@ namespace TeachMeBackendService.ControllersAPI
                 {
                     newPair.Id = Guid.NewGuid().ToString("N");
                     newPair.ExerciseId = parentInDb.Id;
-                    parentInDb.Pairs.Add(newPair);
+                    parentInDb.Pairs?.Add(newPair);
                 }
 
                 foreach (var newAnswer in exercise.Answers ?? Enumerable.Empty<Answer>())
                 {
                     newAnswer.Id = Guid.NewGuid().ToString("N");
                     newAnswer.ExerciseId = parentInDb.Id;
-                    parentInDb.Answers.Add(newAnswer);
+                    parentInDb.Answers?.Add(newAnswer);
                 }
 
                 foreach (var newSpace in exercise.Spaces ?? Enumerable.Empty<Space>())
                 {
                     newSpace.Id = Guid.NewGuid().ToString("N");
                     newSpace.ExerciseId = parentInDb.Id;
-                    parentInDb.Spaces.Add(newSpace);
+                    parentInDb.Spaces?.Add(newSpace);
                 }
 
 

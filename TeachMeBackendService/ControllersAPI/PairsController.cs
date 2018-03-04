@@ -54,10 +54,5 @@ namespace TeachMeBackendService.ControllersAPI
             }
             base.Dispose(disposing);
         }
-
-        private bool PairExists(string id)
-        {
-            return db.Pairs.Count(e => e.Id == id) > 0;
-        }
     }
 }

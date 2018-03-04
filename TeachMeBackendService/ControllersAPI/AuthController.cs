@@ -24,71 +24,53 @@ namespace TeachMeBackendService.ControllersAPI
     [MobileAppController]
     public class AuthController : ApiController
     {
-        private ApplicationUserManager _userManager;
-        private string signingKey;
-        private string audience;
-        private string issuer;
-        private int jwtTokenExpirationTimeInHours;
+        private readonly ApplicationUserManager _userManager;
+        private readonly string _signingKey;
+        private readonly string _audience;
+        private readonly string _issuer;
+        private readonly int _jwtTokenExpirationTimeInHours;
 
-        TeachMeBackendContext dbContext
-        {
-            get
-            {
-                return Request.GetOwinContext().Get<TeachMeBackendContext>();
-            }
-        }
+        TeachMeBackendContext DbContext => Request.GetOwinContext().Get<TeachMeBackendContext>();
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        private ApplicationUserManager UserManager => _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-        private IAuthenticationManager Authentication
-        {
-            get { return Request.GetOwinContext().Authentication; }
-        }
+        private IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
 
         public AuthController()
         {
-            signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
+            _userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            _signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
 
-            if (string.IsNullOrEmpty(signingKey))
+            if (string.IsNullOrEmpty(_signingKey))
             {
                 // WEBSITE_AUTH_SIGNING_KEY - is null, when it is run locally for debugging
-                signingKey = ConfigurationManager.AppSettings["SigningKey"];
-                audience = ConfigurationManager.AppSettings["ValidAudience"];
-                issuer = ConfigurationManager.AppSettings["ValidIssuer"];
+                _signingKey = ConfigurationManager.AppSettings["SigningKey"];
+                _audience = ConfigurationManager.AppSettings["ValidAudience"];
+                _issuer = ConfigurationManager.AppSettings["ValidIssuer"];
             }
             else
             {
                 var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
-                audience = $"https://{website}/";
-                issuer = $"https://{website}/";
+                _audience = $"https://{website}/";
+                _issuer = $"https://{website}/";
             }
 
 
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]))
             {
-                jwtTokenExpirationTimeInHours = Int32.Parse(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]);
+                _jwtTokenExpirationTimeInHours = Int32.Parse(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]);
             }
             else
             {
-                jwtTokenExpirationTimeInHours = 72;
+                _jwtTokenExpirationTimeInHours = 72;
             }
             
         }
                 
         [Route("user/{id:guid}", Name = "GetUserById")]
-        public async Task<IHttpActionResult> GetUser(string Id)
+        public async Task<IHttpActionResult> GetUser(string id)
         {
-            var user = await UserManager.FindByIdAsync(Id);
+            var user = await UserManager.FindByIdAsync(id);
 
             if (user != null)
             {
@@ -113,10 +95,13 @@ namespace TeachMeBackendService.ControllersAPI
             var response = new ClaimsUserInfo();
 
             // Get the Claims of the current user.
-            var claimsPrincipal = this.User as ClaimsPrincipal;
-            response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;
-            response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;           
+            var claimsPrincipal = User as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
+                //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;
+                response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+            }
 
             return Ok(response);
         }
@@ -160,8 +145,8 @@ namespace TeachMeBackendService.ControllersAPI
                     DateOfBirth = model.DateOfBirth
                 };
 
-                dbContext.Set<User>().Add(user);
-                dbContext.SaveChanges();
+                DbContext.Set<User>().Add(user);
+                DbContext.SaveChanges();
 
                 // Create token for the new registered user
                 var claims = new List<Claim>
@@ -171,7 +156,7 @@ namespace TeachMeBackendService.ControllersAPI
                     new Claim(ClaimTypes.Role, model.Role.ToString())
                 };
 
-                var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromDays(jwtTokenExpirationTimeInHours));
+                var token = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromDays(_jwtTokenExpirationTimeInHours));
 
                 loginResult = new LoginResult()
                 {
@@ -246,9 +231,9 @@ namespace TeachMeBackendService.ControllersAPI
                 claims.Add(new Claim(ClaimTypes.Role, userRole));
             }
 
-            var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
+            var token = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromHours(_jwtTokenExpirationTimeInHours));
 
-            var user = dbContext.Set<User>().Find(appUser.Id);
+            var user = DbContext.Set<User>().Find(appUser.Id);
 
             return new LoginResult()
             {

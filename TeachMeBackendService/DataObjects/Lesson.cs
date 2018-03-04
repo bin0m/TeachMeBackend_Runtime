@@ -1,15 +1,14 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace TeachMeBackendService.DataObjects
 {
     public class Lesson : EntityData
     {
         public string Name { get; set; }
-
 
         // parent Section FK
         public String SectionId { get; set; }
@@ -31,5 +30,6 @@ namespace TeachMeBackendService.DataObjects
 
         //children Exercises
         public List<Exercise> Exercises { get; set; }
+
     }
 }

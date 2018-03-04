@@ -2,7 +2,6 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using TeachMeBackendService.DataObjects;
 
@@ -19,9 +18,9 @@ namespace TeachMeBackendService.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
 
-        private const string connectionStringName = "Name=MS_TableConnectionString";
+        private const string ConnectionStringName = "Name=MS_TableConnectionString";
 
-        public TeachMeBackendContext() : base(connectionStringName, throwIfV1Schema: false)
+        public TeachMeBackendContext() : base(ConnectionStringName, throwIfV1Schema: false)
         {
         }
 

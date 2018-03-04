@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -22,7 +14,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CommentRatingsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/CommentRatings
         [Route("")]
@@ -36,22 +28,22 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(CommentRating))]
         public IHttpActionResult GetCommentRating(string id)
         {
-            CommentRating CommentRating = db.CommentRatings.Find(id);
-            if (CommentRating == null)
+            CommentRating commentRating = db.CommentRatings.Find(id);
+            if (commentRating == null)
             {
                 return NotFound();
             }
 
-            return Ok(CommentRating);
+            return Ok(commentRating);
         }
 
 
         [Route("~/api/v{version:ApiVersion}/comments/{id}/commentratings")]
         public IQueryable<CommentRating> GetBySection(string id)
         {
-            var CommentRating = db.CommentRatings.Where(c => c.CommentId == id);
+            var commentRating = db.CommentRatings.Where(c => c.CommentId == id);
 
-            return CommentRating;
+            return commentRating;
         }
 
         protected override void Dispose(bool disposing)
@@ -61,11 +53,6 @@ namespace TeachMeBackendService.ControllersAPI
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool CommentRatingExists(string id)
-        {
-            return db.CommentRatings.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -13,10 +8,10 @@ namespace TeachMeBackendService
 {
     public partial class Startup
     {
-        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        public static OAuthAuthorizationServerOptions OAuthOptions => null;
 
-        public static string PublicClientId { get; private set; }
-        
+        public static string PublicClientId => null;
+
         public static void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request

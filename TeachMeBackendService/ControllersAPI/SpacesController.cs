@@ -54,10 +54,5 @@ namespace TeachMeBackendService.ControllersAPI
             }
             base.Dispose(disposing);
         }
-
-        private bool SpaceExists(string id)
-        {
-            return db.Spaces.Count(e => e.Id == id) > 0;
-        }
     }
 }

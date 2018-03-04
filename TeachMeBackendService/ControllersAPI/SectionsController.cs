@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -117,10 +112,9 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Section))]
         public IHttpActionResult DeleteSection(string id)
         {
-            Section section = null;
-            using (var dbContext = new Models.TeachMeBackendContext())
+            using (var dbContext = new TeachMeBackendContext())
             {
-                section = dbContext.DeleteSectionAndChildren(id);
+                var section = dbContext.DeleteSectionAndChildren(id);
                 if (section == null)
                 {
                     return NotFound();
