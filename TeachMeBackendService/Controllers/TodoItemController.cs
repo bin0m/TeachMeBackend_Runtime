@@ -15,6 +15,7 @@ namespace TeachMeBackendService.Controllers
  //   [ApiVersion("1.0")]   
  //   [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
     [ApiVersionNeutral]
+    [Authorize]
     public class TodoItemController : TableController<TodoItem>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -51,7 +52,7 @@ namespace TeachMeBackendService.Controllers
         }
 
         // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-//        [Route("{id}", Name = "GetTodoItem")]
+        [Route("{id}", Name = "GetTodoItem")]
         public SingleResult<TodoItem> GetTodoItem(string id)
         {
              return Lookup(id);
