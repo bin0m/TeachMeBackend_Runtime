@@ -1,16 +1,16 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Azure.Mobile.Server;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
-using Microsoft.Web.Http;
-using System.Net.Http;
-using Microsoft.AspNet.Identity.Owin;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/user")]

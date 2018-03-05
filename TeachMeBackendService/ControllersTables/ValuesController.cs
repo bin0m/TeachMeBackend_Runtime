@@ -1,13 +1,13 @@
-﻿using System.Web.Http;
-using System.Web.Http.Tracing;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Data.Entity;
+using System.Web.Http;
+using System.Web.Http.Tracing;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
-using TeachMeBackendService.DataObjects;
 using Microsoft.Web.Http;
+using TeachMeBackendService.DataObjects;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
     // Use the MobileAppController attribute for each ApiController you want to use  
     // from your mobile clients 

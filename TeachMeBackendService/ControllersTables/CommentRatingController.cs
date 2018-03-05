@@ -8,7 +8,7 @@ using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/commentrating")]
