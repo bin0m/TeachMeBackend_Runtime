@@ -10,8 +10,9 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersTables
 {
-    [RoutePrefix("tables/course")]
+    [Authorize]
     [ApiVersionNeutral]
+    [RoutePrefix("tables/course")]
     public class CourseController : TableController<Course>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
