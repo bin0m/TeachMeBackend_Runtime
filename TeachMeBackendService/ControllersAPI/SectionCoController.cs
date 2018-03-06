@@ -8,12 +8,12 @@ using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersAPI
 {
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/section")]
     [Authorize]
-    [ApiVersionNeutral]
-    [RoutePrefix("tables/section")]
-    public class SectionController : TableController<Section>
+    public class SectionCoController : TableController<Section>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -23,31 +23,36 @@ namespace TeachMeBackendService.Controllers
         }
 
         // GET tables/Section
+        [Route("")]
         public IQueryable<Section> GetAllSection()
         {
             return Query(); 
         }
 
         // GET tables/Section/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}", Name = "GetSectionCo")]
         public SingleResult<Section> GetSection(string id)
         {
             return Lookup(id);
         }
 
         // PATCH tables/Section/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task<Section> PatchSection(string id, Delta<Section> patch)
         {
              return UpdateAsync(id, patch);
         }
 
         // POST tables/Section
+        [Route("")]
         public async Task<IHttpActionResult> PostSection(Section item)
         {
             Section current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+            return CreatedAtRoute("GetSectionCo", new { id = current.Id }, current);
         }
 
         // DELETE tables/Section/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
         public Task DeleteSection(string id)
         {
              return DeleteAsync(id);

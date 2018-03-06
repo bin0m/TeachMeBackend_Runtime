@@ -1,61 +1,282 @@
-﻿//using System.Linq;
-//using System.Threading.Tasks;
+﻿//using System;
+//using System.Data.Entity;
+//using System.Data.Entity.Infrastructure;
+//using System.Linq;
+//using System.Net;
 //using System.Web.Http;
-//using System.Web.Http.Controllers;
-//using System.Web.Http.OData;
-//using Microsoft.Azure.Mobile.Server;
+//using System.Web.Http.Description;
+//using Microsoft.Azure.Mobile.Server.Config;
 //using Microsoft.Web.Http;
 //using TeachMeBackendService.DataObjects;
 //using TeachMeBackendService.Models;
 
-//namespace TeachMeBackendService.ControllersTables
+//namespace TeachMeBackendService.ControllersAPI
 //{
-//    [ApiVersion("1.0")]
-//    [RoutePrefix("api/v{version:ApiVersion}/exercise")]
 //    [Authorize]
-//    public class ExerciseController : TableController<Exercise>
+//    [ApiVersionNeutral]
+//    [RoutePrefix("tables/exercise")]
+//    public class ExerciseController : ApiController
 //    {
-//        protected override void Initialize(HttpControllerContext controllerContext)
-//        {
-//            base.Initialize(controllerContext);
-//            TeachMeBackendContext context = new TeachMeBackendContext();
-//            DomainManager = new EntityDomainManager<Exercise>(context, Request);
-//        }
+//        private TeachMeBackendContext db = new TeachMeBackendContext();
 
-//        // GET tables/Exercise
+//        // GET: api/Exercises
 //        [Route("")]
-//        public IQueryable<Exercise> GetAllExercise()
+//        public IQueryable<Exercise> GetExercises()
 //        {
-//            return Query(); 
+//            return db
+//                .Exercises
+//                .Include(ex => ex.Answers)
+//                .Include(ex => ex.Pairs)
+//                .Include(ex => ex.Spaces);
 //        }
 
-//        // GET tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
-//        [Route("{id}", Name = "GetExercise")]
-//        public SingleResult<Exercise> GetExercise(string id)
+//        // GET: api/Exercises/5
+//        [Route("{id}", Name = "GetExercisesById")]
+//        [ResponseType(typeof(Exercise))]
+//        public IHttpActionResult GetExercise(string id)
 //        {
-//            return Lookup(id);
+//            Exercise exercise = db
+//                .Exercises
+//                .Include(ex => ex.Answers)
+//                .Include(ex => ex.Pairs)
+//                .Include(ex => ex.Spaces)
+//                .SingleOrDefault(ex => ex.Id == id);
+
+//            if (exercise == null)
+//            {
+//                return NotFound();
+//            }
+
+//            return Ok(exercise);
 //        }
 
-//        // PATCH tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
-//        [Route("{id}")]
-//        public Task<Exercise> PatchExercise(string id, Delta<Exercise> patch)
+
+//        [Route("~/api/v{version:ApiVersion}/lessons/{id}/exercises")]
+//        public IQueryable<Exercise> GetBySection(string id)
 //        {
-//             return UpdateAsync(id, patch);
+//            var exercises = db
+//                .Exercises
+//                .Include(ex => ex.Answers)
+//                .Include(ex => ex.Pairs)
+//                .Include(ex => ex.Spaces)
+//                .Where(c => c.LessonId == id);
+
+//            return exercises;
 //        }
 
-//        // POST tables/Exercise
+//        // POST: api/Exercises
 //        [Route("")]
-//        public async Task<IHttpActionResult> PostExercise(Exercise item)
+//        [ResponseType(typeof(Exercise))]
+//        public IHttpActionResult PostExercise(Exercise exercise)
 //        {
-//            Exercise current = await InsertAsync(item);
-//            return CreatedAtRoute("GetExercise", new { id = current.Id }, current);
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
+
+//            exercise.Id = Guid.NewGuid().ToString("N");
+
+//            if (exercise.Pairs != null)
+//            {
+//                foreach (var pair in exercise.Pairs)
+//                {
+//                    pair.Id = Guid.NewGuid().ToString("N");
+//                }
+//            }
+
+//            if (exercise.Answers != null)
+//            {
+//                foreach (var answer in exercise.Answers)
+//                {
+//                    answer.Id = Guid.NewGuid().ToString("N");
+//                }
+//            }
+
+//            if (exercise.Spaces != null)
+//            {
+//                foreach (var space in exercise.Spaces)
+//                {
+//                    space.Id = Guid.NewGuid().ToString("N");
+//                }
+//            }
+//            //Exercise newExercise = new Exercise
+//            //{
+//            //    Name = "TestName",
+//            //    Type = "TestType",
+//            //    LessonId = "c1x6409cf5444d8d866578ad3dd349nk",
+//            //    Id = Guid.NewGuid().ToString("N"),
+//            //    Pairs = new List<Pair> {
+//            //        new Pair{
+//            //            Value = "testValue",
+//            //            Equal = "testEqual",
+//            //            Id = Guid.NewGuid().ToString("N")
+//            //        } }
+//            //};
+
+//            db.Exercises.Add(exercise);
+
+
+//            try
+//            {
+//                db.SaveChanges();
+//            }
+//            catch (DbUpdateException)
+//            {
+//                if (ExerciseExists(exercise.Id))
+//                {
+//                    return Conflict();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+
+//            return CreatedAtRoute("GetExercisesById", new { id = exercise.Id }, exercise);
 //        }
 
-//        // DELETE tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
+
+//        // PUT: api/Exercises/5
 //        [Route("{id}")]
-//        public Task DeleteExercise(string id)
+//        [ResponseType(typeof(Exercise))]
+//        public IHttpActionResult PutExercise(string id, Exercise exercise)
 //        {
-//             return DeleteAsync(id);
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
+
+//            if (id != exercise.Id)
+//            {
+//                return BadRequest();
+//            }
+
+//            var parentInDb = db.Exercises
+//                .Where(p => p.Id == exercise.Id)
+//                .Include(p => p.Pairs)
+//                .Include(p => p.Answers)
+//                .Include(p => p.Spaces)
+//                .SingleOrDefault();
+
+//            if (parentInDb != null)
+//            {
+//                // to prevent error: "Modifying a column with the 'Identity' pattern is not supported. Column: 'CreatedAt'"
+//                exercise.CreatedAt = parentInDb.CreatedAt;
+
+//                // Update parent
+//                db.Entry(parentInDb).CurrentValues.SetValues(exercise);
+
+//                // Delete all previous children
+//                if (parentInDb.Pairs != null)
+//                {
+//                    db.Pairs.RemoveRange(parentInDb.Pairs);
+//                }
+//                if (parentInDb.Answers != null)
+//                {
+//                    db.Answers.RemoveRange(parentInDb.Answers);
+//                }
+//                if (parentInDb.Spaces != null)
+//                {
+//                    db.Spaces.RemoveRange(parentInDb.Spaces);
+//                }
+
+//                //  Insert new children
+//                foreach (var newPair in exercise.Pairs ?? Enumerable.Empty<Pair>())
+//                {
+//                    newPair.Id = Guid.NewGuid().ToString("N");
+//                    newPair.ExerciseId = parentInDb.Id;
+//                    parentInDb.Pairs?.Add(newPair);
+//                }
+
+//                foreach (var newAnswer in exercise.Answers ?? Enumerable.Empty<Answer>())
+//                {
+//                    newAnswer.Id = Guid.NewGuid().ToString("N");
+//                    newAnswer.ExerciseId = parentInDb.Id;
+//                    parentInDb.Answers?.Add(newAnswer);
+//                }
+
+//                foreach (var newSpace in exercise.Spaces ?? Enumerable.Empty<Space>())
+//                {
+//                    newSpace.Id = Guid.NewGuid().ToString("N");
+//                    newSpace.ExerciseId = parentInDb.Id;
+//                    parentInDb.Spaces?.Add(newSpace);
+//                }
+
+
+//                // Update the exercise and state that the exercise 'owns' the collection of Pairs,Answers...
+//                //db.UpdateGraph<Exercise>(exercise, map => map.OwnedCollection(p => p.Pairs));
+
+//                try
+//                {
+//                    db.SaveChanges();
+//                }
+//                catch (DbUpdateConcurrencyException)
+//                {
+//                    if (!ExerciseExists(id))
+//                    {
+//                        return NotFound();
+//                    }
+//                    else
+//                    {
+//                        throw;
+//                    }
+//                }
+//            }
+
+//            Exercise freshExercise = db
+//                .Exercises
+//                .Include(ex => ex.Answers)
+//                .Include(ex => ex.Pairs)
+//                .Include(ex => ex.Spaces)
+//                .SingleOrDefault(ex => ex.Id == id);
+
+//            if (freshExercise == null)
+//            {
+//                return NotFound();
+//            }
+
+//            return Ok(freshExercise);
+//        }
+
+//        // DELETE: api/Exercises/5
+//        [Route("{id}")]
+//        [ResponseType(typeof(void))]
+//        public IHttpActionResult DeleteExercise(string id)
+//        {
+//            Exercise exercise = db.Exercises.Find(id);
+
+//            if (exercise == null)
+//            {
+//                return NotFound();
+//            }
+
+//            db.Exercises.Remove(exercise);
+
+//            try
+//            {
+//                db.SaveChanges();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                return NotFound();
+//            }
+
+//            return StatusCode(HttpStatusCode.NoContent);
+//        }
+
+
+//        protected override void Dispose(bool disposing)
+//        {
+//            if (disposing)
+//            {
+//                db.Dispose();
+//            }
+//            base.Dispose(disposing);
+//        }
+
+//        private bool ExerciseExists(string id)
+//        {
+//            return db.Exercises.Count(e => e.Id == id) > 0;
 //        }
 //    }
 //}

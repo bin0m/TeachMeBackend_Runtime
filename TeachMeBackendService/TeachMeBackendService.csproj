@@ -182,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -191,6 +192,8 @@
     <Compile Include="ControllersAPI\AuthCustomController.cs" />
     <Compile Include="ControllersAPI\AuthController.cs" />
     <Compile Include="ControllersAPI\CourseCoController.cs" />
+    <Compile Include="ControllersAPI\LessonCoController.cs" />
+    <Compile Include="ControllersAPI\SectionCoController.cs" />
     <Compile Include="ControllersAPI\SpacesController.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
@@ -213,12 +216,12 @@
     <Compile Include="ControllersTables\PairController.cs" />
     <Compile Include="ControllersTables\Section2Controller.cs" />
     <Compile Include="ControllersTables\Section3Controller.cs" />
-    <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="ControllersTables\SpaceController.cs" />
     <Compile Include="ControllersTables\StudentCourseController.cs" />
     <Compile Include="ControllersTables\UserController.cs" />
     <Compile Include="ControllersTables\TodoItemController.cs" />
     <Compile Include="ControllersTables\ValuesController.cs" />
+    <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\Space.cs" />
