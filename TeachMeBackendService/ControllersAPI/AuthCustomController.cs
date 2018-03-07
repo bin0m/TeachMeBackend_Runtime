@@ -117,7 +117,8 @@ namespace TeachMeBackendService.ControllersAPI
             var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, appUser.Email),
-                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.PrimarySid, appUser.Id)
                 };
 
             var userRoles = await UserManager.GetRolesAsync(appUser.Id);

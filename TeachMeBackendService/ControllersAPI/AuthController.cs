@@ -161,6 +161,7 @@ namespace TeachMeBackendService.ControllersAPI
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, model.Email),
                     new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.PrimarySid, appUser.Id),
                     new Claim(ClaimTypes.Role, model.Role.ToString())
                 };
 
@@ -230,7 +231,8 @@ namespace TeachMeBackendService.ControllersAPI
             var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, appUser.Email),
-                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.PrimarySid, appUser.Id)
                 };
 
             var userRoles = await UserManager.GetRolesAsync(appUser.Id);

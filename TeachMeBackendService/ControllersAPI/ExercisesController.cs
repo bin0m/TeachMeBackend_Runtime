@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -265,6 +266,26 @@ namespace TeachMeBackendService.ControllersAPI
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Route("~/api/v{version:ApiVersion}/exercises/{id}/progress")]
+        public IHttpActionResult GetProgressByExercise(string id)
+        {
+            int progress = 0;
+            var claimsPrincipal = User as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id && c.UserId == userId).FirstOrDefault();
+                if (exerciseStudents != null)
+                {
+                    if (exerciseStudents.IsDone)
+                    {
+                        progress = 1;
+                    }
+                }
+            }           
+
+            return Ok(progress);
+        }
 
         protected override void Dispose(bool disposing)
         {

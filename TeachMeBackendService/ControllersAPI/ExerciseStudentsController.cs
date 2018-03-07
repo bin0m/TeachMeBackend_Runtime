@@ -44,7 +44,7 @@ namespace TeachMeBackendService.ControllersAPI
             var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id);
 
             return exerciseStudents;
-        }
+        }     
 
         protected override void Dispose(bool disposing)
         {
