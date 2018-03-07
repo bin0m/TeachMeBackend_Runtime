@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -32,6 +35,27 @@ namespace TeachMeBackendService.ControllersAPI
             if (lesson == null)
             {
                 return NotFound();
+            }
+
+            var claimsPrincipal = User as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;                
+                var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
+                lesson.ExercisesNumber = exercises.Count();
+
+                //TODO: simplify loop ( use one LINQ query instead)
+                foreach (var ex in exercises)
+                {
+                    var exerciseStudents = ex.ExerciseStudents.Where(c => c.UserId == userId).FirstOrDefault();
+                    if (exerciseStudents != null)
+                    {
+                        if (exerciseStudents.IsDone)
+                        {
+                            lesson.ExercisesDone += 1;
+                        }
+                    }
+                }
             }
 
             return Ok(lesson);

@@ -10,6 +10,11 @@ namespace TeachMeBackendService.DataObjects
     {
         public string Name { get; set; }
 
+        [NotMapped]
+        public int ExercisesNumber { get; set; }
+        [NotMapped]
+        public int ExercisesDone { get; set; }
+
         // parent Section FK
         public String SectionId { get; set; }
 
