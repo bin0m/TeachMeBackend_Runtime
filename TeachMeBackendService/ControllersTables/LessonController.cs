@@ -12,7 +12,7 @@ namespace TeachMeBackendService.ControllersTables
 {
     [Authorize]
     [ApiVersionNeutral]
-    [RoutePrefix("tables/section")]
+    [RoutePrefix("tables/lesson")]
     public class LessonController : TableController<Lesson>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
