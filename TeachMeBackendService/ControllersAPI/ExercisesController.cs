@@ -270,11 +270,10 @@ namespace TeachMeBackendService.ControllersAPI
         public IHttpActionResult GetProgressByExercise(string id)
         {
             int progress = 0;
-            var claimsPrincipal = User as ClaimsPrincipal;
-            if (claimsPrincipal != null)
+            if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
-                var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id && c.UserId == userId).FirstOrDefault();
+                var exerciseStudents = db.ExerciseStudents.FirstOrDefault(c => c.ExerciseId == id && c.UserId == userId);
                 if (exerciseStudents != null)
                 {
                     if (exerciseStudents.IsDone)
@@ -282,9 +281,10 @@ namespace TeachMeBackendService.ControllersAPI
                         progress = 1;
                     }
                 }
-            }           
-
+            }
+      
             return Ok(progress);
+           
         }
 
         protected override void Dispose(bool disposing)
