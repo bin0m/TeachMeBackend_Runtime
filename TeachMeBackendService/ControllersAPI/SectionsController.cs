@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -17,13 +19,15 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class SectionsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Sections
         [Route("")]
-        public IQueryable<Section> GetSections()
+        public IEnumerable<Section> GetSections()
         {
-            return db.Sections;
+            var all = db.Sections.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateSectionProgress(x.Id));
+            return all;
         }
 
         // GET: api/Sections/5
@@ -37,7 +41,25 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
+            //Calculates progress for all exercises under this section for the current user
+            section.Progress = CalculateSectionProgress(id);
+
             return Ok(section);
+        }
+
+        //Calculates progress for all exercises under this section for the current user
+        private ProgressModel CalculateSectionProgress(string id)
+        {
+            ProgressModel progressModel = new ProgressModel();
+            var exercises = db.Exercises.Where(ex => ex.Lesson.SectionId == id).Include(ex => ex.ExerciseStudents);
+            progressModel.ExercisesNumber = exercises.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                progressModel.ExercisesDone =
+                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+            }
+            return progressModel;
         }
 
         // PUT: api/Sections/5

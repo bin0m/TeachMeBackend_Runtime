@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using TeachMeBackendService.Models;
 
 
 namespace TeachMeBackendService.DataObjects
@@ -11,9 +12,7 @@ namespace TeachMeBackendService.DataObjects
         public string Name { get; set; }
 
         [NotMapped]
-        public int ExercisesNumber { get; set; }
-        [NotMapped]
-        public int ExercisesDone { get; set; }
+        public ProgressModel Progress { get; set; }
 
         // parent Section FK
         public String SectionId { get; set; }

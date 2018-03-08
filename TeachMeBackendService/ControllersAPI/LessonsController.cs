@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Web.Http;
@@ -20,9 +21,11 @@ namespace TeachMeBackendService.ControllersAPI
 
         // GET: api/Lessons
         [Route("")]
-        public IQueryable<Lesson> GetLessons()
+        public IEnumerable<Lesson> GetLessons()
         {
-            return db.Lessons;
+            var all = db.Lessons.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateLessonProgress(x.Id));
+            return all;
         }
 
         // GET: api/Lessons/5
@@ -36,20 +39,28 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
-            if (User is ClaimsPrincipal claimsPrincipal)
-            {
-                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
-
-                var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
-                lesson.ExercisesNumber = exercises.Count();
-
-                lesson.ExercisesDone = exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
-            }
+            //Calculates progress for all exercises under this lesson for the current user
+            lesson.Progress = CalculateLessonProgress(id);
 
             return Ok(lesson);
         }
 
-        
+        //Calculates progress for all exercises under this lesson for the current user
+        private ProgressModel CalculateLessonProgress(string id)
+        {
+            ProgressModel progressModel = new ProgressModel();
+            var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
+            progressModel.ExercisesNumber = exercises.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                progressModel.ExercisesDone =
+                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+            }
+            return progressModel;
+        }
+
+
         [Route("~/api/v{version:ApiVersion}/sections/{id}/lessons")]
         public IQueryable<Lesson> GetBySection(string id)
         {

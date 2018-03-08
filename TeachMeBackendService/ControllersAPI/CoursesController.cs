@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -15,13 +18,15 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CoursesController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Courses
         [Route("")]
-        public IQueryable<Course> GetCourses()
+        public IEnumerable<Course> GetCourses()
         {
-            return db.Courses;
+            var all = db.Courses.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateCourseProgress(x.Id));
+            return all;
         }
 
         // GET: api/Courses/5
@@ -35,7 +40,25 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
+            //Calculates progress for all exercises under this course for the current user
+            course.Progress = CalculateCourseProgress(id);
+
             return Ok(course);
+        }
+
+        //Calculates progress for all exercises under this course for the current user
+        private ProgressModel CalculateCourseProgress(string id)
+        {
+            ProgressModel progressModel = new ProgressModel();
+            var exercises = db.Exercises.Where(ex => ex.Lesson.Section.CourseId == id).Include(ex => ex.ExerciseStudents);
+            progressModel.ExercisesNumber = exercises.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                progressModel.ExercisesDone =
+                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+            }
+            return progressModel;
         }
 
         // DELETE: api/Courses/5

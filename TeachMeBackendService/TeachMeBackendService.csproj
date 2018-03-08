@@ -245,6 +245,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ProgressModel.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
