@@ -16,7 +16,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class LessonsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Lessons
         [Route("")]
@@ -43,9 +43,7 @@ namespace TeachMeBackendService.ControllersAPI
                 var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
                 lesson.ExercisesNumber = exercises.Count();
 
-                var doneExercises = exercises.Where(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
-                lesson.ExercisesDone = doneExercises.Count();
-                
+                lesson.ExercisesDone = exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
             }
 
             return Ok(lesson);
