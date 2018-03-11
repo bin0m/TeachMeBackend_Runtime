@@ -44,6 +44,8 @@ namespace TeachMeBackendService.Models
         public DbSet<Space> Spaces { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<User> UserDetails { get; set; }
+        public DbSet<LessonProgress> LessonProgresses { get; set; }
+        public DbSet<SectionProgress> SectionProgresses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -168,6 +170,32 @@ namespace TeachMeBackendService.Models
                .HasRequired(p => p.User)
                .WithMany(l => l.StudentCourses)
                .HasForeignKey(p => p.UserId);
+
+            // Lesson <1-to-many> LessonProgresses
+            modelBuilder.Entity<LessonProgress>()
+                .HasRequired(p => p.Lesson)
+                .WithMany(l => l.LessonProgresses)
+                .HasForeignKey(p => p.LessonId);
+
+            // User <1-to-many> LessonProgresses
+            modelBuilder.Entity<LessonProgress>()
+                .HasRequired(p => p.User)
+                .WithMany(l => l.LessonProgresses)
+                .HasForeignKey(p => p.UserId)
+                .WillCascadeOnDelete(false);
+
+            // Section <1-to-many> SectionProgresses
+            modelBuilder.Entity<SectionProgress>()
+                .HasRequired(p => p.Section)
+                .WithMany(l => l.SectionProgresses)
+                .HasForeignKey(p => p.SectionId);
+
+            // User <1-to-many> SectionProgresses
+            modelBuilder.Entity<SectionProgress>()
+                .HasRequired(p => p.User)
+                .WithMany(l => l.SectionProgresses)
+                .HasForeignKey(p => p.UserId)
+                .WillCascadeOnDelete(false);
         }
 
         /// <summary>

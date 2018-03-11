@@ -35,5 +35,8 @@ namespace TeachMeBackendService.DataObjects
         //children Exercises
         public List<Exercise> Exercises { get; set; }
 
+        // Children LessonProgresses
+        public List<LessonProgress> LessonProgresses { get; set; }
+
     }
 }

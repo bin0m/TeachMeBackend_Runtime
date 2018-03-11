@@ -213,17 +213,21 @@
     <Compile Include="ControllersTables\ExerciseController.cs" />
     <Compile Include="ControllersTables\ExerciseStudentController.cs" />
     <Compile Include="ControllersTables\LessonController.cs" />
+    <Compile Include="ControllersTables\SectionProgressController.cs" />
     <Compile Include="ControllersTables\PairController.cs" />
     <Compile Include="ControllersTables\Section2Controller.cs" />
     <Compile Include="ControllersTables\Section3Controller.cs" />
     <Compile Include="ControllersTables\SpaceController.cs" />
+    <Compile Include="ControllersTables\LessonProgressController.cs" />
     <Compile Include="ControllersTables\StudentCourseController.cs" />
     <Compile Include="ControllersTables\UserController.cs" />
     <Compile Include="ControllersTables\TodoItemController.cs" />
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
-    <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="DataObjects\SectionProgress.cs" />
+    <Compile Include="DataObjects\StudentCourse.cs" />
+    <Compile Include="DataObjects\LessonProgress.cs" />
     <Compile Include="DataObjects\Space.cs" />
     <Compile Include="DataObjects\Pair.cs" />
     <Compile Include="DataObjects\CommentRating.cs" />
@@ -241,6 +245,10 @@
     <Compile Include="Migrations\201802272334036_Initial.cs" />
     <Compile Include="Migrations\201802272334036_Initial.Designer.cs">
       <DependentUpon>201802272334036_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.cs" />
+    <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.Designer.cs">
+      <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -273,6 +281,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802272334036_Initial.resx">
       <DependentUpon>201802272334036_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.resx">
+      <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
