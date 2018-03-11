@@ -40,25 +40,25 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
-            //Calculates progress for all exercises under this course for the current user
+            //Calculates progress for all sections under this course for the current user
             course.Progress = CalculateCourseProgress(id);
 
             return Ok(course);
         }
 
-        //Calculates progress for all exercises under this course for the current user
-        private ProgressModel CalculateCourseProgress(string id)
+        //Calculates progress for all sections under this course for the current user
+        private ProgressCourseModel CalculateCourseProgress(string id)
         {
-            ProgressModel progressModel = new ProgressModel();
-            var exercises = db.Exercises.Where(ex => ex.Lesson.Section.CourseId == id).Include(ex => ex.ExerciseStudents);
-            progressModel.ExercisesNumber = exercises.Count();
+            ProgressCourseModel progressCourseModel = new ProgressCourseModel();
+            var sections = db.Sections.Where(c => c.CourseId == id).Include(c => c.SectionProgresses);
+            progressCourseModel.SectionsNumber = sections.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
-                progressModel.ExercisesDone =
-                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+                progressCourseModel.SectionsDone =
+                    sections.Count(c => c.SectionProgresses.Any(p => p.UserId == userId && p.IsDone));
             }
-            return progressModel;
+            return progressCourseModel;
         }
 
         // DELETE: api/Courses/5

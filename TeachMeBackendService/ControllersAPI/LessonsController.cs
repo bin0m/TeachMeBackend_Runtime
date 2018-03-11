@@ -46,18 +46,25 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         //Calculates progress for all exercises under this lesson for the current user
-        private ProgressModel CalculateLessonProgress(string id)
+        private ProgressLessonModel CalculateLessonProgress(string id)
         {
-            ProgressModel progressModel = new ProgressModel();
+            ProgressLessonModel progressLessonModel = new ProgressLessonModel();
             var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
-            progressModel.ExercisesNumber = exercises.Count();
+            progressLessonModel.ExercisesNumber = exercises.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
-                progressModel.ExercisesDone =
+                    progressLessonModel.ExercisesDone =
                     exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+                var sectionProgress = db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
+                if (sectionProgress != null)
+                {
+                    progressLessonModel.IsDone = sectionProgress.IsDone;
+                    progressLessonModel.IsStarted = sectionProgress.IsDone;
+                }
             }
-            return progressModel;
+           
+            return progressLessonModel;
         }
 
 

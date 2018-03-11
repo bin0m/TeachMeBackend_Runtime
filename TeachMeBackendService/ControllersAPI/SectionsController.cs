@@ -41,25 +41,31 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
-            //Calculates progress for all exercises under this section for the current user
+            //Calculates progress for all lessons under this section for the current user
             section.Progress = CalculateSectionProgress(id);
 
             return Ok(section);
         }
 
-        //Calculates progress for all exercises under this section for the current user
-        private ProgressModel CalculateSectionProgress(string id)
+        //Calculates progress for all lessons under this section for the current user
+        private ProgressSectionModel CalculateSectionProgress(string id)
         {
-            ProgressModel progressModel = new ProgressModel();
-            var exercises = db.Exercises.Where(ex => ex.Lesson.SectionId == id).Include(ex => ex.ExerciseStudents);
-            progressModel.ExercisesNumber = exercises.Count();
+            ProgressSectionModel progressSectionModel = new ProgressSectionModel();
+            var lessons = db.Lessons.Where(l => l.SectionId == id).Include(l => l.LessonProgresses);
+            progressSectionModel.LessonsNumber = lessons.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
-                progressModel.ExercisesDone =
-                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+                progressSectionModel.LessonsDone =
+                    lessons.Count(l => l.LessonProgresses.Any(p => p.UserId == userId && p.IsDone));
+                var sectionProgress = db.SectionProgresses.FirstOrDefault(p => p.UserId == userId && p.SectionId == id);
+                if (sectionProgress != null)
+                {
+                    progressSectionModel.IsDone = sectionProgress.IsDone;
+                    progressSectionModel.IsStarted = sectionProgress.IsDone;
+                }
             }
-            return progressModel;
+            return progressSectionModel;
         }
 
         // PUT: api/Sections/5

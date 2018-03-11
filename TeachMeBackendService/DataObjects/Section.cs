@@ -11,7 +11,7 @@ namespace TeachMeBackendService.DataObjects
         public string Name { get; set; }
 
         [NotMapped]
-        public ProgressModel Progress { get; set; }
+        public ProgressSectionModel Progress { get; set; }
 
         // parent Course FK
         public String CourseId { get; set; }

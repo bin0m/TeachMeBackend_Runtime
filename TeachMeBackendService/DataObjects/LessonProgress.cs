@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.DataObjects
 {
@@ -10,9 +11,12 @@ namespace TeachMeBackendService.DataObjects
         public bool IsStarted { get; set; }
 
         public bool IsDone { get; set; }
- 
-         // Lesson FK
-         public String LessonId { get; set; }
+
+         [NotMapped]
+         public ProgressLessonModel Progress { get; set; }
+
+        // Lesson FK
+        public String LessonId { get; set; }
  
          // parent Lesson link
          public Lesson Lesson { get; set; }
