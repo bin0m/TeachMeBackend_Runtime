@@ -199,7 +199,7 @@
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
     <Compile Include="ControllersAPI\AnswersController.cs" />
-    <Compile Include="ControllersAPI\StudentCoursesController.cs" />
+    <Compile Include="ControllersAPI\CourseProgressesController.cs" />
     <Compile Include="ControllersAPI\PairsController.cs" />
     <Compile Include="ControllersAPI\ExerciseStudentsController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
@@ -219,14 +219,14 @@
     <Compile Include="ControllersTables\Section3Controller.cs" />
     <Compile Include="ControllersTables\SpaceController.cs" />
     <Compile Include="ControllersTables\LessonProgressController.cs" />
-    <Compile Include="ControllersTables\StudentCourseController.cs" />
+    <Compile Include="ControllersTables\CourseProgressController.cs" />
     <Compile Include="ControllersTables\UserController.cs" />
     <Compile Include="ControllersTables\TodoItemController.cs" />
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\SectionProgress.cs" />
-    <Compile Include="DataObjects\StudentCourse.cs" />
+    <Compile Include="DataObjects\CourseProgress.cs" />
     <Compile Include="DataObjects\LessonProgress.cs" />
     <Compile Include="DataObjects\Space.cs" />
     <Compile Include="DataObjects\Pair.cs" />
@@ -239,6 +239,7 @@
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
     <Compile Include="DataObjects\Section3.cs" />
+    <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Logic\Helper.cs" />
@@ -249,6 +250,10 @@
     <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.cs" />
     <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.Designer.cs">
       <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121557520_AddedCourseProgressesTable.cs" />
+    <Compile Include="Migrations\201803121557520_AddedCourseProgressesTable.Designer.cs">
+      <DependentUpon>201803121557520_AddedCourseProgressesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -284,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.resx">
       <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121557520_AddedCourseProgressesTable.resx">
+      <DependentUpon>201803121557520_AddedCourseProgressesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

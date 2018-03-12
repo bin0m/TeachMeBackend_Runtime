@@ -12,48 +12,48 @@ namespace TeachMeBackendService.ControllersTables
 {
     [Authorize]
     [ApiVersionNeutral]
-    [RoutePrefix("tables/SectionProgress")]
-    public class SectionProgressController : TableController<SectionProgress>
+    [RoutePrefix("tables/CourseProgress")]
+    public class CourseProgressController : TableController<CourseProgress>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             TeachMeBackendContext context = new TeachMeBackendContext();
-            DomainManager = new EntityDomainManager<SectionProgress>(context, Request);
+            DomainManager = new EntityDomainManager<CourseProgress>(context, Request);
         }
 
-        // GET tables/SectionProgress
+        // GET tables/CourseProgress
         [Route("")]
-        public IQueryable<SectionProgress> GetAllSectionProgress()
+        public IQueryable<CourseProgress> GetAllCourseProgress()
         {
             return Query(); 
         }
 
-        // GET tables/SectionProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // GET tables/CourseProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
-        public SingleResult<SectionProgress> GetSectionProgress(string id)
+        public SingleResult<CourseProgress> GetCourseProgress(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/SectionProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // PATCH tables/CourseProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
-        public Task<SectionProgress> PatchSectionProgress(string id, Delta<SectionProgress> patch)
+        public Task<CourseProgress> PatchCourseProgress(string id, Delta<CourseProgress> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/SectionProgress
+        // POST tables/CourseProgress
         [Route("")]
-        public async Task<IHttpActionResult> PostSectionProgress(SectionProgress item)
+        public async Task<IHttpActionResult> PostCourseProgress(CourseProgress item)
         {
-            SectionProgress current = await InsertAsync(item);
+            CourseProgress current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        // DELETE tables/SectionProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // DELETE tables/CourseProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
-        public Task DeleteSectionProgress(string id)
+        public Task DeleteCourseProgress(string id)
         {
              return DeleteAsync(id);
         }

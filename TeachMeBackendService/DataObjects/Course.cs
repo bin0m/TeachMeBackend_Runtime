@@ -28,7 +28,7 @@ namespace TeachMeBackendService.DataObjects
         // Children Sections
         public List<Section> Sections { get; set; }
 
-        // Children StudentCourses
-        public List<StudentCourse> StudentCourses { get; set; }
+        // Children CourseProgresses
+        public List<CourseProgress> CourseProgresses { get; set; }
     }
 }

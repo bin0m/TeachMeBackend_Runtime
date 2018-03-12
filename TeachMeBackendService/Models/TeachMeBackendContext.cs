@@ -46,6 +46,7 @@ namespace TeachMeBackendService.Models
         public DbSet<User> UserDetails { get; set; }
         public DbSet<LessonProgress> LessonProgresses { get; set; }
         public DbSet<SectionProgress> SectionProgresses { get; set; }
+        public DbSet<CourseProgress> CourseProgresses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -158,19 +159,6 @@ namespace TeachMeBackendService.Models
                .WithMany(l => l.ExerciseStudents)
                .HasForeignKey(p => p.UserId);
 
-            // Course <1-to-many> StudentCourses
-            modelBuilder.Entity<StudentCourse>()
-               .HasRequired(p => p.Course)
-               .WithMany(l => l.StudentCourses)
-               .HasForeignKey(p => p.CourseId)
-               .WillCascadeOnDelete(false);
-
-            // User <1-to-many> StudentCourses
-            modelBuilder.Entity<StudentCourse>()
-               .HasRequired(p => p.User)
-               .WithMany(l => l.StudentCourses)
-               .HasForeignKey(p => p.UserId);
-
             // Lesson <1-to-many> LessonProgresses
             modelBuilder.Entity<LessonProgress>()
                 .HasRequired(p => p.Lesson)
@@ -195,6 +183,19 @@ namespace TeachMeBackendService.Models
                 .HasRequired(p => p.User)
                 .WithMany(l => l.SectionProgresses)
                 .HasForeignKey(p => p.UserId)
+                .WillCascadeOnDelete(false);
+
+            // Course <1-to-many> CourseProgresses
+            modelBuilder.Entity<CourseProgress>()
+               .HasRequired(p => p.Course)
+               .WithMany(l => l.CourseProgresses)
+               .HasForeignKey(p => p.CourseId);
+
+            // User <1-to-many> CourseProgresses
+            modelBuilder.Entity<CourseProgress>()
+               .HasRequired(p => p.User)
+               .WithMany(l => l.CourseProgresses)
+               .HasForeignKey(p => p.UserId)
                 .WillCascadeOnDelete(false);
         }
 
@@ -225,7 +226,7 @@ namespace TeachMeBackendService.Models
         /// <returns>1)course, when deletes all succesfully  2) null, when failed to delete course or one of its children</returns>
         public Course DeleteCourseAndChildren(string id)
         {
-            var course = Courses.Include(c => c.Sections).Include(c => c.StudentCourses).FirstOrDefault(c => c.Id == id);
+            var course = Courses.Include(c => c.Sections).Include(c => c.CourseProgresses).FirstOrDefault(c => c.Id == id);
 
             if (course != null)
             {
@@ -239,8 +240,8 @@ namespace TeachMeBackendService.Models
                     }
                 }
 
-                // delete inner StudentCourses
-                StudentCourses.RemoveRange(course.StudentCourses);
+                // delete inner CourseProgresses
+                CourseProgresses.RemoveRange(course.CourseProgresses);
 
                 Courses.Remove(course);
                 return course;

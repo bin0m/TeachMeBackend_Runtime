@@ -10,9 +10,9 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/lessonprogress")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/LessonProgress")]
     public class LessonProgressController : TableController<LessonProgress>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -30,7 +30,7 @@ namespace TeachMeBackendService.ControllersTables
         }
 
         // GET tables/LessonProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetLessonProgress")]
+        [Route("{id}")]
         public SingleResult<LessonProgress> GetLessonProgress(string id)
         {
             return Lookup(id);
@@ -48,7 +48,7 @@ namespace TeachMeBackendService.ControllersTables
         public async Task<IHttpActionResult> PostLessonProgress(LessonProgress item)
         {
             LessonProgress current = await InsertAsync(item);
-            return CreatedAtRoute("GetLessonProgress", new { id = current.Id }, current);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/LessonProgress/48D68C86-6EA6-4C25-AA33-223FC9A27959
