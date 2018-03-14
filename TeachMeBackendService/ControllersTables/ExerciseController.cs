@@ -5,8 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
+using Newtonsoft.Json;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
@@ -19,10 +19,13 @@ namespace TeachMeBackendService.ControllersTables
     {
         private TeachMeBackendContext db = new TeachMeBackendContext();
 
+       
+
         // GET: api/Exercises
         [Route("")]
         public IQueryable<Exercise> GetExercises()
         {
+            IncludeNullsInResponse();
             return db
                 .Exercises
                 .Include(ex => ex.Answers)
@@ -35,6 +38,7 @@ namespace TeachMeBackendService.ControllersTables
         [ResponseType(typeof(Exercise))]
         public IHttpActionResult GetExercise(string id)
         {
+            IncludeNullsInResponse();
             Exercise exercise = db
                 .Exercises
                 .Include(ex => ex.Answers)
@@ -59,6 +63,8 @@ namespace TeachMeBackendService.ControllersTables
             {
                 return BadRequest(ModelState);
             }
+
+            IncludeNullsInResponse();
 
             exercise.Id = Guid.NewGuid().ToString("N");
 
@@ -136,6 +142,8 @@ namespace TeachMeBackendService.ControllersTables
             {
                 return BadRequest();
             }
+
+            IncludeNullsInResponse();
 
             var parentInDb = db.Exercises
                 .Where(p => p.Id == exercise.Id)
@@ -248,6 +256,15 @@ namespace TeachMeBackendService.ControllersTables
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private void IncludeNullsInResponse()
+        {
+            var jsonFormatter = this.Configuration.Formatters.JsonFormatter;
+            if (jsonFormatter != null)
+            {
+                jsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Include;
+            }
         }
 
 
