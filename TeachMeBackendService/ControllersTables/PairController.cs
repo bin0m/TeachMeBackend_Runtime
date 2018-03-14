@@ -10,9 +10,9 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/pair")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/pair")]
     public class PairController : TableController<Pair>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -48,7 +48,7 @@ namespace TeachMeBackendService.ControllersTables
         public async Task<IHttpActionResult> PostPair(Pair item)
         {
             Pair current = await InsertAsync(item);
-            return CreatedAtRoute("GetPair", new { id = current.Id }, current);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/Pair/48D68C86-6EA6-4C25-AA33-223FC9A27959

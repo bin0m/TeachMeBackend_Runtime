@@ -8,11 +8,11 @@ using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/answer")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/answer")]
     public class AnswerController : TableController<Answer>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -48,7 +48,7 @@ namespace TeachMeBackendService.Controllers
         public async Task<IHttpActionResult> PostAnswer(Answer item)
         {
             Answer current = await InsertAsync(item);
-            return CreatedAtRoute("GetAnswer", new { id = current.Id }, current);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/Answer/48D68C86-6EA6-4C25-AA33-223FC9A27959
