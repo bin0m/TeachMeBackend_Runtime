@@ -50,20 +50,6 @@ namespace TeachMeBackendService.ControllersTables
             return Ok(exercise);
         }
 
-
-        [Route("~/api/v{version:ApiVersion}/lessons/{id}/exercises")]
-        public IQueryable<Exercise> GetBySection(string id)
-        {
-            var exercises = db
-                .Exercises
-                .Include(ex => ex.Answers)
-                .Include(ex => ex.Pairs)
-                .Include(ex => ex.Spaces)
-                .Where(c => c.LessonId == id);
-
-            return exercises;
-        }
-
         // POST: api/Exercises
         [Route("")]
         [ResponseType(typeof(Exercise))]
