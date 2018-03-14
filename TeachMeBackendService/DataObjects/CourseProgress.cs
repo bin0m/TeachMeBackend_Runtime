@@ -12,6 +12,8 @@ namespace TeachMeBackendService.DataObjects
 
         public bool IsDone { get; set; }
 
+        public string Name { get; set; }
+
         [NotMapped]
         public ProgressCourseModel Progress { get; set; }
 

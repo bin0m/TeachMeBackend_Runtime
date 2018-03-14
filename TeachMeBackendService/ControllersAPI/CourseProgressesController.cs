@@ -14,7 +14,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CourseProgresssController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/CourseProgresss
         [Route("")]
@@ -28,22 +28,22 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(CourseProgress))]
         public IHttpActionResult GetCourseProgress(string id)
         {
-            CourseProgress CourseProgress = db.CourseProgresses.Find(id);
-            if (CourseProgress == null)
+            CourseProgress courseProgress = db.CourseProgresses.Find(id);
+            if (courseProgress == null)
             {
                 return NotFound();
             }
 
-            return Ok(CourseProgress);
+            return Ok(courseProgress);
         }
 
         
         [Route("~/api/v{version:ApiVersion}/users/{id}/CourseProgresss")]
         public IQueryable<CourseProgress> GetByExercise(string id)
         {
-            var CourseProgresss = db.CourseProgresses.Where(c => c.UserId == id);
+            var courseProgresss = db.CourseProgresses.Where(c => c.UserId == id);
 
-            return CourseProgresss;
+            return courseProgresss;
         }
 
         protected override void Dispose(bool disposing)

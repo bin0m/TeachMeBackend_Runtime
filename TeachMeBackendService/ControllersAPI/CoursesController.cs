@@ -89,7 +89,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
 
             var query = from course in db.Courses
-                        where course.CourseProgresses.Any(c => c.UserId == usesrId && c.IsStarted == true)
+                        where course.CourseProgresses.Any(c => c.UserId == usesrId && c.IsStarted)
                         select course;
 
             return query;
