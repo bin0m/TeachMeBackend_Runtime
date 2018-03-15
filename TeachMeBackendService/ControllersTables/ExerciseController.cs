@@ -1,12 +1,10 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web.Http.Controllers;
+using System.Web.Http.OData;
+using Microsoft.Azure.Mobile.Server;
 using Microsoft.Web.Http;
-using Newtonsoft.Json;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
@@ -15,271 +13,49 @@ namespace TeachMeBackendService.ControllersTables
     [Authorize]
     [ApiVersionNeutral]
     [RoutePrefix("tables/exercise")]
-    public class ExerciseController : ApiController
+    public class ExerciseController : TableController<Exercise>
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        protected override void Initialize(HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+            TeachMeBackendContext context = new TeachMeBackendContext();
+            DomainManager = new EntityDomainManager<Exercise>(context, Request);
+        }
 
-       
-
-        // GET: api/Exercises
+        // GET tables/Exercise
         [Route("")]
-        public IQueryable<Exercise> GetExercises()
+        public IQueryable<Exercise> GetAllExercise()
         {
-            IncludeNullsInResponse();
-            return db
-                .Exercises
-                .Include(ex => ex.Answers)
-                .Include(ex => ex.Pairs)
-                .Include(ex => ex.Spaces);
+            return Query();
         }
 
-        // GET: api/Exercises/5
-        [Route("{id}", Name = "GetExercisesById2")]
-        [ResponseType(typeof(Exercise))]
-        public IHttpActionResult GetExercise(string id)
+        // GET tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}", Name = "GetExercise2")]
+        public SingleResult<Exercise> GetExercise(string id)
         {
-            IncludeNullsInResponse();
-            Exercise exercise = db
-                .Exercises
-                .Include(ex => ex.Answers)
-                .Include(ex => ex.Pairs)
-                .Include(ex => ex.Spaces)
-                .SingleOrDefault(ex => ex.Id == id);
-
-            if (exercise == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(exercise);
+            return Lookup(id);
         }
 
-        // POST: api/Exercises
+        // PATCH tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        [Route("{id}")]
+        public Task<Exercise> PatchExercise(string id, Delta<Exercise> patch)
+        {
+            return UpdateAsync(id, patch);
+        }
+
+        // POST tables/Exercise
         [Route("")]
-        [ResponseType(typeof(Exercise))]
-        public IHttpActionResult PostExercise(Exercise exercise)
+        public async Task<IHttpActionResult> PostExercise(Exercise item)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IncludeNullsInResponse();
-
-            exercise.Id = Guid.NewGuid().ToString("N");
-
-            if (exercise.Pairs != null)
-            {
-                foreach (var pair in exercise.Pairs)
-                {
-                    pair.Id = Guid.NewGuid().ToString("N");
-                }
-            }
-
-            if (exercise.Answers != null)
-            {
-                foreach (var answer in exercise.Answers)
-                {
-                    answer.Id = Guid.NewGuid().ToString("N");
-                }
-            }
-
-            if (exercise.Spaces != null)
-            {
-                foreach (var space in exercise.Spaces)
-                {
-                    space.Id = Guid.NewGuid().ToString("N");
-                }
-            }
-            //Exercise newExercise = new Exercise
-            //{
-            //    Name = "TestName",
-            //    Type = "TestType",
-            //    LessonId = "c1x6409cf5444d8d866578ad3dd349nk",
-            //    Id = Guid.NewGuid().ToString("N"),
-            //    Pairs = new List<Pair> {
-            //        new Pair{
-            //            Value = "testValue",
-            //            Equal = "testEqual",
-            //            Id = Guid.NewGuid().ToString("N")
-            //        } }
-            //};
-
-            db.Exercises.Add(exercise);
-
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ExerciseExists(exercise.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("GetExercisesById2", new { id = exercise.Id }, exercise);
+            Exercise current = await InsertAsync(item);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-
-        // PUT: api/Exercises/5
+        // DELETE tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
-        [ResponseType(typeof(Exercise))]
-        public IHttpActionResult PutExercise(string id, Exercise exercise)
+        public Task DeleteExercise(string id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != exercise.Id)
-            {
-                return BadRequest();
-            }
-
-            IncludeNullsInResponse();
-
-            var parentInDb = db.Exercises
-                .Where(p => p.Id == exercise.Id)
-                .Include(p => p.Pairs)
-                .Include(p => p.Answers)
-                .Include(p => p.Spaces)
-                .SingleOrDefault();
-
-            if (parentInDb != null)
-            {
-                // to prevent error: "Modifying a column with the 'Identity' pattern is not supported. Column: 'CreatedAt'"
-                exercise.CreatedAt = parentInDb.CreatedAt;
-
-                // Update parent
-                db.Entry(parentInDb).CurrentValues.SetValues(exercise);
-
-                // Delete all previous children
-                if (parentInDb.Pairs != null)
-                {
-                    db.Pairs.RemoveRange(parentInDb.Pairs);
-                }
-                if (parentInDb.Answers != null)
-                {
-                    db.Answers.RemoveRange(parentInDb.Answers);
-                }
-                if (parentInDb.Spaces != null)
-                {
-                    db.Spaces.RemoveRange(parentInDb.Spaces);
-                }
-
-                //  Insert new children
-                foreach (var newPair in exercise.Pairs ?? Enumerable.Empty<Pair>())
-                {
-                    newPair.Id = Guid.NewGuid().ToString("N");
-                    newPair.ExerciseId = parentInDb.Id;
-                    parentInDb.Pairs?.Add(newPair);
-                }
-
-                foreach (var newAnswer in exercise.Answers ?? Enumerable.Empty<Answer>())
-                {
-                    newAnswer.Id = Guid.NewGuid().ToString("N");
-                    newAnswer.ExerciseId = parentInDb.Id;
-                    parentInDb.Answers?.Add(newAnswer);
-                }
-
-                foreach (var newSpace in exercise.Spaces ?? Enumerable.Empty<Space>())
-                {
-                    newSpace.Id = Guid.NewGuid().ToString("N");
-                    newSpace.ExerciseId = parentInDb.Id;
-                    parentInDb.Spaces?.Add(newSpace);
-                }
-
-
-                // Update the exercise and state that the exercise 'owns' the collection of Pairs,Answers...
-                //db.UpdateGraph<Exercise>(exercise, map => map.OwnedCollection(p => p.Pairs));
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExerciseExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
-
-            Exercise freshExercise = db
-                .Exercises
-                .Include(ex => ex.Answers)
-                .Include(ex => ex.Pairs)
-                .Include(ex => ex.Spaces)
-                .SingleOrDefault(ex => ex.Id == id);
-
-            if (freshExercise == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(freshExercise);
-        }
-
-        // DELETE: api/Exercises/5
-        [Route("{id}")]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult DeleteExercise(string id)
-        {
-            Exercise exercise = db.Exercises.Find(id);
-
-            if (exercise == null)
-            {
-                return NotFound();
-            }
-
-            db.Exercises.Remove(exercise);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return NotFound();
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        private void IncludeNullsInResponse()
-        {
-            var jsonFormatter = this.Configuration.Formatters.JsonFormatter;
-            if (jsonFormatter != null)
-            {
-                jsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Include;
-            }
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ExerciseExists(string id)
-        {
-            return db.Exercises.Count(e => e.Id == id) > 0;
+            return DeleteAsync(id);
         }
     }
 }
