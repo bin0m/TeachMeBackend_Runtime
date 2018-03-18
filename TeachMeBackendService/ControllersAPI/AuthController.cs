@@ -213,6 +213,35 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(loginResult);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgotPassword")]
+        public async Task<IHttpActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                // If user has to activate his email to confirm his account, the use code listing below
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //{
+                //    return Ok();
+                //}
+                if (user == null)
+                {
+                    return Ok();
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", $"Please reset your password by using this {code}");
+                return Ok();
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest(ModelState);
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

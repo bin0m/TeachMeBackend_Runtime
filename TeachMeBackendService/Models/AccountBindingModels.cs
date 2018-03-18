@@ -45,6 +45,11 @@ namespace TeachMeBackendService.Models
         public string Password { get; set; }
     }
 
+    public class ForgotPasswordViewModel
+    {
+        public string Email { get; set; }
+    }
+
     public class LoginResult
     {
         [JsonProperty(PropertyName = "authenticationToken")]

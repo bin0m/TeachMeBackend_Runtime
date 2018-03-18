@@ -242,6 +242,7 @@
     <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Logic\EmailService.cs" />
     <Compile Include="Logic\Helper.cs" />
     <Compile Include="Migrations\201802272334036_Initial.cs" />
     <Compile Include="Migrations\201802272334036_Initial.Designer.cs">
