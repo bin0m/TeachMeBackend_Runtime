@@ -76,7 +76,10 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest(ModelState);
             }
 
-            exercise.Id = Guid.NewGuid().ToString("N");
+            if (String.IsNullOrEmpty(exercise.Id))
+            {
+                exercise.Id = Guid.NewGuid().ToString("N");
+            }
 
             if (exercise.Pairs != null)
             {

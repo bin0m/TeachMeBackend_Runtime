@@ -10,9 +10,9 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/exercisestudent")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/exercisestudent")]
     public class ExerciseStudentController : TableController<ExerciseStudent>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -30,7 +30,7 @@ namespace TeachMeBackendService.ControllersTables
         }
 
         // GET tables/ExerciseStudent/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetExerciseStudent")]
+        [Route("{id}", Name = "GetExerciseStudent2")]
         public SingleResult<ExerciseStudent> GetExerciseStudent(string id)
         {
             return Lookup(id);
@@ -48,7 +48,7 @@ namespace TeachMeBackendService.ControllersTables
         public async Task<IHttpActionResult> PostExerciseStudent(ExerciseStudent item)
         {
             ExerciseStudent current = await InsertAsync(item);
-            return CreatedAtRoute("GetExerciseStudent", new { id = current.Id }, current);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/ExerciseStudent/48D68C86-6EA6-4C25-AA33-223FC9A27959

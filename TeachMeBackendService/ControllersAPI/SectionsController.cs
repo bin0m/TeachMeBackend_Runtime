@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -112,6 +113,11 @@ namespace TeachMeBackendService.ControllersAPI
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (String.IsNullOrEmpty(section.Id))
+            {
+                section.Id = Guid.NewGuid().ToString("N");
             }
 
             db.Sections.Add(section);
