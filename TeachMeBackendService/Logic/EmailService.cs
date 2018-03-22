@@ -14,8 +14,8 @@ namespace TeachMeBackendService.Logic
     {
         public Task SendAsync(IdentityMessage message)
         {
-            const string apiKey = "key-ef7a2525b9a4141408b40cd4d4e438e0";
-            const string sandBox = "sandbox5c2ed57ac7b94f0ea5d372f3194b026c.mailgun.org";
+            const string apiKey = "key-555d8dd6f0a49c757f93ea6edd32824d";
+            const string sandBox = "sandbox0e3961d47dcb414c8554f20b83297606.mailgun.org";
             byte[] apiKeyAuth = Encoding.ASCII.GetBytes($"api:{apiKey}");
             var httpClient = new HttpClient { BaseAddress = new Uri("https://api.mailgun.net/v3/") };
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
@@ -23,7 +23,7 @@ namespace TeachMeBackendService.Logic
 
             var form = new Dictionary<string, string>
             {
-                ["from"] = "postmaster@sandbox5c2ed57ac7b94f0ea5d372f3194b026c.mailgun.org",
+                ["from"] = "Mailgun Sandbox <postmaster@sandbox0e3961d47dcb414c8554f20b83297606.mailgun.org>",
                 ["to"] = message.Destination,
                 ["subject"] = message.Subject,
                 ["text"] = message.Body

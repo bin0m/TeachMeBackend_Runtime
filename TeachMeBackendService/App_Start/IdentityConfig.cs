@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using TeachMeBackendService.Logic;
 using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService
@@ -33,6 +34,9 @@ namespace TeachMeBackendService
  //               RequireLowercase = true,
 //                RequireUppercase = true,
             };
+
+            manager.EmailService = new EmailService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

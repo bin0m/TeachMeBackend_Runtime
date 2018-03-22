@@ -242,6 +242,29 @@ namespace TeachMeBackendService.ControllersAPI
             return BadRequest(ModelState);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return Ok();
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return Ok();
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()

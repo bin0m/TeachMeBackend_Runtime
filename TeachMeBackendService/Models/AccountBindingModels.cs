@@ -43,12 +43,7 @@ namespace TeachMeBackendService.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-    }
-
-    public class ForgotPasswordViewModel
-    {
-        public string Email { get; set; }
-    }
+    }  
 
     public class LoginResult
     {
@@ -63,5 +58,17 @@ namespace TeachMeBackendService.Models
     {
         public string Sid { get; set; }
         public string Role { get; set; }
+    }
+
+    public class ForgotPasswordViewModel
+    {
+        public string Email { get; set; }
+    }
+
+    public class ResetPasswordViewModel
+    {
+        public string Code { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
