@@ -30,6 +30,9 @@ namespace TeachMeBackendService.ControllersAPI
         private readonly string _issuer;
         private readonly int _jwtTokenExpirationTimeInHours;
 
+        private const string WelcomeEmailSubject = "Welcome to TeachMe!";
+        private const string WelcomeEmailBody = "Hi {0},\n Welcome to the Teachme application - where you can study and teach.\n Your username:{1} \n Good Luck!";
+
         public ApplicationUserManager UserManager
         {
             get
@@ -156,6 +159,12 @@ namespace TeachMeBackendService.ControllersAPI
                 DbContext.Set<User>().Add(user);
                 DbContext.SaveChanges();
 
+                //Send welcome email
+                await UserManager.SendEmailAsync(
+                    appUser.Id, 
+                    WelcomeEmailSubject, 
+                    string.Format(WelcomeEmailBody, model.FullName, model.UserName));
+                
                 // Create token for the new registered user
                 var claims = new List<Claim>
                 {
