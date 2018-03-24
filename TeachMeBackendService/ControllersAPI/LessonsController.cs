@@ -45,6 +45,23 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(lesson);
         }
 
+        // GET: api/Lessons/5/progress
+        [Route("{id}/progress")]
+        [ResponseType(typeof(ProgressLessonModel))]
+        public IHttpActionResult GetLessonProgress(string id)
+        {
+            Lesson lesson = db.Lessons.Find(id);
+            if (lesson == null)
+            {
+                return NotFound();
+            }
+
+            //Calculates progress for all exercises under this lesson for the current user
+            ProgressLessonModel progress = CalculateLessonProgress(id);
+
+            return Ok(progress);
+        }
+
         //Calculates progress for all exercises under this lesson for the current user
         private ProgressLessonModel CalculateLessonProgress(string id)
         {
