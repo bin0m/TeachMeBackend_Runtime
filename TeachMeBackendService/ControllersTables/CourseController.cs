@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Http.Description;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Web.Http;
@@ -56,6 +59,46 @@ namespace TeachMeBackendService.ControllersTables
         public Task DeleteCourse(string id)
         {
             return DeleteAsync(id);
+        }
+
+        // GET tables/Course/48D68C86-6EA6-4C25-AA33-223FC9A27959/progress
+        [Route("{id}/progress")]
+        [ResponseType(typeof(ProgressCourseModel))]
+        public IHttpActionResult GetCourseProgress(string id)
+        {
+            using (var db = new TeachMeBackendContext())
+            {
+                Course course = db.Courses.Find(id);
+                if (course == null)
+                {
+                    return NotFound();
+                }
+            }
+
+            //Calculates progress for all exercises under this course for the current user
+            ProgressCourseModel progress = CalculateCourseProgress(id);
+
+            return Ok(progress);
+        }
+
+        //Calculates progress for all sections under this course for the current user
+        private ProgressCourseModel CalculateCourseProgress(string id)
+        {
+            ProgressCourseModel progressCourseModel = new ProgressCourseModel();
+
+            using (var db = new TeachMeBackendContext())
+            {
+                var sections = db.Sections.Where(c => c.CourseId == id).Include(c => c.SectionProgresses);
+                progressCourseModel.SectionsNumber = sections.Count();
+                if (User is ClaimsPrincipal claimsPrincipal)
+                {
+                    var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                    progressCourseModel.SectionsDone =
+                        sections.Count(c => c.SectionProgresses.Any(p => p.UserId == userId && p.IsDone));
+                }
+            }
+
+            return progressCourseModel;
         }
     }
 }

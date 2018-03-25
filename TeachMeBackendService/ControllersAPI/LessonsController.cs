@@ -73,11 +73,11 @@ namespace TeachMeBackendService.ControllersAPI
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
                     progressLessonModel.ExercisesDone =
                     exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
-                var sectionProgress = db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
-                if (sectionProgress != null)
+                var lessonProgress = db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
+                if (lessonProgress != null)
                 {
-                    progressLessonModel.IsDone = sectionProgress.IsDone;
-                    progressLessonModel.IsStarted = sectionProgress.IsDone;
+                    progressLessonModel.IsDone = lessonProgress.IsDone;
+                    progressLessonModel.IsStarted = lessonProgress.IsDone;
                 }
             }
            
