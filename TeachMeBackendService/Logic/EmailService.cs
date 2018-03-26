@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mail;
@@ -16,16 +17,19 @@ namespace TeachMeBackendService.Logic
         public Task SendAsync(IdentityMessage message)
         {
             // from mailbox
-            const string @from = "teachme.info@yandex.ru";
+            const string @from = "xiaomi.redmi.service@gmail.com";
 
             // adress and SMTP port of our Email server
-            SmtpClient client = new SmtpClient("smtp.yandex.ru", 465)
+            SmtpClient smtpClient = new SmtpClient
             {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new System.Net.NetworkCredential(@from, password),
-                EnableSsl = true
+                UseDefaultCredentials = false
             };
+
+            smtpClient.Credentials = new System.Net.NetworkCredential(@from, password);
 
             // create Mail message
             var mail = new MailMessage(from, message.Destination)
@@ -35,7 +39,7 @@ namespace TeachMeBackendService.Logic
                 IsBodyHtml = true
             };
 
-            return client.SendMailAsync(mail);
+            return smtpClient.SendMailAsync(mail);
 
             //const string apiKey = "key-555d8dd6f0a49c757f93ea6edd32824d";
             //const string sandBox = "sandbox0e3961d47dcb414c8554f20b83297606.mailgun.org";
