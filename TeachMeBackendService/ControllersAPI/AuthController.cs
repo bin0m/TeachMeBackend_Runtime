@@ -243,7 +243,7 @@ namespace TeachMeBackendService.ControllersAPI
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", $"Please reset your password by using this {code}");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", $"Please reset your password by using this code: {code}");
                 return Ok();
             }
 
