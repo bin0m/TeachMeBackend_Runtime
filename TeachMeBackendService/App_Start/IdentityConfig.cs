@@ -35,7 +35,7 @@ namespace TeachMeBackendService
 //                RequireUppercase = true,
             };
 
-            manager.EmailService = new EmailService();
+            manager.EmailService = new EmailSmtpService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
