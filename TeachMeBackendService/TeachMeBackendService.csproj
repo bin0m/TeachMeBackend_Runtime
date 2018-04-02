@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201803131042400_AddNameColumnToCourseProgress.Designer.cs">
       <DependentUpon>201803131042400_AddNameColumnToCourseProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs" />
+    <Compile Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.Designer.cs">
+      <DependentUpon>201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803131042400_AddNameColumnToCourseProgress.resx">
       <DependentUpon>201803131042400_AddNameColumnToCourseProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.resx">
+      <DependentUpon>201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

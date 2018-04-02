@@ -12,7 +12,9 @@ namespace TeachMeBackendService.DataObjects
 
         public bool IsDone { get; set; }
 
-         [NotMapped]
+        public string Name { get; set; }
+
+        [NotMapped]
          public ProgressLessonModel Progress { get; set; }
 
         // Lesson FK
