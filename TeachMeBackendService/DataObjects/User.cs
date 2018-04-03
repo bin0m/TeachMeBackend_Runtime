@@ -39,6 +39,8 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public UserRole UserRole { get; set; }
 
+        public string FacebookId { get; set; }
+
         // Children Courses
         public List<Course> Courses { get; set; }
 
