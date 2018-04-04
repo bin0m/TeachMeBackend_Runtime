@@ -5,6 +5,7 @@ using Microsoft.Azure.Mobile.Server.Login;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Web.Http;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -90,6 +91,36 @@ namespace TeachMeBackendService.ControllersAPI
 
             return NotFound();
 
+        }
+
+        [Route("InternalUser", Name = "GetInternalUser")]
+        public async Task<IHttpActionResult> GetInternalUser()
+        {
+            var serviceUser = this.User as ClaimsPrincipal;
+            var ident = serviceUser.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
+            string token = "";
+            string provider = ident;
+            var user = new User();
+            switch (ident)
+            {
+                case "facebook":
+                    token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "?access_token=" + token))
+                        {
+                            var o = JObject.Parse(await response.Content.ReadAsStringAsync());
+                            var name = o["name"].ToString();
+                        }
+                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
+                        {
+                            var x = JObject.Parse(await response.Content.ReadAsStringAsync());
+                            var image = (x["data"]["url"].ToString());
+                        }
+                    }
+                    break;
+            }
+            return Ok(user);
         }
 
         [Route("users")]
