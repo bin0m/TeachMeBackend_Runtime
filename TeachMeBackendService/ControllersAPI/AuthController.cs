@@ -100,7 +100,7 @@ namespace TeachMeBackendService.ControllersAPI
             var ident = serviceUser.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
             string token = "";
             string provider = ident;
-            var user = new User();
+            var newUser = new User();
             switch (ident)
             {
                 case "facebook":
@@ -110,17 +110,41 @@ namespace TeachMeBackendService.ControllersAPI
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "?access_token=" + token))
                         {
                             var o = JObject.Parse(await response.Content.ReadAsStringAsync());
-                            var name = o["name"].ToString();
+                            newUser.FacebookId = o["id"].ToString();
+                            newUser.Email = o["email"].ToString();
+                            newUser.FullName = o["name"].ToString();
+                            newUser.DateOfBirth = DateTime.Parse(o["birthday"].ToString());
+                            newUser.RegisterDate = DateTime.Now;
+                            newUser.UserRole = UserRole.Student;
                         }
+
+                        // look for existing user with facebook Id
+                        var existingUser = DbContext.Set<User>().Single(u => u.FacebookId == newUser.FacebookId);
+
+                        if (existingUser != null)
+                        {
+                            return Ok(existingUser);
+                        }
+
+                        var existingUser2 = await UserManager.FindByNameAsync(newUser.Email);
+                        if (existingUser2 == null)
+                        {
+                        }
+
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
                         {
                             var x = JObject.Parse(await response.Content.ReadAsStringAsync());
                             var image = (x["data"]["url"].ToString());
+                            //TODO: Upload image to Azure Blob and get some blobPath
+                            newUser.AvatarPath = image;
                         }
                     }
+
+                    // Create Internal User
+                    //var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                     break;
             }
-            return Ok(user);
+            return Ok(newUser);
         }
 
         [Route("users")]
