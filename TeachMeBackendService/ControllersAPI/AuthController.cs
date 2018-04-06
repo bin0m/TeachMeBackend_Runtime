@@ -120,16 +120,27 @@ namespace TeachMeBackendService.ControllersAPI
 
                         // look for existing user with facebook Id
                         var existingUser = DbContext.Set<User>().Single(u => u.FacebookId == newUser.FacebookId);
-
                         if (existingUser != null)
                         {
+                            // user have been registered already via facebook, return user
                             return Ok(existingUser);
+                            //TODO: maybe create new local Auth token instead of automatic token created
                         }
 
-                        var existingUser2 = await UserManager.FindByNameAsync(newUser.Email);
-                        if (existingUser2 == null)
+                        // look for existing user with identical email adress
+                        var userWithIdenticalEmail = await UserManager.FindByNameAsync(newUser.Email);
+                        if (userWithIdenticalEmail != null)
                         {
+                            //user already registered to the system, but not via facebook. Need to add Facebook to his account
+                            var existingUser2 = DbContext.Set<User>().Find(userWithIdenticalEmail.Id);
+                            existingUser2.FacebookId = newUser.FacebookId;
+                            DbContext.SaveChanges();
+                            return Ok(existingUser2);
+                            //TODO: maybe create new local Auth token instead of automatic token created
                         }
+
+                        //Create new local account for facebook user
+                        var appUser = new ApplicationUser() { UserName = newUser.Email, Email = newUser.Email, FullName = newUser.FullName };
 
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
                         {
@@ -138,6 +149,52 @@ namespace TeachMeBackendService.ControllersAPI
                             //TODO: Upload image to Azure Blob and get some blobPath
                             newUser.AvatarPath = image;
                         }
+
+                        try
+                        {
+                            IdentityResult result = await UserManager.CreateAsync(appUser);
+
+                            if (!result.Succeeded)
+                            {
+                                return GetErrorResult(result);
+                            }
+
+                            await UserManager.AddToRoleAsync(appUser.Id, newUser.UserRole.ToString());
+
+                            DbContext.Set<User>().Add(newUser);
+                            DbContext.SaveChanges();
+
+                            //Send welcome email
+                            await UserManager.SendEmailAsync(
+                                appUser.Id,
+                                WelcomeEmailSubject,
+                                string.Format(WelcomeEmailBody, newUser.FullName, newUser.Login));
+
+                            //TODO: maybe create new local Auth token instead of automatic token created
+                            //var claims = new List<Claim>
+                            //{
+                            //    new Claim(JwtRegisteredClaimNames.Sub, newUser.Email),
+                            //    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                            //    new Claim(ClaimTypes.PrimarySid, appUser.Id),
+                            //    new Claim(ClaimTypes.Role, newUser.UserRole.ToString())
+                            //};
+
+                            //var newToken = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromDays(_jwtTokenExpirationTimeInHours));
+
+                            //loginResult = new LoginResult()
+                            //{
+                            //    AuthenticationToken = token.RawData,
+                            //    User = user
+                            //};
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message;
+                            return BadRequest(message);
+                        }
+
+
+              
                     }
 
                     // Create Internal User
