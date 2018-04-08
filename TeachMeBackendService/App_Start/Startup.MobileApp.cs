@@ -13,7 +13,6 @@ using System.Web.Http.Tracing;
 using System.Web.Http.Routing;
 using Microsoft.Web.Http.Routing;
 using Newtonsoft.Json;
-using System.Net.Http.Formatting;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 
@@ -153,9 +152,9 @@ namespace TeachMeBackendService
                     FullName = "Administrator"
                 };
 
-                IdentityResult result = userManager.Create(appUser, "qweqwe123");
+                userManager.Create(appUser, "qweqwe123");
 
-                userManager.AddToRoleAsync(appUser.Id, "Admin");
+                userManager.AddToRole(appUser.Id, "Admin");
 
                 var user = new User
                 {
@@ -179,9 +178,9 @@ namespace TeachMeBackendService
                     FullName = "Иван Простов"
                 };
 
-                IdentityResult result2 = userManager.Create(appUser2, "qweqwe123");
+                userManager.Create(appUser2, "qweqwe123");
 
-                userManager.AddToRoleAsync(appUser2.Id, "Student");
+                userManager.AddToRole(appUser2.Id, "Student");
 
                 var user2 = new User
                 {

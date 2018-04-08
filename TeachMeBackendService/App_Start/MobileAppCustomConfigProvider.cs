@@ -1,18 +1,15 @@
 ﻿using Microsoft.Azure.Mobile.Server.Config;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http.Controllers;
 
 namespace TeachMeBackendService
 {
     sealed class MobileAppCustomConfigProvider : MobileAppControllerConfigProvider
     {
-        readonly Lazy<JsonSerializerSettings> settings = new Lazy<JsonSerializerSettings>(JsonConvert.DefaultSettings);
+        readonly Lazy<JsonSerializerSettings> _settings = new Lazy<JsonSerializerSettings>(JsonConvert.DefaultSettings);
 
-        public JsonSerializerSettings Settings => settings.Value;
+        public JsonSerializerSettings Settings => _settings.Value;
 
         public override void Configure(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor)
         {

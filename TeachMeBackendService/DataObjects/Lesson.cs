@@ -1,8 +1,9 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+using TeachMeBackendService.Models;
+
 
 namespace TeachMeBackendService.DataObjects
 {
@@ -10,6 +11,8 @@ namespace TeachMeBackendService.DataObjects
     {
         public string Name { get; set; }
 
+        [NotMapped]
+        public ProgressLessonModel Progress { get; set; }
 
         // parent Section FK
         public String SectionId { get; set; }
@@ -31,5 +34,9 @@ namespace TeachMeBackendService.DataObjects
 
         //children Exercises
         public List<Exercise> Exercises { get; set; }
+
+        // Children LessonProgresses
+        public List<LessonProgress> LessonProgresses { get; set; }
+
     }
 }

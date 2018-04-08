@@ -8,12 +8,12 @@ using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersAPI
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/lesson")]
     [Authorize]
-    public class LessonController : TableController<Lesson>
+    public class LessonCoController : TableController<Lesson>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -30,7 +30,7 @@ namespace TeachMeBackendService.Controllers
         }
 
         // GET tables/Lesson/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetLesson")]
+        [Route("{id}", Name = "GetLessonCo")]
         public SingleResult<Lesson> GetLesson(string id)
         {
             return Lookup(id);
@@ -48,7 +48,7 @@ namespace TeachMeBackendService.Controllers
         public async Task<IHttpActionResult> PostLesson(Lesson item)
         {
             Lesson current = await InsertAsync(item);
-            return CreatedAtRoute("GetLesson", new { id = current.Id }, current);
+            return CreatedAtRoute("GetLessonCo", new { id = current.Id }, current);
         }
 
         // DELETE tables/Lesson/48D68C86-6EA6-4C25-AA33-223FC9A27959

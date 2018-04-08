@@ -12,8 +12,7 @@ namespace TeachMeBackendService.Controllers
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/course")]
-    [Authorize]
-    public class CourseController : TableController<Course>
+    public class CourseCoController : TableController<Course>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -26,11 +25,11 @@ namespace TeachMeBackendService.Controllers
         [Route("")]
         public IQueryable<Course> GetAllCourse()
         {
-            return Query(); 
+            return Query();
         }
 
         // GET tables/Course/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetCourse")]
+        [Route("{id}", Name = "GetCourseCo")]
         public SingleResult<Course> GetCourse(string id)
         {
             return Lookup(id);
@@ -40,7 +39,7 @@ namespace TeachMeBackendService.Controllers
         [Route("{id}")]
         public Task<Course> PatchCourse(string id, Delta<Course> patch)
         {
-             return UpdateAsync(id, patch);
+            return UpdateAsync(id, patch);
         }
 
         // POST tables/Course
@@ -48,14 +47,14 @@ namespace TeachMeBackendService.Controllers
         public async Task<IHttpActionResult> PostCourse(Course item)
         {
             Course current = await InsertAsync(item);
-            return CreatedAtRoute("GetCourse", new { id = current.Id }, current);
+            return CreatedAtRoute("GetCourseCo", new { id = current.Id }, current);
         }
 
         // DELETE tables/Course/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
         public Task DeleteCourse(string id)
         {
-             return DeleteAsync(id);
+            return DeleteAsync(id);
         }
     }
 }

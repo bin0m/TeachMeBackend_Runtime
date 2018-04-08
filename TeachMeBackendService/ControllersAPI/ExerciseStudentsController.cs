@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -17,7 +12,7 @@ using TeachMeBackendService.Models;
 namespace TeachMeBackendService.ControllersAPI
 {
     [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/exercisestudents")]
+    [RoutePrefix("api/v{version:ApiVersion}/exerciseStudents")]
     [MobileAppController]
     [Authorize]
     public class ExerciseStudentsController : ApiController
@@ -32,7 +27,7 @@ namespace TeachMeBackendService.ControllersAPI
         }
 
         // GET: api/ExerciseStudents/5
-        [Route("{id}")]
+        [Route("{id}", Name = "GetExerciseStudentsById")]
         [ResponseType(typeof(ExerciseStudent))]
         public IHttpActionResult GetExerciseStudent(string id)
         {
@@ -52,6 +47,125 @@ namespace TeachMeBackendService.ControllersAPI
             var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id);
 
             return exerciseStudents;
+        }
+
+        // POST: api/ExerciseStudents
+        [Route("")]
+        [ResponseType(typeof(ExerciseStudent))]
+        public IHttpActionResult PostExerciseStudent(ExerciseStudent exerciseStudent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (String.IsNullOrEmpty(exerciseStudent.Id))
+            {
+                exerciseStudent.Id = Guid.NewGuid().ToString("N");
+            }       
+    
+            db.ExerciseStudents.Add(exerciseStudent);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (ExerciseStudentExists(exerciseStudent.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("GetExerciseStudentsById", new { id = exerciseStudent.Id }, exerciseStudent);
+        }
+
+
+        // PUT: api/ExerciseStudents/5
+        [Route("{id}")]
+        [ResponseType(typeof(ExerciseStudent))]
+        public IHttpActionResult PutExerciseStudent(string id, ExerciseStudent exerciseStudent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != exerciseStudent.Id)
+            {
+                return BadRequest();
+            }
+
+            var parentInDb = db.ExerciseStudents
+                .Where(p => p.Id == exerciseStudent.Id)
+                .SingleOrDefault();
+
+            if (parentInDb != null)
+            {
+                // to prevent error: "Modifying a column with the 'Identity' pattern is not supported. Column: 'CreatedAt'"
+                exerciseStudent.CreatedAt = parentInDb.CreatedAt;
+
+                // Update parent
+                db.Entry(parentInDb).CurrentValues.SetValues(exerciseStudent);   
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ExerciseStudentExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            ExerciseStudent freshExerciseStudent = db
+                .ExerciseStudents
+                .SingleOrDefault(ex => ex.Id == id);
+
+            if (freshExerciseStudent == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(freshExerciseStudent);
+        }
+
+        // DELETE: api/ExerciseStudents/5
+        [Route("{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteExerciseStudent(string id)
+        {
+            ExerciseStudent exerciseStudent = db.ExerciseStudents.Find(id);
+
+            if (exerciseStudent == null)
+            {
+                return NotFound();
+            }
+
+            db.ExerciseStudents.Remove(exerciseStudent);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         protected override void Dispose(bool disposing)

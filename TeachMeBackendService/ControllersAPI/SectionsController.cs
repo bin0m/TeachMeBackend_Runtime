@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -22,13 +20,15 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class SectionsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Sections
         [Route("")]
-        public IQueryable<Section> GetSections()
+        public IEnumerable<Section> GetSections()
         {
-            return db.Sections;
+            var all = db.Sections.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateSectionProgress(x.Id));
+            return all;
         }
 
         // GET: api/Sections/5
@@ -42,7 +42,48 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
+            //Calculates progress for all lessons under this section for the current user
+            section.Progress = CalculateSectionProgress(id);
+
             return Ok(section);
+        }
+
+        // GET: api/Sections/5/progress
+        [Route("{id}/progress")]
+        [ResponseType(typeof(ProgressSectionModel))]
+        public IHttpActionResult GetSectionProgress(string id)
+        {
+            Section section = db.Sections.Find(id);
+            if (section == null)
+            {
+                return NotFound();
+            }
+
+            //Calculates progress for all lessons under this section for the current user
+            ProgressSectionModel progress = CalculateSectionProgress(id);
+
+            return Ok(progress);
+        }
+
+        //Calculates progress for all lessons under this section for the current user
+        private ProgressSectionModel CalculateSectionProgress(string id)
+        {
+            ProgressSectionModel progressSectionModel = new ProgressSectionModel();
+            var lessons = db.Lessons.Where(l => l.SectionId == id).Include(l => l.LessonProgresses);
+            progressSectionModel.LessonsNumber = lessons.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                progressSectionModel.LessonsDone =
+                    lessons.Count(l => l.LessonProgresses.Any(p => p.UserId == userId && p.IsDone));
+                var sectionProgress = db.SectionProgresses.FirstOrDefault(p => p.UserId == userId && p.SectionId == id);
+                if (sectionProgress != null)
+                {
+                    progressSectionModel.IsDone = sectionProgress.IsDone;
+                    progressSectionModel.IsStarted = sectionProgress.IsDone;
+                }
+            }
+            return progressSectionModel;
         }
 
         // PUT: api/Sections/5
@@ -91,6 +132,11 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest(ModelState);
             }
 
+            if (String.IsNullOrEmpty(section.Id))
+            {
+                section.Id = Guid.NewGuid().ToString("N");
+            }
+
             db.Sections.Add(section);
 
             try
@@ -117,10 +163,9 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Section))]
         public IHttpActionResult DeleteSection(string id)
         {
-            Section section = null;
-            using (var dbContext = new Models.TeachMeBackendContext())
+            using (var dbContext = new TeachMeBackendContext())
             {
-                section = dbContext.DeleteSectionAndChildren(id);
+                var section = dbContext.DeleteSectionAndChildren(id);
                 if (section == null)
                 {
                     return NotFound();

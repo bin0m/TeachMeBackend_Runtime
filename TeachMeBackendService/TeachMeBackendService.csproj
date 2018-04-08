@@ -141,6 +141,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -189,36 +191,43 @@
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="ControllersAPI\AuthCustomController.cs" />
     <Compile Include="ControllersAPI\AuthController.cs" />
+    <Compile Include="ControllersAPI\CourseCoController.cs" />
+    <Compile Include="ControllersAPI\LessonCoController.cs" />
+    <Compile Include="ControllersAPI\SectionCoController.cs" />
     <Compile Include="ControllersAPI\SpacesController.cs" />
     <Compile Include="ControllersAPI\CommentRatingsController.cs" />
     <Compile Include="ControllersAPI\CoursesController.cs" />
     <Compile Include="ControllersAPI\ExercisesController.cs" />
     <Compile Include="ControllersAPI\AnswersController.cs" />
-    <Compile Include="ControllersAPI\StudentCoursesController.cs" />
+    <Compile Include="ControllersAPI\CourseProgressesController.cs" />
     <Compile Include="ControllersAPI\PairsController.cs" />
     <Compile Include="ControllersAPI\ExerciseStudentsController.cs" />
     <Compile Include="ControllersAPI\LessonsController.cs" />
     <Compile Include="ControllersAPI\CommentsController.cs" />
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
-    <Compile Include="Controllers\AnswerController.cs" />
-    <Compile Include="Controllers\CommentController.cs" />
-    <Compile Include="Controllers\CommentRatingController.cs" />
-    <Compile Include="Controllers\CourseController.cs" />
-    <Compile Include="Controllers\ExerciseController.cs" />
-    <Compile Include="Controllers\ExerciseStudentController.cs" />
-    <Compile Include="Controllers\LessonController.cs" />
-    <Compile Include="Controllers\PairController.cs" />
-    <Compile Include="Controllers\Section2Controller.cs" />
-    <Compile Include="Controllers\Section3Controller.cs" />
-    <Compile Include="Controllers\SectionController.cs" />
-    <Compile Include="Controllers\SpaceController.cs" />
-    <Compile Include="Controllers\StudentCourseController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataObjects\StudentCourse.cs" />
+    <Compile Include="ControllersTables\AnswerController.cs" />
+    <Compile Include="ControllersTables\CommentController.cs" />
+    <Compile Include="ControllersTables\CommentRatingController.cs" />
+    <Compile Include="ControllersTables\CourseController.cs" />
+    <Compile Include="ControllersTables\ExerciseController.cs" />
+    <Compile Include="ControllersTables\ExerciseStudentController.cs" />
+    <Compile Include="ControllersTables\LessonController.cs" />
+    <Compile Include="ControllersTables\SectionProgressController.cs" />
+    <Compile Include="ControllersTables\PairController.cs" />
+    <Compile Include="ControllersTables\Section2Controller.cs" />
+    <Compile Include="ControllersTables\Section3Controller.cs" />
+    <Compile Include="ControllersTables\SpaceController.cs" />
+    <Compile Include="ControllersTables\LessonProgressController.cs" />
+    <Compile Include="ControllersTables\CourseProgressController.cs" />
+    <Compile Include="ControllersTables\UserController.cs" />
+    <Compile Include="ControllersTables\TodoItemController.cs" />
+    <Compile Include="ControllersTables\ValuesController.cs" />
+    <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="DataObjects\SectionProgress.cs" />
+    <Compile Include="DataObjects\CourseProgress.cs" />
+    <Compile Include="DataObjects\LessonProgress.cs" />
     <Compile Include="DataObjects\Space.cs" />
     <Compile Include="DataObjects\Pair.cs" />
     <Compile Include="DataObjects\CommentRating.cs" />
@@ -230,16 +239,40 @@
     <Compile Include="DataObjects\Section.cs" />
     <Compile Include="DataObjects\Section2.cs" />
     <Compile Include="DataObjects\Section3.cs" />
+    <Compile Include="DataObjects\StudentCourse.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Logic\EmailGunService.cs" />
+    <Compile Include="Logic\EmailSmtpService.cs" />
     <Compile Include="Logic\Helper.cs" />
     <Compile Include="Migrations\201802272334036_Initial.cs" />
     <Compile Include="Migrations\201802272334036_Initial.Designer.cs">
       <DependentUpon>201802272334036_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.cs" />
+    <Compile Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.Designer.cs">
+      <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121557520_AddedCourseProgressesTable.cs" />
+    <Compile Include="Migrations\201803121557520_AddedCourseProgressesTable.Designer.cs">
+      <DependentUpon>201803121557520_AddedCourseProgressesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131042400_AddNameColumnToCourseProgress.cs" />
+    <Compile Include="Migrations\201803131042400_AddNameColumnToCourseProgress.Designer.cs">
+      <DependentUpon>201803131042400_AddNameColumnToCourseProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs" />
+    <Compile Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.Designer.cs">
+      <DependentUpon>201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804031553035_AddFacebookIdColumnToUsersTable.cs" />
+    <Compile Include="Migrations\201804031553035_AddFacebookIdColumnToUsersTable.Designer.cs">
+      <DependentUpon>201804031553035_AddFacebookIdColumnToUsersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ProgressModels.cs" />
     <Compile Include="Models\TeachMeBackendContext.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,6 +300,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802272334036_Initial.resx">
       <DependentUpon>201802272334036_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803111257414_AddLessonProgressesAndSectionProgressesTables.resx">
+      <DependentUpon>201803111257414_AddLessonProgressesAndSectionProgressesTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121557520_AddedCourseProgressesTable.resx">
+      <DependentUpon>201803121557520_AddedCourseProgressesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131042400_AddNameColumnToCourseProgress.resx">
+      <DependentUpon>201803131042400_AddNameColumnToCourseProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.resx">
+      <DependentUpon>201804021541342_AddNameColumnsToSectionProgressAndLessonProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031553035_AddFacebookIdColumnToUsersTable.resx">
+      <DependentUpon>201804031553035_AddFacebookIdColumnToUsersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

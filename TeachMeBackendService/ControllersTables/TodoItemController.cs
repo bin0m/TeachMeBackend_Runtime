@@ -1,21 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
-using System.Collections.Generic;
-using System;
-using Microsoft.Web.Http;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
-    //   [ApiVersion("1.0")]   
-    //   [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
-    [ApiVersionNeutral]
-    [Authorize]
+    [ApiVersion("1.0")]
+    [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
     public class TodoItemController : TableController<TodoItem>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -26,7 +24,7 @@ namespace TeachMeBackendService.Controllers
         }
 
         // GET tables/TodoItem
-        //      [Route("")]
+        [Route("")]
         public IQueryable<TodoItem> GetAllTodoItems()
         {
             var query = Query();
@@ -59,14 +57,14 @@ namespace TeachMeBackendService.Controllers
         }
 
         // PATCH tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        //       [Route("{id}")]
+        [Route("{id}")]
         public Task<TodoItem> PatchTodoItem(string id, Delta<TodoItem> patch)
         {
             return UpdateAsync(id, patch);
         }
 
         // POST tables/TodoItem
-        //        [Route("")]
+        [Route("")]
         public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
         {
             TodoItem current = await InsertAsync(item);
@@ -74,7 +72,7 @@ namespace TeachMeBackendService.Controllers
         }
 
         // DELETE tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        //      [Route("{id}")]
+        [Route("{id}")]
         public Task DeleteTodoItem(string id)
         {
             return DeleteAsync(id);

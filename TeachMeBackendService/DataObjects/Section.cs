@@ -1,14 +1,17 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.DataObjects
 {
     public class Section : EntityData
     {
         public string Name { get; set; }
+
+        [NotMapped]
+        public ProgressSectionModel Progress { get; set; }
 
         // parent Course FK
         public String CourseId { get; set; }
@@ -21,5 +24,8 @@ namespace TeachMeBackendService.DataObjects
     
         //children Lessons
         public List<Lesson> Lessons { get; set; }
+
+        // Children SectionProgresses
+        public List<SectionProgress> SectionProgresses { get; set; }
     }
 }

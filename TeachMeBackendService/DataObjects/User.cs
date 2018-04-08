@@ -39,8 +39,16 @@ namespace TeachMeBackendService.DataObjects
         [Required]
         public UserRole UserRole { get; set; }
 
+        public string FacebookId { get; set; }
+
         // Children Courses
         public List<Course> Courses { get; set; }
+
+        // Children SectionProgresses
+        public List<SectionProgress> SectionProgresses { get; set; }
+
+        // Children LessonProgresses
+        public List<LessonProgress> LessonProgresses { get; set; }
 
         // Children ExerciseStudents
         public List<ExerciseStudent> ExerciseStudents { get; set; }
@@ -51,8 +59,8 @@ namespace TeachMeBackendService.DataObjects
         // Children CommentRatings
         public List<CommentRating> CommentRatings { get; set; }
 
-        // Children StudentCourses
-        public List<StudentCourse> StudentCourses { get; set; }
+        // Children CourseProgresses
+        public List<CourseProgress> CourseProgresses { get; set; }
 
     }
 }

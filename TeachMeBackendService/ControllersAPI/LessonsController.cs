@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -22,13 +17,15 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class LessonsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Lessons
         [Route("")]
-        public IQueryable<Lesson> GetLessons()
+        public IEnumerable<Lesson> GetLessons()
         {
-            return db.Lessons;
+            var all = db.Lessons.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateLessonProgress(x.Id));
+            return all;
         }
 
         // GET: api/Lessons/5
@@ -42,10 +39,52 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
+            //Calculates progress for all exercises under this lesson for the current user
+            lesson.Progress = CalculateLessonProgress(id);
+
             return Ok(lesson);
         }
 
-        
+        // GET: api/Lessons/5/progress
+        [Route("{id}/progress")]
+        [ResponseType(typeof(ProgressLessonModel))]
+        public IHttpActionResult GetLessonProgress(string id)
+        {
+            Lesson lesson = db.Lessons.Find(id);
+            if (lesson == null)
+            {
+                return NotFound();
+            }
+
+            //Calculates progress for all exercises under this lesson for the current user
+            ProgressLessonModel progress = CalculateLessonProgress(id);
+
+            return Ok(progress);
+        }
+
+        //Calculates progress for all exercises under this lesson for the current user
+        private ProgressLessonModel CalculateLessonProgress(string id)
+        {
+            ProgressLessonModel progressLessonModel = new ProgressLessonModel();
+            var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
+            progressLessonModel.ExercisesNumber = exercises.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                    progressLessonModel.ExercisesDone =
+                    exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
+                var lessonProgress = db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
+                if (lessonProgress != null)
+                {
+                    progressLessonModel.IsDone = lessonProgress.IsDone;
+                    progressLessonModel.IsStarted = lessonProgress.IsDone;
+                }
+            }
+           
+            return progressLessonModel;
+        }
+
+
         [Route("~/api/v{version:ApiVersion}/sections/{id}/lessons")]
         public IQueryable<Lesson> GetBySection(string id)
         {
@@ -61,11 +100,6 @@ namespace TeachMeBackendService.ControllersAPI
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool LessonExists(string id)
-        {
-            return db.Lessons.Count(e => e.Id == id) > 0;
         }
     }
 }

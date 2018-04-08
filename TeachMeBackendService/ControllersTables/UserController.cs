@@ -1,31 +1,23 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Azure.Mobile.Server;
+using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
-using System.Collections.Generic;
-using System;
-using Microsoft.Web.Http;
-using System.Net.Http;
-using Microsoft.AspNet.Identity.Owin;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
     [ApiVersion("1.0")]
     [RoutePrefix("api/v{version:ApiVersion}/user")]
     [Authorize]
     public class UserController : TableController<User>
     {
-        TeachMeBackendContext db
-        {
-            get
-            {
-                return Request.GetOwinContext().Get<TeachMeBackendContext>();
-            }
-        }
+        TeachMeBackendContext Db => Request.GetOwinContext().Get<TeachMeBackendContext>();
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
@@ -54,28 +46,28 @@ namespace TeachMeBackendService.Controllers
         public Task<User> PatchUser(string id, Delta<User> patch)
         {
             // Update AppUser
-            var user = new User();            
+            // ReSharper disable once LocalNameCapturedOnly
+            User user;            
             var propertyNames = patch.GetChangedPropertyNames();
-            bool isEmailChanged = propertyNames.Contains(nameof(user.Email));
-            bool isFullNameChanged = propertyNames.Contains(nameof(user.FullName));
+            var enumerable = propertyNames as string[] ?? propertyNames.ToArray();
+            bool isEmailChanged = enumerable.Contains(nameof(user.Email));
+            bool isFullNameChanged = enumerable.Contains(nameof(user.FullName));
 
             if (isEmailChanged || isFullNameChanged)
             {
-                var appUser = db.Users.Find(id);
+                var appUser = Db.Users.Find(id);
                 if (isEmailChanged)
                 {
-                    object email;
-                    patch.TryGetPropertyValue(nameof(user.Email), out email);
+                    patch.TryGetPropertyValue(nameof(user.Email), out var email);
                     appUser.Email = (string)email;
                     appUser.UserName = (string)email;
                 }
                 if (isFullNameChanged)
                 {
-                    object fullName;
-                    patch.TryGetPropertyValue(nameof(user.FullName), out fullName);
+                    patch.TryGetPropertyValue(nameof(user.FullName), out var fullName);
                     appUser.FullName = (string)fullName;
                 }
-                db.SaveChanges();
+                Db.SaveChanges();
             }
 
             // Update User

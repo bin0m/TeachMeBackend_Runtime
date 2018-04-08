@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -62,11 +55,6 @@ namespace TeachMeBackendService.ControllersAPI
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool CommentExists(string id)
-        {
-            return db.Comments.Count(e => e.Id == id) > 0;
         }
     }
 }

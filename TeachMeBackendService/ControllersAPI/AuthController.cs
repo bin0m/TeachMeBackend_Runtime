@@ -5,6 +5,7 @@ using Microsoft.Azure.Mobile.Server.Login;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Web.Http;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,19 +25,14 @@ namespace TeachMeBackendService.ControllersAPI
     [MobileAppController]
     public class AuthController : ApiController
     {
-        private ApplicationUserManager _userManager;
-        private string signingKey;
-        private string audience;
-        private string issuer;
-        private int jwtTokenExpirationTimeInHours;
+        private  ApplicationUserManager _userManager;
+        private readonly string _signingKey;
+        private readonly string _audience;
+        private readonly string _issuer;
+        private readonly int _jwtTokenExpirationTimeInHours;
 
-        TeachMeBackendContext dbContext
-        {
-            get
-            {
-                return Request.GetOwinContext().Get<TeachMeBackendContext>();
-            }
-        }
+        private const string WelcomeEmailSubject = "Welcome to TeachMe!";
+        private const string WelcomeEmailBody = "Hi {0},\n Welcome to the Teachme application - where you can study and teach.\n Your username:{1} \n Good Luck!";
 
         public ApplicationUserManager UserManager
         {
@@ -50,46 +46,43 @@ namespace TeachMeBackendService.ControllersAPI
             }
         }
 
-        private IAuthenticationManager Authentication
-        {
-            get { return Request.GetOwinContext().Authentication; }
-        }
+        TeachMeBackendContext DbContext => Request.GetOwinContext().Get<TeachMeBackendContext>();
+        private IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
 
         public AuthController()
         {
-            signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
+            _signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
 
-            if (string.IsNullOrEmpty(signingKey))
+            if (string.IsNullOrEmpty(_signingKey))
             {
                 // WEBSITE_AUTH_SIGNING_KEY - is null, when it is run locally for debugging
-                signingKey = ConfigurationManager.AppSettings["SigningKey"];
-                audience = ConfigurationManager.AppSettings["ValidAudience"];
-                issuer = ConfigurationManager.AppSettings["ValidIssuer"];
+                _signingKey = ConfigurationManager.AppSettings["SigningKey"];
+                _audience = ConfigurationManager.AppSettings["ValidAudience"];
+                _issuer = ConfigurationManager.AppSettings["ValidIssuer"];
             }
             else
             {
                 var website = Environment.GetEnvironmentVariable("WEBSITE_HOSTNAME");
-                audience = $"https://{website}/";
-                issuer = $"https://{website}/";
+                _audience = $"https://{website}/";
+                _issuer = $"https://{website}/";
             }
 
 
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]))
             {
-                jwtTokenExpirationTimeInHours = Int32.Parse(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]);
+                _jwtTokenExpirationTimeInHours = Int32.Parse(ConfigurationManager.AppSettings["JwtTokenExpirationTimeInHours"]);
             }
             else
             {
-                jwtTokenExpirationTimeInHours = 72;
+                _jwtTokenExpirationTimeInHours = 72;
             }
             
         }
-
-        [AllowAnonymous]
+                
         [Route("user/{id:guid}", Name = "GetUserById")]
-        public async Task<IHttpActionResult> GetUser(string Id)
+        public async Task<IHttpActionResult> GetUser(string id)
         {
-            var user = await UserManager.FindByIdAsync(Id);
+            var user = await UserManager.FindByIdAsync(id);
 
             if (user != null)
             {
@@ -100,7 +93,117 @@ namespace TeachMeBackendService.ControllersAPI
 
         }
 
-        [AllowAnonymous]
+        [Route("InternalUser", Name = "GetInternalUser")]
+        public async Task<IHttpActionResult> GetInternalUser()
+        {
+            var serviceUser = this.User as ClaimsPrincipal;
+            var ident = serviceUser.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
+            string token = "";
+            string provider = ident;
+            var newUser = new User();
+            switch (ident)
+            {
+                case "facebook":
+                    token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "?access_token=" + token))
+                        {
+                            var o = JObject.Parse(await response.Content.ReadAsStringAsync());
+                            newUser.FacebookId = o["id"].ToString();
+                            newUser.Email = o["email"].ToString();
+                            newUser.FullName = o["name"].ToString();
+                            newUser.DateOfBirth = DateTime.Parse(o["birthday"].ToString());
+                            newUser.RegisterDate = DateTime.Now;
+                            newUser.UserRole = UserRole.Student;
+                        }
+
+                        // look for existing user with facebook Id
+                        var existingUser = DbContext.Set<User>().Single(u => u.FacebookId == newUser.FacebookId);
+                        if (existingUser != null)
+                        {
+                            // user have been registered already via facebook, return user
+                            return Ok(existingUser);
+                            //TODO: maybe create new local Auth token instead of automatic token created
+                        }
+
+                        // look for existing user with identical email adress
+                        var userWithIdenticalEmail = await UserManager.FindByNameAsync(newUser.Email);
+                        if (userWithIdenticalEmail != null)
+                        {
+                            //user already registered to the system, but not via facebook. Need to add Facebook to his account
+                            var existingUser2 = DbContext.Set<User>().Find(userWithIdenticalEmail.Id);
+                            existingUser2.FacebookId = newUser.FacebookId;
+                            DbContext.SaveChanges();
+                            return Ok(existingUser2);
+                            //TODO: maybe create new local Auth token instead of automatic token created
+                        }
+
+                        //Create new local account for facebook user
+                        var appUser = new ApplicationUser() { UserName = newUser.Email, Email = newUser.Email, FullName = newUser.FullName };
+
+                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
+                        {
+                            var x = JObject.Parse(await response.Content.ReadAsStringAsync());
+                            var image = (x["data"]["url"].ToString());
+                            //TODO: Upload image to Azure Blob and get some blobPath
+                            newUser.AvatarPath = image;
+                        }
+
+                        try
+                        {
+                            IdentityResult result = await UserManager.CreateAsync(appUser);
+
+                            if (!result.Succeeded)
+                            {
+                                return GetErrorResult(result);
+                            }
+
+                            await UserManager.AddToRoleAsync(appUser.Id, newUser.UserRole.ToString());
+
+                            DbContext.Set<User>().Add(newUser);
+                            DbContext.SaveChanges();
+
+                            //Send welcome email
+                            await UserManager.SendEmailAsync(
+                                appUser.Id,
+                                WelcomeEmailSubject,
+                                string.Format(WelcomeEmailBody, newUser.FullName, newUser.Login));
+
+                            //TODO: maybe create new local Auth token instead of automatic token created
+                            //var claims = new List<Claim>
+                            //{
+                            //    new Claim(JwtRegisteredClaimNames.Sub, newUser.Email),
+                            //    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                            //    new Claim(ClaimTypes.PrimarySid, appUser.Id),
+                            //    new Claim(ClaimTypes.Role, newUser.UserRole.ToString())
+                            //};
+
+                            //var newToken = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromDays(_jwtTokenExpirationTimeInHours));
+
+                            //loginResult = new LoginResult()
+                            //{
+                            //    AuthenticationToken = token.RawData,
+                            //    User = user
+                            //};
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message;
+                            return BadRequest(message);
+                        }
+
+
+              
+                    }
+
+                    // Create Internal User
+                    //var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+                    break;
+            }
+            return Ok(newUser);
+        }
+
         [Route("users")]
         public IHttpActionResult GetUsers()
         {
@@ -115,10 +218,13 @@ namespace TeachMeBackendService.ControllersAPI
             var response = new ClaimsUserInfo();
 
             // Get the Claims of the current user.
-            var claimsPrincipal = this.User as ClaimsPrincipal;
-            response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;
-            response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;           
+            var claimsPrincipal = User as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
+                //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;
+                response.Role = claimsPrincipal.FindFirst(ClaimTypes.Role).Value;
+            }
 
             return Ok(response);
         }
@@ -162,18 +268,25 @@ namespace TeachMeBackendService.ControllersAPI
                     DateOfBirth = model.DateOfBirth
                 };
 
-                dbContext.Set<User>().Add(user);
-                dbContext.SaveChanges();
+                DbContext.Set<User>().Add(user);
+                DbContext.SaveChanges();
 
+                //Send welcome email
+                await UserManager.SendEmailAsync(
+                    appUser.Id, 
+                    WelcomeEmailSubject, 
+                    string.Format(WelcomeEmailBody, model.FullName, model.UserName));
+                
                 // Create token for the new registered user
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, model.Email),
                     new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.PrimarySid, appUser.Id),
                     new Claim(ClaimTypes.Role, model.Role.ToString())
                 };
 
-                var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromDays(jwtTokenExpirationTimeInHours));
+                var token = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromDays(_jwtTokenExpirationTimeInHours));
 
                 loginResult = new LoginResult()
                 {
@@ -221,6 +334,58 @@ namespace TeachMeBackendService.ControllersAPI
             return Ok(loginResult);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgotPassword")]
+        public async Task<IHttpActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                // If user has to activate his email to confirm his account, the use code listing below
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //{
+                //    return Ok();
+                //}
+                if (user == null)
+                {
+                    return Ok();
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", $"Please reset your password by using this code: {code}");
+                return Ok();
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return Ok();
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return Ok();
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -239,7 +404,8 @@ namespace TeachMeBackendService.ControllersAPI
             var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, appUser.Email),
-                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName)
+                    new Claim(JwtRegisteredClaimNames.GivenName, appUser.FullName),
+                    new Claim(ClaimTypes.PrimarySid, appUser.Id)
                 };
 
             var userRoles = await UserManager.GetRolesAsync(appUser.Id);
@@ -248,9 +414,9 @@ namespace TeachMeBackendService.ControllersAPI
                 claims.Add(new Claim(ClaimTypes.Role, userRole));
             }
 
-            var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
+            var token = AppServiceLoginHandler.CreateToken(claims, _signingKey, _audience, _issuer, TimeSpan.FromHours(_jwtTokenExpirationTimeInHours));
 
-            var user = dbContext.Set<User>().Find(appUser.Id);
+            var user = DbContext.Set<User>().Find(appUser.Id);
 
             return new LoginResult()
             {

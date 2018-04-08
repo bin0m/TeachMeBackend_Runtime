@@ -8,11 +8,11 @@ using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 
-namespace TeachMeBackendService.Controllers
+namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/exercise")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/exercise")]
     public class ExerciseController : TableController<Exercise>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -26,11 +26,11 @@ namespace TeachMeBackendService.Controllers
         [Route("")]
         public IQueryable<Exercise> GetAllExercise()
         {
-            return Query(); 
+            return Query();
         }
 
         // GET tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        [Route("{id}", Name = "GetExercise")]
+        [Route("{id}", Name = "GetExercise2")]
         public SingleResult<Exercise> GetExercise(string id)
         {
             return Lookup(id);
@@ -40,7 +40,7 @@ namespace TeachMeBackendService.Controllers
         [Route("{id}")]
         public Task<Exercise> PatchExercise(string id, Delta<Exercise> patch)
         {
-             return UpdateAsync(id, patch);
+            return UpdateAsync(id, patch);
         }
 
         // POST tables/Exercise
@@ -48,14 +48,14 @@ namespace TeachMeBackendService.Controllers
         public async Task<IHttpActionResult> PostExercise(Exercise item)
         {
             Exercise current = await InsertAsync(item);
-            return CreatedAtRoute("GetExercise", new { id = current.Id }, current);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/Exercise/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
         public Task DeleteExercise(string id)
         {
-             return DeleteAsync(id);
+            return DeleteAsync(id);
         }
     }
 }

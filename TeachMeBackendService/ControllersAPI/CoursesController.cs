@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Web.Http;
 using TeachMeBackendService.DataObjects;
@@ -22,13 +18,15 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CoursesController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Courses
         [Route("")]
-        public IQueryable<Course> GetCourses()
+        public IEnumerable<Course> GetCourses()
         {
-            return db.Courses;
+            var all = db.Courses.OrderBy(x => x.CreatedAt).ToList();
+            all.ForEach(x => x.Progress = CalculateCourseProgress(x.Id));
+            return all;
         }
 
         // GET: api/Courses/5
@@ -42,7 +40,42 @@ namespace TeachMeBackendService.ControllersAPI
                 return NotFound();
             }
 
+            //Calculates progress for all sections under this course for the current user
+            course.Progress = CalculateCourseProgress(id);
+
             return Ok(course);
+        }
+
+        // GET: api/Courses/5/progress
+        [Route("{id}/progress")]
+        [ResponseType(typeof(ProgressCourseModel))]
+        public IHttpActionResult GetCourseProgress(string id)
+        {
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            //Calculates progress for all exercises under this course for the current user
+            ProgressCourseModel progress = CalculateCourseProgress(id);
+
+            return Ok(progress);
+        }
+
+        //Calculates progress for all sections under this course for the current user
+        private ProgressCourseModel CalculateCourseProgress(string id)
+        {
+            ProgressCourseModel progressCourseModel = new ProgressCourseModel();
+            var sections = db.Sections.Where(c => c.CourseId == id).Include(c => c.SectionProgresses);
+            progressCourseModel.SectionsNumber = sections.Count();
+            if (User is ClaimsPrincipal claimsPrincipal)
+            {
+                var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
+                progressCourseModel.SectionsDone =
+                    sections.Count(c => c.SectionProgresses.Any(p => p.UserId == userId && p.IsDone));
+            }
+            return progressCourseModel;
         }
 
         // DELETE: api/Courses/5
@@ -50,10 +83,9 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Course))]
         public IHttpActionResult DeleteCourse(string id)
         {
-            Course course = null;
-            using (var dbContext = new Models.TeachMeBackendContext())
+            using (var dbContext = new TeachMeBackendContext())
             {
-                course = dbContext.DeleteCourseAndChildren(id);
+                var course = dbContext.DeleteCourseAndChildren(id);
                 if (course == null)
                 {
                     return NotFound();
@@ -74,7 +106,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
 
             var query = from course in db.Courses
-                        where course.StudentCourses.Any(c => c.UserId == usesrId)
+                        where course.CourseProgresses.Any(c => c.UserId == usesrId && c.IsStarted)
                         select course;
 
             return query;
@@ -88,11 +120,6 @@ namespace TeachMeBackendService.ControllersAPI
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool CourseExists(string id)
-        {
-            return db.Courses.Count(e => e.Id == id) > 0;
         }
     }
 }

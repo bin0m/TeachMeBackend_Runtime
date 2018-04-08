@@ -54,10 +54,6 @@ namespace TeachMeBackendService.ControllersAPI
             }
             base.Dispose(disposing);
         }
-
-        private bool AnswerExists(string id)
-        {
-            return db.Answers.Count(e => e.Id == id) > 0;
-        }
+        
     }
 }
