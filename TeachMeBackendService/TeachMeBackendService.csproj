@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201804031553035_AddFacebookIdColumnToUsersTable.Designer.cs">
       <DependentUpon>201804031553035_AddFacebookIdColumnToUsersTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.cs" />
+    <Compile Include="Migrations\201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.Designer.cs">
+      <DependentUpon>201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -321,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804031553035_AddFacebookIdColumnToUsersTable.resx">
       <DependentUpon>201804031553035_AddFacebookIdColumnToUsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.resx">
+      <DependentUpon>201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
