@@ -279,6 +279,10 @@
     <Compile Include="Migrations\201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.Designer.cs">
       <DependentUpon>201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804121251177_AddStatusColumnToCoursesTable.cs" />
+    <Compile Include="Migrations\201804121251177_AddStatusColumnToCoursesTable.Designer.cs">
+      <DependentUpon>201804121251177_AddStatusColumnToCoursesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -328,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.resx">
       <DependentUpon>201804121221170_AddIsModeratedAndOriginalIdColumnsToExerciseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121251177_AddStatusColumnToCoursesTable.resx">
+      <DependentUpon>201804121251177_AddStatusColumnToCoursesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

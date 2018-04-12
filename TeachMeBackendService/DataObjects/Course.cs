@@ -6,6 +6,15 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.DataObjects
 {
+    public enum ModerationStatus
+    {
+        Draft = 0,
+        FirstModeration = 1,
+        SecondModeration = 2,
+        Published = 3,
+        Rejected = 4
+    }
+
     public class Course : EntityData
     {
         public string Name { get; set; }
@@ -18,6 +27,8 @@ namespace TeachMeBackendService.DataObjects
 
         [NotMapped]
         public ProgressCourseModel Progress { get; set; }
+
+        public ModerationStatus Status { get; set; }
 
         // parent User FK
         public String UserId { get; set; }
