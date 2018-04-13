@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace TeachMeBackendService.ControllersAPI
 {
@@ -147,6 +150,7 @@ namespace TeachMeBackendService.ControllersAPI
                             var x = JObject.Parse(await response.Content.ReadAsStringAsync());
                             var image = (x["data"]["url"].ToString());
                             //TODO: Upload image to Azure Blob and get some blobPath
+                            UploadImageToBlob(image);
                             newUser.AvatarPath = image;
                         }
 
@@ -423,6 +427,26 @@ namespace TeachMeBackendService.ControllersAPI
                 AuthenticationToken = token.RawData,
                 User = user
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void UploadImageToBlob(string filePath)
+        {
+            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("images");
+
+            var blockBlob = container.GetBlockBlobReference("anewblob");
+            // Create or overwrite the "myblob" blob with contents from a local file.
+            using (var fileStream = System.IO.File.OpenRead(filePath))
+            {
+                blockBlob.UploadFromStream(fileStream);
+            }
         }
 
 

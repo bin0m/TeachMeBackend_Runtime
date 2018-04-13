@@ -23,6 +23,10 @@ namespace TeachMeBackendService.DataObjects
 
         public string Text { get; set; }
 
+        public bool isModerated { get; set; }
+
+        public string OriginalId { get; set; }
+
         // parent Lesson FK
         public String LessonId { get; set; }
 
