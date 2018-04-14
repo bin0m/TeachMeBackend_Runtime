@@ -5,6 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TeachMeBackendService.DataObjects
 {
+    public enum ModerationExerciseStatus
+    {
+            Draft = 0,
+            Published = 1,
+            Rejected = 2
+    }
+
     public class Exercise : EntityData
     {
         [Required]
@@ -23,9 +30,9 @@ namespace TeachMeBackendService.DataObjects
 
         public string Text { get; set; }
 
-        public bool isModerated { get; set; }
-
         public string OriginalId { get; set; }
+
+        public ModerationExerciseStatus Status { get; set; }
 
         // parent Lesson FK
         public String LessonId { get; set; }

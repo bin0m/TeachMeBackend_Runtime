@@ -6,7 +6,7 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.DataObjects
 {
-    public enum ModerationStatus
+    public enum ModerationCourseStatus
     {
         Draft = 0,
         FirstModeration = 1,
@@ -28,7 +28,7 @@ namespace TeachMeBackendService.DataObjects
         [NotMapped]
         public ProgressCourseModel Progress { get; set; }
 
-        public ModerationStatus Status { get; set; }
+        public ModerationCourseStatus Status { get; set; }
 
         // parent User FK
         public String UserId { get; set; }
