@@ -231,6 +231,8 @@
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="DataObjects\Specialty.cs" />
+    <Compile Include="DataObjects\University.cs" />
     <Compile Include="DataObjects\SectionProgress.cs" />
     <Compile Include="DataObjects\CourseProgress.cs" />
     <Compile Include="DataObjects\LessonProgress.cs" />
