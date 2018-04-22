@@ -231,7 +231,10 @@
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="DataObjects\StudyProgram.cs" />
+    <Compile Include="DataObjects\StudyYear.cs" />
     <Compile Include="DataObjects\Specialty.cs" />
+    <Compile Include="DataObjects\Group.cs" />
     <Compile Include="DataObjects\University.cs" />
     <Compile Include="DataObjects\SectionProgress.cs" />
     <Compile Include="DataObjects\CourseProgress.cs" />
