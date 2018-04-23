@@ -7,12 +7,10 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.DataObjects
 {
-    [Table("Specialties")]
-    public class Specialty : EntityData
+    [Table("Faculties")]
+    public class Faculty : EntityData
     {
         public string Name { get; set; }
-
-        public string Description { get; set; }
 
         //children Groups
         public List<Group> Groups { get; set; }

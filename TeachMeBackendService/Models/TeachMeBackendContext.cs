@@ -47,6 +47,13 @@ namespace TeachMeBackendService.Models
         public DbSet<LessonProgress> LessonProgresses { get; set; }
         public DbSet<SectionProgress> SectionProgresses { get; set; }
         public DbSet<CourseProgress> CourseProgresses { get; set; }
+        public DbSet<University> Universities { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<StudyPeriod> StudyPeriods { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<StudyProgram> StudyPrograms { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -197,6 +204,52 @@ namespace TeachMeBackendService.Models
                .WithMany(l => l.CourseProgresses)
                .HasForeignKey(p => p.UserId)
                 .WillCascadeOnDelete(false);
+
+            // University <1-to-many> Groups
+            modelBuilder.Entity<Group>()
+               .HasRequired(p => p.University)
+               .WithMany(l => l.Groups)
+               .HasForeignKey(p => p.UniversityId);
+
+            // Faculty <01-to-many> Groups
+            modelBuilder.Entity<Group>()
+               .HasOptional(c => c.Faculty)
+               .WithMany(p => p.Groups)
+               .HasForeignKey(c => c.FacultyId);
+
+            // Specialty <1-to-many> Groups
+            modelBuilder.Entity<Group>()
+               .HasRequired(p => p.Specialty)
+               .WithMany(l => l.Groups)
+               .HasForeignKey(p => p.SpecialtyId);
+
+            // StudyPeriod <1-to-many> Groups
+            modelBuilder.Entity<Group>()
+               .HasRequired(p => p.StudyPeriod)
+               .WithMany(l => l.Groups)
+               .HasForeignKey(p => p.StudyPeriodId);
+
+            // Groups <many-to-many> Users
+            modelBuilder.Entity<Group>()
+                .HasMany(p => p.Users)
+                .WithMany(l => l.Groups)
+                .Map(m =>
+                {
+                    m.ToTable("GroupUsers");
+                    m.MapLeftKey("GroupId");
+                    m.MapRightKey("UserId");
+                });
+
+            // StudyProgram <many-to-many> Groups
+            modelBuilder.Entity<StudyProgram>()
+                .HasMany(p => p.Groups)
+                .WithMany(l => l.StudyPrograms)
+                .Map(m =>
+                {
+                    m.ToTable("StudyProgramGroups");
+                    m.MapLeftKey("StudyProgramId");
+                    m.MapRightKey("GroupId");
+                });
         }
 
         /// <summary>
