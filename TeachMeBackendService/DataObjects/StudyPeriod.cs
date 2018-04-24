@@ -11,9 +11,9 @@ namespace TeachMeBackendService.DataObjects
     {
         public string Name { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
         //children Groups
         public List<Group> Groups { get; set; }

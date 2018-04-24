@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.Designer.cs">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.cs" />
+    <Compile Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.Designer.cs">
+      <DependentUpon>201804241346567_UniversitiesFeatureTablesCreation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -348,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.resx">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.resx">
+      <DependentUpon>201804241346567_UniversitiesFeatureTablesCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
