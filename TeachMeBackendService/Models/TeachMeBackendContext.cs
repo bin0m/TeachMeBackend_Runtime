@@ -240,15 +240,26 @@ namespace TeachMeBackendService.Models
                     m.MapRightKey("UserId");
                 });
 
-            // StudyProgram <many-to-many> Groups
+            // Groups <many-to-many> StudyProgram
+            modelBuilder.Entity<Group>()
+                .HasMany(p => p.StudyPrograms)
+                .WithMany(l => l.Groups)
+                .Map(m =>
+                {
+                    m.ToTable("GroupStudyPrograms");
+                    m.MapLeftKey("GroupId");
+                    m.MapRightKey("StudyProgramId");
+                });
+
+            // StudyProgram <many-to-many> Courses
             modelBuilder.Entity<StudyProgram>()
-                .HasMany(p => p.Groups)
+                .HasMany(p => p.Courses)
                 .WithMany(l => l.StudyPrograms)
                 .Map(m =>
                 {
-                    m.ToTable("StudyProgramGroups");
+                    m.ToTable("StudyProgramCourses");
                     m.MapLeftKey("StudyProgramId");
-                    m.MapRightKey("GroupId");
+                    m.MapRightKey("CourseId");
                 });
         }
 
