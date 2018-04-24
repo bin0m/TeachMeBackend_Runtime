@@ -230,6 +230,7 @@
     <Compile Include="ControllersTables\TodoItemController.cs" />
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
+    <Compile Include="ControllersTables\FacultyController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
     <Compile Include="DataObjects\StudyProgram.cs" />
     <Compile Include="DataObjects\StudyPeriod.cs" />
@@ -293,9 +294,9 @@
     <Compile Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.Designer.cs">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.cs" />
-    <Compile Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.Designer.cs">
-      <DependentUpon>201804241346567_UniversitiesFeatureTablesCreation.cs</DependentUpon>
+    <Compile Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.cs" />
+    <Compile Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.Designer.cs">
+      <DependentUpon>201804241454463_UniversitiesFeatureTablesCreation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -353,8 +354,8 @@
     <EmbeddedResource Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.resx">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804241346567_UniversitiesFeatureTablesCreation.resx">
-      <DependentUpon>201804241346567_UniversitiesFeatureTablesCreation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.resx">
+      <DependentUpon>201804241454463_UniversitiesFeatureTablesCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

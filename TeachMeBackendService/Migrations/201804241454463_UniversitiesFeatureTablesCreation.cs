@@ -21,7 +21,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 128),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
                             {
@@ -70,7 +70,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 128),
                         YearOfStudy = c.Int(nullable: false),
                         UniversityId = c.String(nullable: false, maxLength: 128),
                         StudyPeriodId = c.String(nullable: false, maxLength: 128),
@@ -132,7 +132,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 128),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
                             {
@@ -167,6 +167,7 @@ namespace TeachMeBackendService.Migrations
                             }),
                     })
                 .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
@@ -181,7 +182,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 128),
                         Description = c.String(),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
@@ -217,6 +218,7 @@ namespace TeachMeBackendService.Migrations
                             }),
                     })
                 .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
@@ -231,7 +233,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 128),
                         StartDate = c.DateTimeOffset(nullable: false, precision: 7),
                         EndDate = c.DateTimeOffset(nullable: false, precision: 7),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
@@ -282,8 +284,8 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        Name = c.String(),
-                        ShortName = c.String(),
+                        Name = c.String(maxLength: 128),
+                        ShortName = c.String(maxLength: 16),
                         Description = c.String(),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
@@ -319,6 +321,7 @@ namespace TeachMeBackendService.Migrations
                             }),
                     })
                 .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
@@ -381,9 +384,12 @@ namespace TeachMeBackendService.Migrations
             DropIndex("dbo.StudyProgramCourses", new[] { "CourseId" });
             DropIndex("dbo.StudyProgramCourses", new[] { "StudyProgramId" });
             DropIndex("dbo.Universities", new[] { "CreatedAt" });
+            DropIndex("dbo.Universities", new[] { "Name" });
             DropIndex("dbo.StudyPeriods", new[] { "CreatedAt" });
             DropIndex("dbo.Specialties", new[] { "CreatedAt" });
+            DropIndex("dbo.Specialties", new[] { "Name" });
             DropIndex("dbo.Faculties", new[] { "CreatedAt" });
+            DropIndex("dbo.Faculties", new[] { "Name" });
             DropIndex("dbo.Groups", new[] { "CreatedAt" });
             DropIndex("dbo.Groups", new[] { "SpecialtyId" });
             DropIndex("dbo.Groups", new[] { "FacultyId" });

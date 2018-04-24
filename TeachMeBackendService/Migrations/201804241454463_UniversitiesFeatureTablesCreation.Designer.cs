@@ -13,7 +13,7 @@ namespace TeachMeBackendService.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804241346567_UniversitiesFeatureTablesCreation"; }
+            get { return "201804241454463_UniversitiesFeatureTablesCreation"; }
         }
         
         string IMigrationMetadata.Source
