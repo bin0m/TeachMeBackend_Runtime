@@ -218,6 +218,8 @@
     <Compile Include="ControllersTables\CourseController.cs" />
     <Compile Include="ControllersTables\ExerciseController.cs" />
     <Compile Include="ControllersTables\ExerciseStudentController.cs" />
+    <Compile Include="ControllersTables\SpecialtyController.cs" />
+    <Compile Include="ControllersTables\UniversityController.cs" />
     <Compile Include="ControllersTables\LessonController.cs" />
     <Compile Include="ControllersTables\SectionProgressController.cs" />
     <Compile Include="ControllersTables\PairController.cs" />
