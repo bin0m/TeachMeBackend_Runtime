@@ -12,9 +12,9 @@ using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.ControllersTables
 {
-    [ApiVersion("1.0")]
-    [RoutePrefix("api/v{version:ApiVersion}/user")]
     [Authorize]
+    [ApiVersionNeutral]
+    [RoutePrefix("tables/User")]
     public class UserController : TableController<User>
     {
         TeachMeBackendContext Db => Request.GetOwinContext().Get<TeachMeBackendContext>();
@@ -26,7 +26,7 @@ namespace TeachMeBackendService.ControllersTables
             DomainManager = new EntityDomainManager<User>(context, Request);
         }
 
-        // GET User
+        // GET tables/User
         [Route("")]
         public IQueryable<User> GetAllUser()
         {
@@ -34,14 +34,14 @@ namespace TeachMeBackendService.ControllersTables
             return query;
         }
 
-        // GET User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // GET tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}", Name = "GetUser")]
         public SingleResult<User> GetUser(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // PATCH tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
         public Task<User> PatchUser(string id, Delta<User> patch)
         {
@@ -72,10 +72,10 @@ namespace TeachMeBackendService.ControllersTables
 
             // Update User
             return UpdateAsync(id, patch);
-        }       
+        }
 
 
-        // DELETE User/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        // DELETE tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
         [Route("{id}")]
         public Task DeleteUser(string id)
         {
