@@ -18,7 +18,6 @@ using System.Web.Http;
 using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace TeachMeBackendService.ControllersAPI
@@ -99,15 +98,13 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("InternalUser", Name = "GetInternalUser")]
         public async Task<IHttpActionResult> GetInternalUser()
         {
-            var serviceUser = this.User as ClaimsPrincipal;
-            var ident = serviceUser.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
-            string token = "";
-            string provider = ident;
+            var serviceUser = User as ClaimsPrincipal;
+            var ident = serviceUser?.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
             var newUser = new User();
             switch (ident)
             {
                 case "facebook":
-                    token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
+                    var token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
                     using (HttpClient client = new HttpClient())
                     {
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "?access_token=" + token))
@@ -136,9 +133,13 @@ namespace TeachMeBackendService.ControllersAPI
                         {
                             //user already registered to the system, but not via facebook. Need to add Facebook to his account
                             var existingUser2 = DbContext.Set<User>().Find(userWithIdenticalEmail.Id);
-                            existingUser2.FacebookId = newUser.FacebookId;
-                            DbContext.SaveChanges();
-                            return Ok(existingUser2);
+                            if (existingUser2 != null)
+                            {
+                                existingUser2.FacebookId = newUser.FacebookId;
+                                DbContext.SaveChanges();
+                                return Ok(existingUser2);
+                            }
+
                             //TODO: maybe create new local Auth token instead of automatic token created
                         }
 
@@ -222,8 +223,7 @@ namespace TeachMeBackendService.ControllersAPI
             var response = new ClaimsUserInfo();
 
             // Get the Claims of the current user.
-            var claimsPrincipal = User as ClaimsPrincipal;
-            if (claimsPrincipal != null)
+            if (User is ClaimsPrincipal claimsPrincipal)
             {
                 response.Sid = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier).Value;
                 //response.Sid = claimsPrincipal.FindFirst(ClaimTypes.GivenName).Value;

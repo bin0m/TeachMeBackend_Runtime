@@ -9,7 +9,8 @@ namespace TeachMeBackendService.DataObjects
     {
             Draft = 0,
             Published = 1,
-            Rejected = 2
+            Rejected = 2,
+            Old = 3
     }
 
     public class Exercise : EntityData
