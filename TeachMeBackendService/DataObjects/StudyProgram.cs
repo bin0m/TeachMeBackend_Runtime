@@ -13,10 +13,10 @@ namespace TeachMeBackendService.DataObjects
         [StringLength(128)]
         public string Name { get; set; }
 
-        // many-to-many relationship
-        public List<Group> Groups { get; set; }
+        // Children GroupStudyPrograms
+        public List<GroupStudyProgram> GroupStudyPrograms { get; set; }
 
-        // many-to-many relationship
-        public List<Course> Courses { get; set; }
+        // Children StudyProgramCourses
+        public List<StudyProgramCourse> StudyProgramCourses { get; set; }
     }
 }

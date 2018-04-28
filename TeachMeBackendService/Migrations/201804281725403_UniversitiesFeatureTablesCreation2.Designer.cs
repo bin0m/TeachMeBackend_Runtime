@@ -7,13 +7,13 @@ namespace TeachMeBackendService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UniversitiesFeatureTablesCreation : IMigrationMetadata
+    public sealed partial class UniversitiesFeatureTablesCreation2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UniversitiesFeatureTablesCreation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UniversitiesFeatureTablesCreation2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804241454463_UniversitiesFeatureTablesCreation"; }
+            get { return "201804281725403_UniversitiesFeatureTablesCreation2"; }
         }
         
         string IMigrationMetadata.Source

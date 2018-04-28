@@ -39,10 +39,10 @@ namespace TeachMeBackendService.DataObjects
         // parent Specialty link
         public Specialty Specialty { get; set; }
 
-        // many-to-many relationship
-        public List<User> Users { get; set; }
+        // Children GroupUsers
+        public List<GroupUser> GroupUsers { get; set; }
 
-        // many-to-many relationship
-        public List<StudyProgram> StudyPrograms { get; set; }
+        // Children GroupStudyPrograms
+        public List<GroupStudyProgram> GroupStudyPrograms { get; set; }
     }
 }

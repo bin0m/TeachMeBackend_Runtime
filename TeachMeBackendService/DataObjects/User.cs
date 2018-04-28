@@ -62,8 +62,8 @@ namespace TeachMeBackendService.DataObjects
         // Children CourseProgresses
         public List<CourseProgress> CourseProgresses { get; set; }
 
-        // many-to-many relationship
-        public List<Group> Groups { get; set; }
+        // Children GroupUsers
+        public List<GroupUser> GroupUsers { get; set; }
 
     }
 }
