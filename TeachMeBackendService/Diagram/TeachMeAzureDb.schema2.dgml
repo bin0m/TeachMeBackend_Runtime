@@ -1,191 +1,269 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DirectedGraph GraphDirection="LeftToRight" Layout="ForceDirected" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+<DirectedGraph GraphDirection="RightToLeft" Layout="ForceDirected" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="Database" Category="Database" Bounds="-1241.11853140641,284.083362592774,2365.19486338297,1478.99125478269" Group="Expanded" Label="Data Source=tcp:teachmesqlserver.database.windows.net,1433;Initial Catalog=TeachMeTestDb" />
-    <Node Id="dbo" Category="Schema" Bounds="-1221.11853140641,324.083462592774,2325.19486338297,1418.99105478269" Group="Expanded" Label="Teachme Data Model" UseManualLocation="True" />
-    <Node Id="dbo.Answers" Category="Table" Bounds="-1033.03972481904,751.415233958438,293.113335876465,197.880383007812" Group="Expanded" Label="dbo.Answers" />
-    <Node Id="dbo.Answers_CreatedAt" Category="Field" Bounds="-1013.03972481904,903.335516597745,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Answers_Deleted" Category="Field" Bounds="-923.316381008004,847.375433589932,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Answers_ExerciseId" Category="Field Foreign" Bounds="-832.033055609241,847.375372554776,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
-    <Node Id="dbo.Answers_Id" Category="Field Primary" Bounds="-1013.0397198345,791.415335323331,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Answers_IsRight" Category="Field" Bounds="-853.039703761911,791.415335323331,56.2933333333334,25.96" Description="bit" Label="IsRight" />
-    <Node Id="dbo.Answers_Title" Category="Field Optional" Bounds="-933.039719834502,791.415335323331,50,25.96" Description="ntext" Label="Title" />
-    <Node Id="dbo.Answers_UpdatedAt" Category="Field Optional" Bounds="-909.836384161487,903.335455562588,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Answers_Version" Category="Field" Bounds="-1013.03972268281,847.375433589932,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.AspNetUsers" Category="Table" Bounds="694.522492122766,1280.73896965993,389.553482666013,365.760747686173" Group="Expanded" Label="dbo.AspNetUsers" UseManualLocation="True" />
-    <Node Id="dbo.AspNetUsers_AccessFailedCount" Category="Field" Bounds="714.52240514097,1544.57941868337,118.52,25.96" Description="int" Label="AccessFailedCount" />
-    <Node Id="dbo.AspNetUsers_Email" Category="Field Optional" Bounds="794.522517445657,1320.73908665212,50,25.96" Description="nvarchar(256)" Label="Email" />
-    <Node Id="dbo.AspNetUsers_EmailConfirmed" Category="Field" Bounds="714.522329050475,1432.65925266775,104.093333333333,25.96" Description="bit" Label="EmailConfirmed" />
-    <Node Id="dbo.AspNetUsers_FullName" Category="Field Optional" Bounds="874.522320912454,1320.73908665212,70.16,25.96" Description="ntext" Label="FullName" />
-    <Node Id="dbo.AspNetUsers_Id" Category="Field Primary" Bounds="714.522395375345,1320.73908665212,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.AspNetUsers_LockoutEnabled" Category="Field" Bounds="848.615712839538,1432.65925266775,104.343333333333,25.96" Description="bit" Label="LockoutEnabled" />
-    <Node Id="dbo.AspNetUsers_LockoutEndDateUtc" Category="Field Optional" Bounds="863.042357940449,1544.57917454275,124.716666666667,25.96" Description="datetime" Label="LockoutEndDateUtc" />
-    <Node Id="dbo.AspNetUsers_PasswordHash" Category="Field Optional" Bounds="840.395629424824,1376.69916965993,96.4666666666667,25.96" Description="ntext" Label="PasswordHash" />
-    <Node Id="dbo.AspNetUsers_PhoneNumber" Category="Field Optional" Bounds="966.862658640319,1376.69916965993,97.2133333333334,25.96" Description="ntext" Label="PhoneNumber" />
-    <Node Id="dbo.AspNetUsers_PhoneNumberConfirmed" Category="Field" Bounds="714.522507680032,1600.53950169118,152.98,25.96" Description="bit" Label="PhoneNumberConfirmed" />
-    <Node Id="dbo.AspNetUsers_SecurityStamp" Category="Field Optional" Bounds="714.522404734069,1376.69916965993,95.8733333333333,25.96" Description="ntext" Label="SecurityStamp" />
-    <Node Id="dbo.AspNetUsers_TwoFactorEnabled" Category="Field" Bounds="714.522384389017,1488.61933567556,117.04,25.96" Description="bit" Label="TwoFactorEnabled" />
-    <Node Id="dbo.AspNetUsers_UserName" Category="Field" Bounds="974.682034861022,1320.73920872243,75.4833333333333,25.96" Description="nvarchar(256)" Label="UserName" />
-    <Node Id="dbo.CommentRatings" Category="Table" Bounds="-759.689333542996,364.083570018007,294.210063069661,253.840551672363" Group="Expanded" Label="dbo.CommentRatings" UseManualLocation="True" />
-    <Node Id="dbo.CommentRatings_CommentId" Category="Field Foreign" Bounds="-739.689298895374,571.96401086044,82.5266666666666,25.9599999999999" Description="nvarchar(128)" Label="CommentId" />
-    <Node Id="dbo.CommentRatings_CreatedAt" Category="Field" Bounds="-558.682600490426,460.043844844815,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.CommentRatings_Deleted" Category="Field" Bounds="-649.965978175973,460.043898250577,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.CommentRatings_Id" Category="Field Primary" Bounds="-739.689301743681,404.083727504727,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.CommentRatings_Rating" Category="Field" Bounds="-575.642605373239,404.083796169278,54.1133333333332,25.96" Description="int" Label="Rating" />
-    <Node Id="dbo.CommentRatings_UpdatedAt" Category="Field Optional" Bounds="-739.689327581898,516.003927852628,77.6866666666666,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.CommentRatings_UserId" Category="Field Foreign" Bounds="-659.689304388538,404.083727504727,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.CommentRatings_Version" Category="Field" Bounds="-739.689304591989,460.043814327237,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Comments" Category="Table" Bounds="-420.202806443387,564.750324076957,263.77003499349,253.840513525391" Group="Expanded" Label="dbo.Comments" />
-    <Node Id="dbo.Comments_CommentText" Category="Field Optional" Bounds="-400.202797023629,772.631399776456,94.4033333333333,25.96" Description="ntext" Label="CommentText" />
-    <Node Id="dbo.Comments_CreatedAt" Category="Field" Bounds="-400.202803127145,716.671316768643,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Comments_Deleted" Category="Field" Bounds="-400.202794582223,660.711203243252,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Comments_ExerciseId" Category="Field Foreign" Bounds="-308.919392889515,660.711203243252,72.1066666666667,25.96" Description="nvarchar(128)" Label="ExerciseId" />
-    <Node Id="dbo.Comments_Id" Category="Field Primary" Bounds="-400.202790513213,604.75112023544,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Comments_UpdatedAt" Category="Field Optional" Bounds="-296.999431952015,716.671316768643,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Comments_UserId" Category="Field Foreign" Bounds="-320.20277789928,604.75112023544,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.Comments_Version" Category="Field" Bounds="-236.156101466989,604.75112023544,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.CourseProgresses" Category="Table" Bounds="735.356582273814,630.75891397223,294.75334391276,253.840590165195" Group="Expanded" Label="dbo.CourseProgresses" />
-    <Node Id="dbo.CourseProgresses_CourseId" Category="Field Foreign" Bounds="943.056431491995,782.679312374112,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
-    <Node Id="dbo.CourseProgresses_CreatedAt" Category="Field" Bounds="755.356675632621,838.639349605557,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.CourseProgresses_Deleted" Category="Field" Bounds="755.356653659965,782.679251338956,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.CourseProgresses_Id" Category="Field Primary" Bounds="863.043303236788,670.759115840909,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.CourseProgresses_IsDone" Category="Field" Bounds="839.403270684704,726.719229366299,56.7966666666666,25.96" Description="bit" Label="IsDone" />
-    <Node Id="dbo.CourseProgresses_IsStarted" Category="Field" Bounds="846.639962579236,782.679312374112,66.4166666666667,25.96" Description="bit" Label="IsStarted" />
-    <Node Id="dbo.CourseProgresses_Name" Category="Field Optional" Bounds="943.043358575329,670.759115840909,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.CourseProgresses_UpdatedAt" Category="Field Optional" Bounds="755.356647149547,670.759054805752,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.CourseProgresses_UserId" Category="Field Foreign" Bounds="755.356639825329,726.719168331143,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.CourseProgresses_Version" Category="Field" Bounds="926.199886081839,726.719229366299,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Courses" Category="Table" Bounds="368.54878109685,928.004512447358,334.676689724394,253.840561035157" Group="Expanded" Label="dbo.Courses" />
-    <Node Id="dbo.Courses_CreatedAt" Category="Field" Bounds="489.628770359183,1079.92481103134,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Courses_Days" Category="Field" Bounds="468.54879640085,968.004645015713,50.0000000000001,25.96" Description="int" Label="Days" />
-    <Node Id="dbo.Courses_Deleted" Category="Field" Bounds="562.318689792777,1023.96472802353,61.2833333333333,25.9600000000003" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Courses_Description" Category="Field Optional" Bounds="388.548777683402,1135.88495507431,80.2533333333333,25.96" Description="ntext" Label="Description" />
-    <Node Id="dbo.Courses_Id" Category="Field Primary" Bounds="388.54879640085,968.004645015713,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Courses_Image" Category="Field Optional" Bounds="630.245441908663,968.004645015713,52.98,25.96" Description="ntext" Label="Image" />
-    <Node Id="dbo.Courses_Keywords" Category="Field Optional" Bounds="388.548774428194,1079.92481103134,71.0799999999999,25.96" Description="ntext" Label="Keywords" />
-    <Node Id="dbo.Courses_Name" Category="Field Optional" Bounds="548.548790704235,968.004645015713,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.Courses_UpdatedAt" Category="Field Optional" Bounds="592.832111016735,1079.92499413681,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Courses_UserId" Category="Field Foreign" Bounds="388.548778497204,1023.96472802353,54.0466666666666,25.9600000000003" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.Courses_Version" Category="Field" Bounds="472.595454929496,1023.96472802353,59.7233333333335,25.9600000000003" Description="rowversion" Label="Version" />
-    <Node Id="dbo.ExerciseStudents" Category="Table" Bounds="-313.251961269118,848.590937602348,293.113376100779,253.840544042969" Group="Expanded" Label="dbo.ExerciseStudents" />
-    <Node Id="dbo.ExerciseStudents_CreatedAt" Category="Field" Bounds="-293.251936427926,1000.51117577743,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.ExerciseStudents_Deleted" Category="Field" Bounds="-203.528600246286,944.55109276962,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.ExerciseStudents_ExerciseId" Category="Field Foreign" Bounds="-112.245259588734,944.55109276962,72.1066666666667,25.96" Description="nvarchar(128)" Label="ExerciseId" />
-    <Node Id="dbo.ExerciseStudents_Id" Category="Field Primary" Bounds="-293.251923813994,888.590948726651,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.ExerciseStudents_IsDone" Category="Field" Bounds="-129.205249823108,888.590948726651,56.7966666666666,25.96" Description="bit" Label="IsDone" />
-    <Node Id="dbo.ExerciseStudents_StudentAnswer" Category="Field Optional" Bounds="-293.251908758655,1056.47125878525,100.176666666667,25.9599999999998" Description="ntext" Label="StudentAnswer" />
-    <Node Id="dbo.ExerciseStudents_UpdatedAt" Category="Field Optional" Bounds="-190.048626287952,1000.51117577743,77.6866666666666,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.ExerciseStudents_UserId" Category="Field Foreign" Bounds="-213.251911200062,888.590948726651,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.ExerciseStudents_Version" Category="Field" Bounds="-293.251926662301,944.55109276962,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Exercises" Category="Table" Bounds="-754.61463786417,1066.84198290634,331.696666666667,253.840561035157" Group="Expanded" Label="dbo.Exercises" />
-    <Node Id="dbo.Exercises_Answer" Category="Field Optional" Bounds="-567.584577215687,1162.80219140243,58.7466666666667,25.96" Description="ntext" Label="Answer" />
-    <Node Id="dbo.Exercises_CreatedAt" Category="Field" Bounds="-636.614561549997,1274.72241845321,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Exercises_Deleted" Category="Field" Bounds="-644.891225368356,1218.76227441024,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Exercises_Id" Category="Field Primary" Bounds="-734.614564194853,1106.84210839462,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Exercises_Image" Category="Field Optional" Bounds="-734.614558701689,1162.80225243759,52.98,25.96" Description="ntext" Label="Image" />
-    <Node Id="dbo.Exercises_LessonId" Category="Field Foreign" Bounds="-553.607867824411,1218.76227441024,66.1933333333334,25.96" Description="nvarchar(128)" Label="LessonId" />
-    <Node Id="dbo.Exercises_Name" Category="Field" Bounds="-494.614600409046,1106.84210839462,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.Exercises_Question" Category="Field Optional" Bounds="-734.614564194853,1274.72241845321,68,25.96" Description="ntext" Label="Question" />
-    <Node Id="dbo.Exercises_Sound" Category="Field Optional" Bounds="-651.63457457083,1162.80225243759,54.0500000000002,25.96" Description="ntext" Label="Sound" />
-    <Node Id="dbo.Exercises_Text" Category="Field Optional" Bounds="-574.614594712431,1106.84210839462,50,25.96" Description="ntext" Label="Text" />
-    <Node Id="dbo.Exercises_Type" Category="Field" Bounds="-654.614564194853,1106.84210839462,50,25.96" Description="ntext" Label="Type" />
-    <Node Id="dbo.Exercises_UpdatedAt" Category="Field Optional" Bounds="-533.411236151234,1274.72241845321,77.6866666666666,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Exercises_Version" Category="Field" Bounds="-734.614567043161,1218.7623354454,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.LessonProgresses" Category="Table" Bounds="51.3485807432976,1152.16573036728,287.200080566407,253.840489770508" Group="Expanded" Label="dbo.LessonProgresses" />
-    <Node Id="dbo.LessonProgresses_CreatedAt" Category="Field" Bounds="167.765367038871,1304.08600487899,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.LessonProgresses_Deleted" Category="Field" Bounds="161.071985691214,1248.12592187118,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.LessonProgresses_Id" Category="Field Primary" Bounds="71.3486010883498,1192.16583886337,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.LessonProgresses_IsDone" Category="Field" Bounds="235.395336114392,1192.16583886337,56.7966666666666,25.96" Description="bit" Label="IsDone" />
-    <Node Id="dbo.LessonProgresses_IsStarted" Category="Field" Bounds="71.3485807432978,1304.08606591415,66.4166666666667,25.96" Description="bit" Label="IsStarted" />
-    <Node Id="dbo.LessonProgresses_LessonId" Category="Field Foreign" Bounds="252.355327976371,1248.12592187118,66.1933333333334,25.96" Description="nvarchar(128)" Label="LessonId" />
-    <Node Id="dbo.LessonProgresses_UpdatedAt" Category="Field Optional" Bounds="71.3485905089226,1360.04605736923,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.LessonProgresses_UserId" Category="Field Foreign" Bounds="151.348583184704,1192.16583886337,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.LessonProgresses_Version" Category="Field" Bounds="71.3486287576206,1248.12592187118,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Lessons" Category="Table" Bounds="-789.709096679052,1364.14609180557,303.733299560547,253.8405" Group="Expanded" Label="dbo.Lessons" UseManualLocation="True" />
-    <Node Id="dbo.Lessons_CreatedAt" Category="Field" Bounds="-579.179050626539,1460.10629520401,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Lessons_Deleted" Category="Field" Bounds="-769.70894930818,1460.10629520401,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Lessons_Id" Category="Field Primary" Bounds="-769.708945239169,1404.1462121962,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Lessons_Name" Category="Field Optional" Bounds="-689.708950935784,1404.1462121962,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.Lessons_Section2Id" Category="Field Foreign" Bounds="-769.708941170159,1516.06637821182,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section2Id" />
-    <Node Id="dbo.Lessons_Section3Id" Category="Field Foreign" Bounds="-663.992266365471,1516.06637821182,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section3Id" />
-    <Node Id="dbo.Lessons_SectionId" Category="Field Foreign" Bounds="-678.425692879143,1460.10629520401,69.2466666666667,25.96" Description="nvarchar(128)" Label="SectionId" />
-    <Node Id="dbo.Lessons_UpdatedAt" Category="Field Optional" Bounds="-769.708955818597,1572.02646121964,77.6866666666666,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Lessons_Version" Category="Field" Bounds="-608.012292814039,1404.1462121962,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Pairs" Category="Table" Bounds="-1201.11844493204,1079.89272897797,277.686719301463,253.840544042968" Group="Expanded" Label="dbo.Pairs" />
-    <Node Id="dbo.Pairs_CreatedAt" Category="Field" Bounds="-1079.01170014558,1175.85297265243,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Pairs_Deleted" Category="Field" Bounds="-1091.39503625092,1119.89282860946,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Pairs_Equal" Category="Field Optional" Bounds="-1181.11837126272,1287.77313866806,50,25.96" Description="ntext" Label="Equal" />
-    <Node Id="dbo.Pairs_ExerciseId" Category="Field Foreign" Bounds="-1181.11837131359,1175.85297265243,72.1066666666668,25.96" Description="nvarchar(128)" Label="ExerciseId" />
-    <Node Id="dbo.Pairs_Id" Category="Field Primary" Bounds="-1073.43170286673,1231.81299462509,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Pairs_UpdatedAt" Category="Field Optional" Bounds="-1181.11837039806,1231.81305566024,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Pairs_Value" Category="Field Optional" Bounds="-993.431702866728,1231.81299462509,50,25.96" Description="ntext" Label="Value" />
-    <Node Id="dbo.Pairs_Version" Category="Field" Bounds="-1181.11837220368,1119.89282860946,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Section2s" Category="Table" Bounds="28.5060349919117,1443.20381206524,261.420054974477,197.880522070313" Group="Expanded" Label="dbo.Section2s" />
-    <Node Id="dbo.Section2s_CreatedAt" Category="Field" Bounds="48.5060896951206,1595.12406029892,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Section2s_Deleted" Category="Field" Bounds="48.5060677224644,1539.1639772911,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Section2s_Id" Category="Field Primary" Bounds="48.5060717914748,1483.20389428329,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Section2s_Name" Category="Field Optional" Bounds="128.50606609486,1483.20389428329,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.Section2s_SectionId" Category="Field Foreign" Bounds="139.789415704235,1539.1639772911,69.2466666666667,25.96" Description="nvarchar(128)" Label="SectionId" />
-    <Node Id="dbo.Section2s_UpdatedAt" Category="Field Optional" Bounds="151.70930828236,1595.12406029892,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Section2s_Version" Category="Field" Bounds="210.202754734183,1483.20377221298,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Section3s" Category="Table" Bounds="-355.514634272997,1525.19397946462,223.403338216145,197.880505078125" Group="Expanded" Label="dbo.Section3s" UseManualLocation="True" />
-    <Node Id="dbo.Section3s_CreatedAt" Category="Field" Bounds="-244.231245882557,1621.15398989534,73.2033333333333,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Section3s_Deleted" Category="Field" Bounds="-335.514585421131,1621.15398989534,61.2833333333334,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Section3s_Id" Category="Field Primary" Bounds="-335.514581352121,1565.19390688753,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Section3s_Section2Id" Category="Field Foreign" Bounds="-335.51457728311,1677.11419497347,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section2Id" />
-    <Node Id="dbo.Section3s_UpdatedAt" Category="Field Optional" Bounds="-229.797924756255,1677.11419497347,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Section3s_Version" Category="Field" Bounds="-255.514568941639,1565.19390688753,59.7233333333333,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.SectionProgresses" Category="Table" Bounds="368.548710980191,1211.84509067001,287.42349275287,253.84057109375" Group="Expanded" Label="dbo.SectionProgresses" />
-    <Node Id="dbo.SectionProgresses_CreatedAt" Category="Field" Bounds="487.795457370902,1363.76541772079,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.SectionProgresses_Deleted" Category="Field" Bounds="478.272058933402,1307.80533471298,61.2833333333332,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.SectionProgresses_Id" Category="Field Primary" Bounds="388.548674330537,1251.84519067001,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.SectionProgresses_IsDone" Category="Field" Bounds="552.595470391735,1251.84519067001,56.7966666666666,25.96" Description="bit" Label="IsDone" />
-    <Node Id="dbo.SectionProgresses_IsStarted" Category="Field" Bounds="569.555428887829,1307.80533471298,66.416666666667,25.96" Description="bit" Label="IsStarted" />
-    <Node Id="dbo.SectionProgresses_SectionId" Category="Field Foreign" Bounds="388.548754083141,1363.76541772079,69.2466666666669,25.96" Description="nvarchar(128)" Label="SectionId" />
-    <Node Id="dbo.SectionProgresses_UpdatedAt" Category="Field Optional" Bounds="388.548724786267,1419.72556176376,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.SectionProgresses_UserId" Category="Field Foreign" Bounds="468.548717462048,1251.84519067001,54.0466666666665,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.SectionProgresses_Version" Category="Field" Bounds="388.548763034964,1307.80533471298,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Sections" Category="Table" Bounds="-240.071455470895,1132.43160879375,261.420028889974,197.8804" Group="Expanded" Label="dbo.Sections" />
-    <Node Id="dbo.Sections_CourseId" Category="Field Foreign" Bounds="-128.788111965036,1228.39166894149,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
-    <Node Id="dbo.Sections_CreatedAt" Category="Field" Bounds="-220.071455470895,1284.35175194931,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Sections_Deleted" Category="Field" Bounds="-220.071446925973,1228.39166894149,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Sections_Id" Category="Field Primary" Bounds="-220.071442856963,1172.43158593368,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Sections_Name" Category="Field Optional" Bounds="-140.071448553577,1172.43158593368,51.6966666666667,25.96" Description="ntext" Label="Name" />
-    <Node Id="dbo.Sections_UpdatedAt" Category="Field Optional" Bounds="-116.868114813343,1284.35175194931,77.6866666666666,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Sections_Version" Category="Field" Bounds="-58.3747599142544,1172.43158593368,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Spaces" Category="Table" Bounds="-709.926213771676,659.29105929794,259.723365071615,197.880411791992" Group="Expanded" Label="dbo.Spaces" />
-    <Node Id="dbo.Spaces_CreatedAt" Category="Field" Bounds="-689.926207057809,699.29115929794,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Spaces_Deleted" Category="Field" Bounds="-689.926213771676,811.211371089932,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Spaces_ExerciseId" Category="Field Foreign" Bounds="-598.642842596546,811.211371089932,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
-    <Node Id="dbo.Spaces_Id" Category="Field Primary" Bounds="-689.926209702666,755.251272823331,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Spaces_UpdatedAt" Category="Field Optional" Bounds="-586.722881659046,699.29115929794,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Spaces_Value" Category="Field Optional" Bounds="-609.926194443877,755.251272823331,50,25.96" Description="ntext" Label="Value" />
-    <Node Id="dbo.Spaces_Version" Category="Field" Bounds="-529.926182033395,755.251272823331,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.StudentCourses" Category="Table" Bounds="441.58650874216,583.971734053803,263.770013834635,197.880424853514" Group="Expanded" Label="dbo.StudentCourses" />
-    <Node Id="dbo.StudentCourses_CourseId" Category="Field Foreign" Bounds="552.86984701934,679.931936885831,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
-    <Node Id="dbo.StudentCourses_CreatedAt" Category="Field" Bounds="461.586534031058,735.892050411221,73.2033333333333,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.StudentCourses_Deleted" Category="Field" Bounds="461.586512058402,679.931936885831,61.2833333333332,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.StudentCourses_Id" Category="Field Primary" Bounds="461.586516127412,623.971853878018,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.StudentCourses_UpdatedAt" Category="Field Optional" Bounds="564.78987468861,735.892050411221,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.StudentCourses_UserId" Category="Field Foreign" Bounds="541.586498223767,623.971853878018,54.0466666666665,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.StudentCourses_Version" Category="Field" Bounds="625.633174656058,623.971853878018,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Users" Category="Table" Bounds="-18.2791162578405,431.566377040454,339.723358154312,309.800697505696" Group="Expanded" Label="dbo.Users" UseManualLocation="True" />
-    <Node Id="dbo.Users_AvatarPath" Category="Field Optional" Bounds="104.924141452933,583.486715938565,77.6233333333332,25.96" Description="nvarchar(100)" Label="AvatarPath" />
-    <Node Id="dbo.Users_CompletedCoursesCount" Category="Field" Bounds="1.7209049620476,695.406912471768,152.436666666667,25.96" Description="int" Label="CompletedCoursesCount" />
-    <Node Id="dbo.Users_CreatedAt" Category="Field" Bounds="1.72093344512064,583.486715938565,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Users_DateOfBirth" Category="Field" Bounds="1.72088705840201,639.446829463956,82.4833333333333,25.96" Description="datetime" Label="DateOfBirth" />
-    <Node Id="dbo.Users_Deleted" Category="Field" Bounds="1.72091147246442,527.526632930753,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Users_Email" Category="Field Optional" Bounds="81.7209155414748,471.566542293546,50,25.96" Description="nvarchar(100)" Label="Email" />
-    <Node Id="dbo.Users_FullName" Category="Field Optional" Bounds="190.180893568818,527.526632930753,70.1600000000001,25.96" Description="nvarchar(100)" Label="FullName" />
-    <Node Id="dbo.Users_Id" Category="Field Primary" Bounds="1.72091554147482,471.566542293546,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Users_Login" Category="Field" Bounds="161.720915541475,471.566542293546,50,25.96" Description="nvarchar(100)" Label="Login" />
-    <Node Id="dbo.Users_RegisterDate" Category="Field" Bounds="114.204204115694,639.446829463956,87.9000000000001,25.96" Description="datetime" Label="RegisterDate" />
-    <Node Id="dbo.Users_UpdatedAt" Category="Field Optional" Bounds="212.547565118298,583.486654903409,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Users_UserRole" Category="Field" Bounds="93.0042252745477,527.526632930753,67.1766666666667,25.96" Description="int" Label="UserRole" />
-    <Node Id="dbo.Users_Version" Category="Field" Bounds="241.720943210746,471.566542293546,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="Database" Category="Database" Bounds="0,0,3350.66689785789,2346.27964659206" Group="Expanded" Label="" />
+    <Node Id="Universities" Bounds="40,363.84,1535.18716666667,1108.22094639191" Group="Expanded" UseManualLocation="True" />
+    <Node Id="dbo" Category="Schema" Bounds="20,40,3310.66689785789,2286.27964659206" Group="Expanded" Label="Teachme DB Model" LayoutSettings="ForceDirected" />
+    <Node Id="dbo.Answers" Category="Table" Bounds="3017.55356452455,1057.9821810486,293.113333333334,197.88" Group="Expanded" Label="dbo.Answers" UseManualLocation="True" />
+    <Node Id="dbo.Answers_CreatedAt" Category="Field" Bounds="3037.55356452455,1209.9021810486,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Answers_Deleted" Category="Field" Bounds="3127.27689785789,1153.9421810486,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Answers_ExerciseId" Category="Field Foreign" Bounds="3218.56023119122,1153.9421810486,72.106666666667,25.96" Description="nvarchar(128)" Label="ExerciseId" />
+    <Node Id="dbo.Answers_Id" Category="Field Primary" Bounds="3037.55356452455,1097.9821810486,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Answers_IsRight" Category="Field" Bounds="3197.55356452455,1097.9821810486,56.2933333333335,25.96" Description="bit" Label="IsRight" />
+    <Node Id="dbo.Answers_Title" Category="Field Optional" Bounds="3117.55356452455,1097.9821810486,50,25.96" Description="ntext" Label="Title" />
+    <Node Id="dbo.Answers_UpdatedAt" Category="Field Optional" Bounds="3140.75689785789,1209.9021810486,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Answers_Version" Category="Field" Bounds="3037.55356452455,1153.9421810486,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.AspNetUsers" Category="Table" Bounds="40,1996.47964659206,389.553333333332,309.8" Group="Expanded" Label="dbo.AspNetUsers" UseManualLocation="True" />
+    <Node Id="dbo.AspNetUsers_AccessFailedCount" Category="Field" Bounds="207.04,2204.35964659206,118.52,25.96" Description="int" Label="AccessFailedCount" />
+    <Node Id="dbo.AspNetUsers_Email" Category="Field Optional" Bounds="60,2036.47964659206,50,25.96" Description="nvarchar(256)" Label="Email" />
+    <Node Id="dbo.AspNetUsers_EmailConfirmed" Category="Field" Bounds="60,2148.39964659206,104.093333333332,25.96" Description="bit" Label="EmailConfirmed" />
+    <Node Id="dbo.AspNetUsers_FullName" Category="Field Optional" Bounds="220,2036.47964659206,70.1599999999999,25.96" Description="ntext" Label="FullName" />
+    <Node Id="dbo.AspNetUsers_Id" Category="Field Primary" Bounds="140,2036.47964659206,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.AspNetUsers_LockoutEnabled" Category="Field" Bounds="194.093333333332,2148.39964659206,104.343333333332,25.96" Description="bit" Label="LockoutEnabled" />
+    <Node Id="dbo.AspNetUsers_LockoutEndDateUtc" Category="Field Optional" Bounds="60,2260.31964659206,124.716666666665,25.96" Description="datetime" Label="LockoutEndDateUtc" />
+    <Node Id="dbo.AspNetUsers_PasswordHash" Category="Field Optional" Bounds="185.873333333333,2092.43964659206,96.4666666666662,25.96" Description="ntext" Label="PasswordHash" />
+    <Node Id="dbo.AspNetUsers_PhoneNumber" Category="Field Optional" Bounds="312.339999999999,2092.43964659206,97.2133333333331,25.96" Description="ntext" Label="PhoneNumber" />
+    <Node Id="dbo.AspNetUsers_PhoneNumberConfirmed" Category="Field" Bounds="214.716666666665,2260.31964659206,152.98,25.96" Description="bit" Label="PhoneNumberConfirmed" />
+    <Node Id="dbo.AspNetUsers_SecurityStamp" Category="Field Optional" Bounds="60,2092.43964659206,95.873333333333,25.96" Description="ntext" Label="SecurityStamp" />
+    <Node Id="dbo.AspNetUsers_TwoFactorEnabled" Category="Field" Bounds="60,2204.35964659206,117.04,25.96" Description="bit" Label="TwoFactorEnabled" />
+    <Node Id="dbo.AspNetUsers_UserName" Category="Field" Bounds="320.16,2036.47964659206,75.4833333333336,25.96" Description="nvarchar(256)" Label="UserName" />
+    <Node Id="dbo.CommentRatings" Category="Table" Bounds="2078.97587245277,323.446900867129,258.16,253.84" Group="Expanded" Label="dbo.CommentRatings" UseManualLocation="True" />
+    <Node Id="dbo.CommentRatings_CommentId" Category="Field Foreign" Bounds="2098.97587245277,531.326900867129,82.5266666666666,25.96" Description="nvarchar(128)" Label="CommentId" />
+    <Node Id="dbo.CommentRatings_CreatedAt" Category="Field" Bounds="2098.97587245277,475.366900867129,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.CommentRatings_Deleted" Category="Field" Bounds="2188.6992057861,419.406900867129,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.CommentRatings_Id" Category="Field Primary" Bounds="2098.97587245277,363.446900867129,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.CommentRatings_Rating" Category="Field" Bounds="2263.02253911943,363.446900867129,54.1133333333332,25.96" Description="int" Label="Rating" />
+    <Node Id="dbo.CommentRatings_UpdatedAt" Category="Field Optional" Bounds="2202.1792057861,475.366900867129,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.CommentRatings_UserId" Category="Field Foreign" Bounds="2178.97587245277,363.446900867129,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.CommentRatings_Version" Category="Field" Bounds="2098.97587245277,419.406900867129,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Comments" Category="Table" Bounds="2243.19792027071,664.248541835736,263.77,253.84" Group="Expanded" Label="dbo.Comments" />
+    <Node Id="dbo.Comments_CommentText" Category="Field Optional" Bounds="2263.19792027071,872.128541835736,94.4033333333332,25.96" Description="ntext" Label="CommentText" />
+    <Node Id="dbo.Comments_CreatedAt" Category="Field" Bounds="2263.19792027071,816.168541835736,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Comments_Deleted" Category="Field" Bounds="2263.19792027071,760.208541835736,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Comments_ExerciseId" Category="Field Foreign" Bounds="2354.48125360404,760.208541835736,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
+    <Node Id="dbo.Comments_Id" Category="Field Primary" Bounds="2263.19792027071,704.248541835736,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Comments_UpdatedAt" Category="Field Optional" Bounds="2366.40125360404,816.168541835736,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Comments_UserId" Category="Field Foreign" Bounds="2343.19792027071,704.248541835736,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.Comments_Version" Category="Field" Bounds="2427.24458693738,704.248541835736,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.CourseProgresses" Category="Table" Bounds="1163.25111667943,80,306.673333333334,253.84" Group="Expanded" Label="dbo.CourseProgresses" UseManualLocation="True" />
+    <Node Id="dbo.CourseProgresses_CourseId" Category="Field Foreign" Bounds="1279.66778334609,231.92,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
+    <Node Id="dbo.CourseProgresses_CreatedAt" Category="Field" Bounds="1376.72111667943,231.92,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.CourseProgresses_Deleted" Category="Field" Bounds="1359.77111667943,175.96,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.CourseProgresses_Id" Category="Field Primary" Bounds="1183.25111667943,120,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.CourseProgresses_IsDone" Category="Field" Bounds="1183.25111667943,175.96,56.7966666666666,25.96" Description="bit" Label="IsDone" />
+    <Node Id="dbo.CourseProgresses_IsStarted" Category="Field" Bounds="1183.25111667943,231.92,66.416666666667,25.96" Description="bit" Label="IsStarted" />
+    <Node Id="dbo.CourseProgresses_Name" Category="Field Optional" Bounds="1263.25111667943,120,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.CourseProgresses_UpdatedAt" Category="Field Optional" Bounds="1183.25111667943,287.88,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.CourseProgresses_UserId" Category="Field Foreign" Bounds="1344.94778334609,120,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.CourseProgresses_Version" Category="Field" Bounds="1270.04778334609,175.96,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Courses" Category="Table" Bounds="1299.7244098488,1502.06094639191,331.143333333333,253.84" Group="Expanded" Label="dbo.Courses" />
+    <Node Id="dbo.Courses_CreatedAt" Category="Field" Bounds="1319.7244098488,1709.94094639191,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Courses_Days" Category="Field" Bounds="1319.7244098488,1542.06094639191,50,25.96" Description="int" Label="Days" />
+    <Node Id="dbo.Courses_Deleted" Category="Field" Bounds="1409.44774318213,1653.98094639191,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Courses_Description" Category="Field Optional" Bounds="1530.6144098488,1709.94094639191,80.2533333333331,25.96" Description="ntext" Label="Description" />
+    <Node Id="dbo.Courses_Id" Category="Field Primary" Bounds="1399.7244098488,1542.06094639191,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Courses_Image" Category="Field Optional" Bounds="1402.22107651546,1598.02094639191,52.98,25.96" Description="ntext" Label="Image" />
+    <Node Id="dbo.Courses_Keywords" Category="Field Optional" Bounds="1500.73107651546,1653.98094639191,71.0799999999999,25.96" Description="ntext" Label="Keywords" />
+    <Node Id="dbo.Courses_Name" Category="Field Optional" Bounds="1479.7244098488,1542.06094639191,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.Courses_Status" Category="Field" Bounds="1319.7244098488,1598.02094639191,52.4966666666669,25.96" Description="int" Label="Status" />
+    <Node Id="dbo.Courses_UpdatedAt" Category="Field Optional" Bounds="1422.92774318213,1709.94094639191,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Courses_UserId" Category="Field Foreign" Bounds="1485.20107651546,1598.02094639191,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.Courses_Version" Category="Field" Bounds="1319.7244098488,1653.98094639191,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.ExerciseStudents" Category="Table" Bounds="2140.63222965901,948.088600476098,293.113333333333,253.84" Group="Expanded" Label="dbo.ExerciseStudents" />
+    <Node Id="dbo.ExerciseStudents_CreatedAt" Category="Field" Bounds="2160.63222965901,1100.0086004761,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.ExerciseStudents_Deleted" Category="Field" Bounds="2250.35556299234,1044.0486004761,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.ExerciseStudents_ExerciseId" Category="Field Foreign" Bounds="2341.63889632567,1044.0486004761,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
+    <Node Id="dbo.ExerciseStudents_Id" Category="Field Primary" Bounds="2160.63222965901,988.088600476098,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.ExerciseStudents_IsDone" Category="Field" Bounds="2324.67889632567,988.088600476098,56.7966666666666,25.96" Description="bit" Label="IsDone" />
+    <Node Id="dbo.ExerciseStudents_StudentAnswer" Category="Field Optional" Bounds="2160.63222965901,1155.9686004761,100.176666666667,25.96" Description="ntext" Label="StudentAnswer" />
+    <Node Id="dbo.ExerciseStudents_UpdatedAt" Category="Field Optional" Bounds="2263.83556299234,1100.0086004761,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.ExerciseStudents_UserId" Category="Field Foreign" Bounds="2240.63222965901,988.088600476098,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.ExerciseStudents_Version" Category="Field" Bounds="2160.63222965901,1044.0486004761,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Exercises" Category="Table" Bounds="2579.8454988181,1057.98201678273,348.273333333334,309.8" Group="Expanded" Label="dbo.Exercises" UseManualLocation="True" />
+    <Node Id="dbo.Exercises_Answer" Category="Field Optional" Bounds="2849.37216548477,1153.94201678273,58.7466666666669,25.96" Description="ntext" Label="Answer" />
+    <Node Id="dbo.Exercises_CreatedAt" Category="Field" Bounds="2800.00883215144,1265.86201678273,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Exercises_Deleted" Category="Field" Bounds="2689.56883215144,1209.90201678273,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Exercises_Id" Category="Field Primary" Bounds="2599.8454988181,1097.98201678273,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Exercises_Image" Category="Field Optional" Bounds="2682.34216548477,1153.94201678273,52.9799999999996,25.96" Description="ntext" Label="Image" />
+    <Node Id="dbo.Exercises_LessonId" Category="Field Foreign" Bounds="2780.85216548477,1209.90201678273,66.1933333333332,25.96" Description="nvarchar(128)" Label="LessonId" />
+    <Node Id="dbo.Exercises_Name" Category="Field" Bounds="2839.8454988181,1097.98201678273,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.Exercises_OriginalId" Category="Field Optional" Bounds="2697.8454988181,1265.86201678273,72.1633333333334,25.96" Description="ntext" Label="OriginalId" />
+    <Node Id="dbo.Exercises_Question" Category="Field Optional" Bounds="2599.8454988181,1265.86201678273,68,25.96" Description="ntext" Label="Question" />
+    <Node Id="dbo.Exercises_Sound" Category="Field Optional" Bounds="2765.32216548477,1153.94201678273,54.0500000000002,25.96" Description="ntext" Label="Sound" />
+    <Node Id="dbo.Exercises_Status" Category="Field" Bounds="2599.8454988181,1153.94201678273,52.4966666666669,25.96" Description="int" Label="Status" />
+    <Node Id="dbo.Exercises_Text" Category="Field Optional" Bounds="2679.8454988181,1097.98201678273,50,25.96" Description="ntext" Label="Text" />
+    <Node Id="dbo.Exercises_Type" Category="Field" Bounds="2759.8454988181,1097.98201678273,50,25.96" Description="ntext" Label="Type" />
+    <Node Id="dbo.Exercises_UpdatedAt" Category="Field Optional" Bounds="2599.8454988181,1321.82201678273,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Exercises_Version" Category="Field" Bounds="2599.8454988181,1209.90201678273,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Faculties" Category="Table" Bounds="60.0000000000001,920.128790233063,261.42,197.88" Group="Expanded" Label="dbo.Faculties" UseManualLocation="True" />
+    <Node Id="dbo.Faculties_CreatedAt" Category="Field" Bounds="171.283333333333,1016.08879023306,73.2033333333329,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Faculties_Deleted" Category="Field" Bounds="80.0000000000001,1016.08879023306,61.2833333333328,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Faculties_Id" Category="Field Primary" Bounds="80.0000000000001,960.128790233063,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Faculties_Name" Category="Field Optional" Bounds="160,960.128790233063,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.Faculties_UpdatedAt" Category="Field Optional" Bounds="80.0000000000001,1072.04879023306,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Faculties_Version" Category="Field" Bounds="241.696666666667,960.128790233063,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.GroupStudyPrograms" Category="Table" Bounds="874.586966666668,969.083207042803,177.833333333333,141.92" Group="Expanded" Label="dbo.GroupStudyPrograms" UseManualLocation="True" />
+    <Node Id="dbo.GroupStudyPrograms_GroupId" Category="Field Primary" Bounds="910.518633333334,1009.0832070428,63.54,25.96" Description="nvarchar(128)" Label="GroupId" />
+    <Node Id="dbo.GroupStudyPrograms_StudyProgramId" Category="Field Primary" Bounds="910.518633333334,1065.0432070428,105.97,25.96" Description="nvarchar(128)" Label="StudyProgramId" />
+    <Node Id="dbo.GroupUsers" Category="Table" Bounds="351.420100000001,862.04923240294,125.91,141.92" Group="Expanded" Label="dbo.GroupUsers" UseManualLocation="True" />
+    <Node Id="dbo.GroupUsers_GroupId" Category="Field Primary" Bounds="382.605100000001,958.00923240294,63.54,25.96" Description="nvarchar(128)" Label="GroupId" />
+    <Node Id="dbo.GroupUsers_UserId" Category="Field Primary" Bounds="382.605100000001,902.04923240294,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.Groups" Category="Table" Bounds="507.3302,770.141436074051,337.256666666667,253.84" Group="Expanded" Label="dbo.Groups" />
+    <Node Id="dbo.Groups_CreatedAt" Category="Field" Bounds="715.953533333334,866.101436074051,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Groups_Deleted" Category="Field" Bounds="527.3302,866.101436074051,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Groups_FacultyId" Category="Field Foreign" Bounds="618.613533333334,866.101436074051,67.3400000000001,25.96" Description="nvarchar(128)" Label="FacultyId" />
+    <Node Id="dbo.Groups_Id" Category="Field Primary" Bounds="527.3302,810.141436074051,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Groups_Name" Category="Field Optional" Bounds="607.3302,810.141436074051,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.Groups_SpecialtyId" Category="Field Foreign" Bounds="527.3302,922.061436074051,77.3000000000002,25.96" Description="nvarchar(128)" Label="SpecialtyId" />
+    <Node Id="dbo.Groups_StudyPeriodId" Category="Field Foreign" Bounds="643.426866666667,978.021436074052,94.5366666666669,25.96" Description="nvarchar(128)" Label="StudyPeriodId" />
+    <Node Id="dbo.Groups_UniversityId" Category="Field Foreign" Bounds="742.316866666667,922.061436074051,82.2700000000004,25.96" Description="nvarchar(128)" Label="UniversityId" />
+    <Node Id="dbo.Groups_UpdatedAt" Category="Field Optional" Bounds="634.630200000001,922.061436074051,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Groups_Version" Category="Field" Bounds="689.026866666667,810.141436074051,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Groups_YearOfStudy" Category="Field" Bounds="527.3302,978.021436074052,86.0966666666664,25.96" Description="int" Label="YearOfStudy" />
+    <Node Id="dbo.LessonProgresses" Category="Table" Bounds="1605.18726666667,1175.96856158336,305.813333333334,253.84" Group="Expanded" Label="dbo.LessonProgresses" />
+    <Node Id="dbo.LessonProgresses_CreatedAt" Category="Field" Bounds="1817.79726666667,1327.88856158336,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.LessonProgresses_Deleted" Category="Field" Bounds="1801.70726666667,1271.92856158336,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.LessonProgresses_Id" Category="Field Primary" Bounds="1625.18726666667,1215.96856158336,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.LessonProgresses_IsDone" Category="Field" Bounds="1625.18726666667,1271.92856158336,56.7966666666666,25.96" Description="bit" Label="IsDone" />
+    <Node Id="dbo.LessonProgresses_IsStarted" Category="Field" Bounds="1721.3806,1327.88856158336,66.416666666667,25.96" Description="bit" Label="IsStarted" />
+    <Node Id="dbo.LessonProgresses_LessonId" Category="Field Foreign" Bounds="1625.18726666667,1327.88856158336,66.1933333333332,25.96" Description="nvarchar(128)" Label="LessonId" />
+    <Node Id="dbo.LessonProgresses_Name" Category="Field Optional" Bounds="1705.18726666667,1215.96856158336,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.LessonProgresses_UpdatedAt" Category="Field Optional" Bounds="1625.18726666667,1383.84856158336,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.LessonProgresses_UserId" Category="Field Foreign" Bounds="1786.88393333334,1215.96856158336,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.LessonProgresses_Version" Category="Field" Bounds="1711.98393333334,1271.92856158336,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Lessons" Category="Table" Bounds="2163.93011045105,1461.04763127331,303.733333333333,253.84" Group="Expanded" Label="dbo.Lessons" />
+    <Node Id="dbo.Lessons_CreatedAt" Category="Field" Bounds="2374.46011045105,1557.00763127331,73.2033333333329,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Lessons_Deleted" Category="Field" Bounds="2183.93011045105,1557.00763127331,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Lessons_Id" Category="Field Primary" Bounds="2183.93011045105,1501.04763127331,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Lessons_Name" Category="Field Optional" Bounds="2263.93011045105,1501.04763127331,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.Lessons_Section2Id" Category="Field Foreign" Bounds="2183.93011045105,1612.96763127331,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section2Id" />
+    <Node Id="dbo.Lessons_Section3Id" Category="Field Foreign" Bounds="2289.64677711771,1612.96763127331,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section3Id" />
+    <Node Id="dbo.Lessons_SectionId" Category="Field Foreign" Bounds="2275.21344378438,1557.00763127331,69.2466666666669,25.96" Description="nvarchar(128)" Label="SectionId" />
+    <Node Id="dbo.Lessons_UpdatedAt" Category="Field Optional" Bounds="2183.93011045105,1668.92763127331,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Lessons_Version" Category="Field" Bounds="2345.62677711771,1501.04763127331,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Pairs" Category="Table" Bounds="2919.682512895,830.102051525424,293.113333333333,197.88" Group="Expanded" Label="dbo.Pairs" UseManualLocation="True" />
+    <Node Id="dbo.Pairs_CreatedAt" Category="Field" Bounds="2939.682512895,982.022051525424,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Pairs_Deleted" Category="Field" Bounds="3029.40584622833,926.062051525424,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Pairs_Equal" Category="Field Optional" Bounds="2939.682512895,870.102051525424,50,25.96" Description="ntext" Label="Equal" />
+    <Node Id="dbo.Pairs_ExerciseId" Category="Field Foreign" Bounds="3120.68917956166,926.062051525424,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
+    <Node Id="dbo.Pairs_Id" Category="Field Primary" Bounds="3019.682512895,870.102051525424,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Pairs_UpdatedAt" Category="Field Optional" Bounds="3042.88584622833,982.022051525424,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Pairs_Value" Category="Field Optional" Bounds="3099.682512895,870.102051525424,50,25.96" Description="ntext" Label="Value" />
+    <Node Id="dbo.Pairs_Version" Category="Field" Bounds="2939.682512895,926.062051525424,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Section2s" Category="Table" Bounds="1841.48415987121,1459.80856158336,261.42,197.88" Group="Expanded" Label="dbo.Section2s" />
+    <Node Id="dbo.Section2s_CreatedAt" Category="Field" Bounds="1861.48415987121,1611.72856158336,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Section2s_Deleted" Category="Field" Bounds="1861.48415987121,1555.76856158336,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Section2s_Id" Category="Field Primary" Bounds="1861.48415987121,1499.80856158336,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Section2s_Name" Category="Field Optional" Bounds="1941.48415987121,1499.80856158336,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.Section2s_SectionId" Category="Field Foreign" Bounds="1952.76749320454,1555.76856158336,69.2466666666667,25.96" Description="nvarchar(128)" Label="SectionId" />
+    <Node Id="dbo.Section2s_UpdatedAt" Category="Field Optional" Bounds="1964.68749320455,1611.72856158336,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Section2s_Version" Category="Field" Bounds="2023.18082653788,1499.80856158336,59.7233333333336,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Section3s" Category="Table" Bounds="2068.5064707464,1768.59964659206,223.403333333334,197.88" Group="Expanded" Label="dbo.Section3s" />
+    <Node Id="dbo.Section3s_CreatedAt" Category="Field" Bounds="2179.78980407973,1864.55964659206,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Section3s_Deleted" Category="Field" Bounds="2088.5064707464,1864.55964659206,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Section3s_Id" Category="Field Primary" Bounds="2088.5064707464,1808.59964659206,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Section3s_Section2Id" Category="Field Foreign" Bounds="2088.5064707464,1920.51964659206,75.7166666666667,25.96" Description="nvarchar(128)" Label="Section2Id" />
+    <Node Id="dbo.Section3s_UpdatedAt" Category="Field Optional" Bounds="2194.22313741307,1920.51964659206,77.686666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Section3s_Version" Category="Field" Bounds="2168.5064707464,1808.59964659206,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.SectionProgresses" Category="Table" Bounds="1720.41343549183,1687.68856158336,308.866666666667,253.84" Group="Expanded" Label="dbo.SectionProgresses" />
+    <Node Id="dbo.SectionProgresses_CreatedAt" Category="Field" Bounds="1936.07676882516,1839.60856158336,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.SectionProgresses_Deleted" Category="Field" Bounds="1916.93343549183,1783.64856158336,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.SectionProgresses_Id" Category="Field Primary" Bounds="1740.41343549183,1727.68856158336,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.SectionProgresses_IsDone" Category="Field" Bounds="1740.41343549183,1783.64856158336,56.7966666666666,25.96" Description="bit" Label="IsDone" />
+    <Node Id="dbo.SectionProgresses_IsStarted" Category="Field" Bounds="1740.41343549183,1839.60856158336,66.4166666666665,25.96" Description="bit" Label="IsStarted" />
+    <Node Id="dbo.SectionProgresses_Name" Category="Field Optional" Bounds="1820.41343549183,1727.68856158336,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.SectionProgresses_SectionId" Category="Field Foreign" Bounds="1836.83010215849,1839.60856158336,69.2466666666667,25.96" Description="nvarchar(128)" Label="SectionId" />
+    <Node Id="dbo.SectionProgresses_UpdatedAt" Category="Field Optional" Bounds="1740.41343549183,1895.56856158336,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.SectionProgresses_UserId" Category="Field Foreign" Bounds="1902.11010215849,1727.68856158336,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.SectionProgresses_Version" Category="Field" Bounds="1827.21010215849,1783.64856158336,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Sections" Category="Table" Bounds="1941.0007,1231.92851463919,261.42,197.88" Group="Expanded" Label="dbo.Sections" />
+    <Node Id="dbo.Sections_CourseId" Category="Field Foreign" Bounds="2052.28403333334,1327.88851463919,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
+    <Node Id="dbo.Sections_CreatedAt" Category="Field" Bounds="1961.0007,1383.84851463919,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Sections_Deleted" Category="Field" Bounds="1961.0007,1327.88851463919,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Sections_Id" Category="Field Primary" Bounds="1961.0007,1271.92851463919,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Sections_Name" Category="Field Optional" Bounds="2041.0007,1271.92851463919,51.6966666666667,25.96" Description="ntext" Label="Name" />
+    <Node Id="dbo.Sections_UpdatedAt" Category="Field Optional" Bounds="2064.20403333334,1383.84851463919,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Sections_Version" Category="Field" Bounds="2122.69736666667,1271.92851463919,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Spaces" Category="Table" Bounds="2761.60719366709,602.222039403302,259.723333333333,197.88" Group="Expanded" Label="dbo.Spaces" UseManualLocation="True" />
+    <Node Id="dbo.Spaces_CreatedAt" Category="Field" Bounds="2781.60719366709,754.142039403302,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Spaces_Deleted" Category="Field" Bounds="2781.60719366709,698.182039403302,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Spaces_ExerciseId" Category="Field Foreign" Bounds="2872.89052700042,698.182039403302,72.1066666666666,25.96" Description="nvarchar(128)" Label="ExerciseId" />
+    <Node Id="dbo.Spaces_Id" Category="Field Primary" Bounds="2781.60719366709,642.222039403302,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Spaces_UpdatedAt" Category="Field Optional" Bounds="2884.81052700042,754.142039403302,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Spaces_Value" Category="Field Optional" Bounds="2861.60719366709,642.222039403302,50,25.96" Description="ntext" Label="Value" />
+    <Node Id="dbo.Spaces_Version" Category="Field" Bounds="2941.60719366709,642.222039403302,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Specialties" Category="Table" Bounds="60.0000000000008,692.248790233063,261.42,197.88" Group="Expanded" Label="dbo.Specialties" UseManualLocation="True" />
+    <Node Id="dbo.Specialties_CreatedAt" Category="Field" Bounds="171.283333333334,788.208790233063,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Specialties_Deleted" Category="Field" Bounds="80.0000000000008,788.208790233063,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Specialties_Description" Category="Field Optional" Bounds="187.686666666667,844.168790233063,80.2533333333331,25.96" Description="ntext" Label="Description" />
+    <Node Id="dbo.Specialties_Id" Category="Field Primary" Bounds="80.0000000000008,732.248790233063,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Specialties_Name" Category="Field Optional" Bounds="160.000000000001,732.248790233063,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.Specialties_UpdatedAt" Category="Field Optional" Bounds="80.0000000000008,844.168790233063,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Specialties_Version" Category="Field" Bounds="241.696666666668,732.248790233063,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.StudentCourses" Category="Table" Bounds="1499.92455001276,135.96,263.77,197.88" Group="Expanded" Label="dbo.StudentCourses" UseManualLocation="True" />
+    <Node Id="dbo.StudentCourses_CourseId" Category="Field Foreign" Bounds="1611.20788334609,231.92,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
+    <Node Id="dbo.StudentCourses_CreatedAt" Category="Field" Bounds="1519.92455001276,287.88,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.StudentCourses_Deleted" Category="Field" Bounds="1519.92455001276,231.92,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.StudentCourses_Id" Category="Field Primary" Bounds="1519.92455001276,175.96,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.StudentCourses_UpdatedAt" Category="Field Optional" Bounds="1623.12788334609,287.88,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.StudentCourses_UserId" Category="Field Foreign" Bounds="1599.92455001276,175.96,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.StudentCourses_Version" Category="Field" Bounds="1683.97121667943,175.96,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.StudyPeriods" Category="Table" Bounds="229.435292510511,403.84,261.42,253.84" Group="Expanded" Label="dbo.StudyPeriods" UseManualLocation="True" />
+    <Node Id="dbo.StudyPeriods_CreatedAt" Category="Field" Bounds="349.08529251051,555.76,73.2033333333329,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.StudyPeriods_Deleted" Category="Field" Bounds="249.435292510511,499.8,61.2833333333328,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.StudyPeriods_EndDate" Category="Field" Bounds="340.718625843844,499.8,64.79,25.96" Description="datetime" Label="EndDate" />
+    <Node Id="dbo.StudyPeriods_Id" Category="Field Primary" Bounds="249.435292510511,443.84,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.StudyPeriods_Name" Category="Field Optional" Bounds="329.435292510511,443.84,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.StudyPeriods_StartDate" Category="Field" Bounds="249.435292510511,555.76,69.6499999999996,25.96" Description="datetime" Label="StartDate" />
+    <Node Id="dbo.StudyPeriods_UpdatedAt" Category="Field Optional" Bounds="249.435292510511,611.72,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.StudyPeriods_Version" Category="Field" Bounds="411.131959177178,443.84,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.StudyProgramCourses" Category="Table" Bounds="1373.8405,861.558541030448,181.346666666667,141.92" Group="Expanded" Label="dbo.StudyProgramCourses" UseManualLocation="True" />
+    <Node Id="dbo.StudyProgramCourses_CourseId" Category="Field Primary" Bounds="1411.52883333333,901.558541030448,67.0533333333333,25.96" Description="nvarchar(128)" Label="CourseId" />
+    <Node Id="dbo.StudyProgramCourses_StudyProgramId" Category="Field Primary" Bounds="1411.52883333333,957.518541030448,105.97,25.96" Description="nvarchar(128)" Label="StudyProgramId" />
+    <Node Id="dbo.StudyPrograms" Category="Table" Bounds="1082.4204,848.094995031239,261.42,197.88" Group="Expanded" Label="dbo.StudyPrograms" UseManualLocation="True" />
+    <Node Id="dbo.StudyPrograms_CreatedAt" Category="Field" Bounds="1193.70373333333,944.054995031239,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.StudyPrograms_Deleted" Category="Field" Bounds="1102.4204,944.054995031239,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.StudyPrograms_Id" Category="Field Primary" Bounds="1102.4204,888.094995031239,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.StudyPrograms_Name" Category="Field Optional" Bounds="1182.4204,888.094995031239,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.StudyPrograms_UpdatedAt" Category="Field Optional" Bounds="1102.4204,1000.01499503124,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.StudyPrograms_Version" Category="Field" Bounds="1264.11706666667,888.094995031239,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Universities" Category="Table" Bounds="313.071952328128,1198.22094639191,261.42,253.84" Group="Expanded" Label="dbo.Universities" UseManualLocation="True" />
+    <Node Id="dbo.Universities_CreatedAt" Category="Field" Bounds="424.355285661461,1294.18094639191,73.2033333333329,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Universities_Deleted" Category="Field" Bounds="333.071952328128,1294.18094639191,61.2833333333328,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Universities_Description" Category="Field Optional" Bounds="333.071952328128,1406.10094639191,80.253333333334,25.96" Description="ntext" Label="Description" />
+    <Node Id="dbo.Universities_Id" Category="Field Primary" Bounds="333.071952328128,1238.22094639191,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Universities_Name" Category="Field Optional" Bounds="413.071952328128,1238.22094639191,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.Universities_ShortName" Category="Field Optional" Bounds="440.758618994794,1350.14094639191,80.1300000000001,25.96" Description="nvarchar(16)" Label="ShortName" />
+    <Node Id="dbo.Universities_UpdatedAt" Category="Field Optional" Bounds="333.071952328128,1350.14094639191,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Universities_Version" Category="Field" Bounds="494.768618994795,1238.22094639191,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Users" Category="Table" Bounds="1605.18726666667,711.240391765526,401.823333333333,309.8" Group="Expanded" Label="dbo.Users" />
+    <Node Id="dbo.Users_AvatarPath" Category="Field Optional" Bounds="1625.18726666667,863.160391765526,77.6233333333334,25.96" Description="nvarchar(100)" Label="AvatarPath" />
+    <Node Id="dbo.Users_CompletedCoursesCount" Category="Field" Bounds="1625.18726666667,975.080391765526,152.436666666667,25.96" Description="int" Label="CompletedCoursesCount" />
+    <Node Id="dbo.Users_CreatedAt" Category="Field" Bounds="1913.80726666667,807.200391765526,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Users_DateOfBirth" Category="Field" Bounds="1625.18726666667,919.120391765526,82.4833333333331,25.96" Description="datetime" Label="DateOfBirth" />
+    <Node Id="dbo.Users_Deleted" Category="Field" Bounds="1625.18726666667,807.200391765526,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Users_Email" Category="Field Optional" Bounds="1625.18726666667,751.240391765526,50,25.96" Description="nvarchar(100)" Label="Email" />
+    <Node Id="dbo.Users_FacebookId" Category="Field Optional" Bounds="1840.49726666667,863.160391765526,81.123333333333,25.96" Description="ntext" Label="FacebookId" />
+    <Node Id="dbo.Users_FullName" Category="Field Optional" Bounds="1813.64726666667,807.200391765526,70.1599999999999,25.96" Description="nvarchar(100)" Label="FullName" />
+    <Node Id="dbo.Users_Id" Category="Field Primary" Bounds="1705.18726666667,751.240391765526,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Users_Login" Category="Field" Bounds="1785.18726666667,751.240391765526,50,25.96" Description="nvarchar(100)" Label="Login" />
+    <Node Id="dbo.Users_RegisterDate" Category="Field" Bounds="1737.6706,919.120391765526,87.9000000000001,25.96" Description="datetime" Label="RegisterDate" />
+    <Node Id="dbo.Users_UpdatedAt" Category="Field Optional" Bounds="1732.8106,863.160391765526,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Users_UserRole" Category="Field" Bounds="1716.4706,807.200391765526,67.1766666666667,25.96" Description="int" Label="UserRole" />
+    <Node Id="dbo.Users_Version" Category="Field" Bounds="1865.18726666667,751.240391765526,59.7233333333334,25.96" Description="rowversion" Label="Version" />
   </Nodes>
   <Links>
     <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Universities" Target="dbo.Faculties" Category="Contains" />
+    <Link Source="Universities" Target="dbo.GroupStudyPrograms" Category="Contains" />
+    <Link Source="Universities" Target="dbo.GroupUsers" Category="Contains" />
+    <Link Source="Universities" Target="dbo.Groups" Category="Contains" />
+    <Link Source="Universities" Target="dbo.Specialties" Category="Contains" />
+    <Link Source="Universities" Target="dbo.StudyPeriods" Category="Contains" />
+    <Link Source="Universities" Target="dbo.StudyProgramCourses" Category="Contains" />
+    <Link Source="Universities" Target="dbo.StudyPrograms" Category="Contains" />
+    <Link Source="Universities" Target="dbo.Universities" Category="Contains" />
+    <Link Source="dbo" Target="Universities" Category="Contains" />
     <Link Source="dbo" Target="dbo.Answers" Category="Contains" />
     <Link Source="dbo" Target="dbo.AspNetUsers" Category="Contains" />
     <Link Source="dbo" Target="dbo.CommentRatings" Category="Contains" />
@@ -266,6 +344,7 @@
     <Link Source="dbo.Courses" Target="dbo.Courses_Image" Category="Contains" />
     <Link Source="dbo.Courses" Target="dbo.Courses_Keywords" Category="Contains" />
     <Link Source="dbo.Courses" Target="dbo.Courses_Name" Category="Contains" />
+    <Link Source="dbo.Courses" Target="dbo.Courses_Status" Category="Contains" />
     <Link Source="dbo.Courses" Target="dbo.Courses_UpdatedAt" Category="Contains" />
     <Link Source="dbo.Courses" Target="dbo.Courses_UserId" Category="Contains" />
     <Link Source="dbo.Courses" Target="dbo.Courses_Version" Category="Contains" />
@@ -288,19 +367,51 @@
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Image" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_LessonId" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Name" Category="Contains" />
+    <Link Source="dbo.Exercises" Target="dbo.Exercises_OriginalId" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Question" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Sound" Category="Contains" />
+    <Link Source="dbo.Exercises" Target="dbo.Exercises_Status" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Text" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Type" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_UpdatedAt" Category="Contains" />
     <Link Source="dbo.Exercises" Target="dbo.Exercises_Version" Category="Contains" />
     <Link Source="dbo.Exercises_LessonId" Target="dbo.Lessons_Id" Category="Foreign Key" Label="FK_dbo.Exercises_dbo.Lessons_LessonId" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_CreatedAt" Category="Contains" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_Deleted" Category="Contains" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_Id" Category="Contains" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_Name" Category="Contains" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.Faculties" Target="dbo.Faculties_Version" Category="Contains" />
+    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_GroupId" Category="Contains" />
+    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_StudyProgramId" Category="Contains" />
+    <Link Source="dbo.GroupStudyPrograms_GroupId" Target="dbo.Groups_Id" Category="Foreign Key" Label="FK_dbo.GroupStudyPrograms_dbo.Groups_GroupId" />
+    <Link Source="dbo.GroupStudyPrograms_StudyProgramId" Target="dbo.StudyPrograms_Id" Category="Foreign Key" Label="FK_dbo.GroupStudyPrograms_dbo.StudyPrograms_StudyProgramId" />
+    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_GroupId" Category="Contains" />
+    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_UserId" Category="Contains" />
+    <Link Source="dbo.GroupUsers_GroupId" Target="dbo.Groups_Id" Category="Foreign Key" Label="FK_dbo.GroupUsers_dbo.Groups_GroupId" />
+    <Link Source="dbo.GroupUsers_UserId" Target="dbo.Users_Id" Category="Foreign Key" Label="FK_dbo.GroupUsers_dbo.Users_UserId" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_CreatedAt" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_Deleted" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_FacultyId" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_Id" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_Name" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_SpecialtyId" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_StudyPeriodId" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_UniversityId" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_Version" Category="Contains" />
+    <Link Source="dbo.Groups" Target="dbo.Groups_YearOfStudy" Category="Contains" />
+    <Link Source="dbo.Groups_FacultyId" Target="dbo.Faculties_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Faculties_FacultyId" />
+    <Link Source="dbo.Groups_SpecialtyId" Target="dbo.Specialties_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Specialties_SpecialtyId" />
+    <Link Source="dbo.Groups_StudyPeriodId" Target="dbo.StudyPeriods_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.StudyPeriods_StudyPeriodId" />
+    <Link Source="dbo.Groups_UniversityId" Target="dbo.Universities_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Universities_UniversityId" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_CreatedAt" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Deleted" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Id" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_IsDone" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_IsStarted" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_LessonId" Category="Contains" />
+    <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Name" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_UpdatedAt" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_UserId" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Version" Category="Contains" />
@@ -347,6 +458,7 @@
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_Id" Category="Contains" />
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_IsDone" Category="Contains" />
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_IsStarted" Category="Contains" />
+    <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_Name" Category="Contains" />
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_SectionId" Category="Contains" />
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_UpdatedAt" Category="Contains" />
     <Link Source="dbo.SectionProgresses" Target="dbo.SectionProgresses_UserId" Category="Contains" />
@@ -369,6 +481,13 @@
     <Link Source="dbo.Spaces" Target="dbo.Spaces_Value" Category="Contains" />
     <Link Source="dbo.Spaces" Target="dbo.Spaces_Version" Category="Contains" />
     <Link Source="dbo.Spaces_ExerciseId" Target="dbo.Exercises_Id" Category="Foreign Key" Label="FK_dbo.Spaces_dbo.Exercises_ExerciseId" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_CreatedAt" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_Deleted" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_Description" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_Id" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_Name" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.Specialties" Target="dbo.Specialties_Version" Category="Contains" />
     <Link Source="dbo.StudentCourses" Target="dbo.StudentCourses_CourseId" Category="Contains" />
     <Link Source="dbo.StudentCourses" Target="dbo.StudentCourses_CreatedAt" Category="Contains" />
     <Link Source="dbo.StudentCourses" Target="dbo.StudentCourses_Deleted" Category="Contains" />
@@ -378,12 +497,39 @@
     <Link Source="dbo.StudentCourses" Target="dbo.StudentCourses_Version" Category="Contains" />
     <Link Source="dbo.StudentCourses_CourseId" Target="dbo.Courses_Id" Category="Foreign Key" Label="FK_dbo.StudentCourses_dbo.Courses_CourseId" />
     <Link Source="dbo.StudentCourses_UserId" Target="dbo.Users_Id" Category="Foreign Key" Label="FK_dbo.StudentCourses_dbo.Users_UserId" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_CreatedAt" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_Deleted" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_EndDate" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_Id" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_Name" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_StartDate" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.StudyPeriods" Target="dbo.StudyPeriods_Version" Category="Contains" />
+    <Link Source="dbo.StudyProgramCourses" Target="dbo.StudyProgramCourses_CourseId" Category="Contains" />
+    <Link Source="dbo.StudyProgramCourses" Target="dbo.StudyProgramCourses_StudyProgramId" Category="Contains" />
+    <Link Source="dbo.StudyProgramCourses_CourseId" Target="dbo.Courses_Id" Category="Foreign Key" Label="FK_dbo.StudyProgramCourses_dbo.Courses_CourseId" />
+    <Link Source="dbo.StudyProgramCourses_StudyProgramId" Target="dbo.StudyPrograms_Id" Category="Foreign Key" Label="FK_dbo.StudyProgramCourses_dbo.StudyPrograms_StudyProgramId" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_CreatedAt" Category="Contains" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_Deleted" Category="Contains" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_Id" Category="Contains" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_Name" Category="Contains" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.StudyPrograms" Target="dbo.StudyPrograms_Version" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_CreatedAt" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_Deleted" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_Description" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_Id" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_Name" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_ShortName" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.Universities" Target="dbo.Universities_Version" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_AvatarPath" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_CompletedCoursesCount" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_CreatedAt" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_DateOfBirth" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_Deleted" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_Email" Category="Contains" />
+    <Link Source="dbo.Users" Target="dbo.Users_FacebookId" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_FullName" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_Id" Category="Contains" />
     <Link Source="dbo.Users" Target="dbo.Users_Login" Category="Contains" />
@@ -417,6 +563,7 @@
     <Property Id="IsEnabled" DataType="System.Boolean" />
     <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
     <Property Id="Layout" DataType="System.String" />
+    <Property Id="LayoutSettings" DataType="Microsoft.VisualStudio.Diagrams.View.GroupLayoutStyle" />
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
     <Property Id="TargetType" DataType="System.Type" />
     <Property Id="UseManualLocation" DataType="System.Boolean" />
