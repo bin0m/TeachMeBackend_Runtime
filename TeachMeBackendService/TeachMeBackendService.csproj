@@ -222,6 +222,9 @@
     <Compile Include="ControllersTables\StudyProgramController.cs" />
     <Compile Include="ControllersTables\StudyPeriodController.cs" />
     <Compile Include="ControllersTables\SpecialtyController.cs" />
+    <Compile Include="ControllersTables\GroupUserController.cs" />
+    <Compile Include="ControllersTables\GroupStudyProgramController.cs" />
+    <Compile Include="ControllersTables\StudyProgramCourseController.cs" />
     <Compile Include="ControllersTables\UniversityController.cs" />
     <Compile Include="ControllersTables\LessonController.cs" />
     <Compile Include="ControllersTables\SectionProgressController.cs" />
