@@ -42,7 +42,7 @@ namespace TeachMeBackendService.DataObjects
         // Children CourseProgresses
         public List<CourseProgress> CourseProgresses { get; set; }
 
-        // many-to-many relationship
-        public List<StudyProgram> StudyPrograms { get; set; }
+        // Children StudyProgramCourses
+        public List<StudyProgramCourse> StudyProgramCourses { get; set; }
     }
 }
