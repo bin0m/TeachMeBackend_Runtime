@@ -218,6 +218,11 @@
     <Compile Include="ControllersTables\CourseController.cs" />
     <Compile Include="ControllersTables\ExerciseController.cs" />
     <Compile Include="ControllersTables\ExerciseStudentController.cs" />
+    <Compile Include="ControllersTables\GroupController.cs" />
+    <Compile Include="ControllersTables\StudyProgramController.cs" />
+    <Compile Include="ControllersTables\StudyPeriodController.cs" />
+    <Compile Include="ControllersTables\SpecialtyController.cs" />
+    <Compile Include="ControllersTables\UniversityController.cs" />
     <Compile Include="ControllersTables\LessonController.cs" />
     <Compile Include="ControllersTables\SectionProgressController.cs" />
     <Compile Include="ControllersTables\PairController.cs" />
@@ -230,7 +235,14 @@
     <Compile Include="ControllersTables\TodoItemController.cs" />
     <Compile Include="ControllersTables\ValuesController.cs" />
     <Compile Include="ControllersTables\SectionController.cs" />
+    <Compile Include="ControllersTables\FacultyController.cs" />
     <Compile Include="DataObjects\ExerciseStudent.cs" />
+    <Compile Include="DataObjects\StudyProgram.cs" />
+    <Compile Include="DataObjects\StudyPeriod.cs" />
+    <Compile Include="DataObjects\Specialty.cs" />
+    <Compile Include="DataObjects\Group.cs" />
+    <Compile Include="DataObjects\Faculty.cs" />
+    <Compile Include="DataObjects\University.cs" />
     <Compile Include="DataObjects\SectionProgress.cs" />
     <Compile Include="DataObjects\CourseProgress.cs" />
     <Compile Include="DataObjects\LessonProgress.cs" />
@@ -286,6 +298,10 @@
     <Compile Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs" />
     <Compile Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.Designer.cs">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.cs" />
+    <Compile Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.Designer.cs">
+      <DependentUpon>201804241454463_UniversitiesFeatureTablesCreation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -344,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.resx">
       <DependentUpon>201804141632427_AddStatusColumnAndRemoveIsModeratedColumnInExercisesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241454463_UniversitiesFeatureTablesCreation.resx">
+      <DependentUpon>201804241454463_UniversitiesFeatureTablesCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

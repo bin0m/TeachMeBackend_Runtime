@@ -17,7 +17,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class ExerciseStudentsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/ExerciseStudents
         [Route("")]
@@ -102,8 +102,7 @@ namespace TeachMeBackendService.ControllersAPI
             }
 
             var parentInDb = db.ExerciseStudents
-                .Where(p => p.Id == exerciseStudent.Id)
-                .SingleOrDefault();
+                .SingleOrDefault(p => p.Id == exerciseStudent.Id);
 
             if (parentInDb != null)
             {
