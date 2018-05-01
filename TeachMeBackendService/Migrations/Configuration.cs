@@ -1,11 +1,7 @@
 namespace TeachMeBackendService.Migrations
 {
     using Microsoft.Azure.Mobile.Server.Tables;
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Data.Entity.Migrations.History;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<TeachMeBackendService.Models.TeachMeBackendContext>
     {
