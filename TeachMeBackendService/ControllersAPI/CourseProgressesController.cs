@@ -14,13 +14,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CourseProgresssController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/CourseProgresss
         [Route("")]
         public IQueryable<CourseProgress> GetCourseProgresss()
         {
-            return db.CourseProgresses;
+            return _db.CourseProgresses;
         }
 
         // GET: api/CourseProgresss/5
@@ -28,7 +28,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(CourseProgress))]
         public IHttpActionResult GetCourseProgress(string id)
         {
-            CourseProgress courseProgress = db.CourseProgresses.Find(id);
+            CourseProgress courseProgress = _db.CourseProgresses.Find(id);
             if (courseProgress == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/users/{id}/CourseProgresss")]
         public IQueryable<CourseProgress> GetByExercise(string id)
         {
-            var courseProgresss = db.CourseProgresses.Where(c => c.UserId == id);
+            var courseProgresss = _db.CourseProgresses.Where(c => c.UserId == id);
 
             return courseProgresss;
         }
@@ -50,7 +50,7 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

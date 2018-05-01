@@ -17,13 +17,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class LessonsController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/Lessons
         [Route("")]
         public IEnumerable<Lesson> GetLessons()
         {
-            var all = db.Lessons.OrderBy(x => x.CreatedAt).ToList();
+            var all = _db.Lessons.OrderBy(x => x.CreatedAt).ToList();
             all.ForEach(x => x.Progress = CalculateLessonProgress(x.Id));
             return all;
         }
@@ -33,7 +33,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Lesson))]
         public IHttpActionResult GetLesson(string id)
         {
-            Lesson lesson = db.Lessons.Find(id);
+            Lesson lesson = _db.Lessons.Find(id);
             if (lesson == null)
             {
                 return NotFound();
@@ -50,7 +50,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(ProgressLessonModel))]
         public IHttpActionResult GetLessonProgress(string id)
         {
-            Lesson lesson = db.Lessons.Find(id);
+            Lesson lesson = _db.Lessons.Find(id);
             if (lesson == null)
             {
                 return NotFound();
@@ -66,14 +66,14 @@ namespace TeachMeBackendService.ControllersAPI
         private ProgressLessonModel CalculateLessonProgress(string id)
         {
             ProgressLessonModel progressLessonModel = new ProgressLessonModel();
-            var exercises = db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
+            var exercises = _db.Exercises.Where(ex => ex.LessonId == id).Include(ex => ex.ExerciseStudents);
             progressLessonModel.ExercisesNumber = exercises.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
                     progressLessonModel.ExercisesDone =
                     exercises.Count(ex => ex.ExerciseStudents.Any(c => c.UserId == userId && c.IsDone));
-                var lessonProgress = db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
+                var lessonProgress = _db.LessonProgresses.FirstOrDefault(p => p.UserId == userId && p.LessonId == id);
                 if (lessonProgress != null)
                 {
                     progressLessonModel.IsDone = lessonProgress.IsDone;
@@ -88,7 +88,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/sections/{id}/lessons")]
         public IQueryable<Lesson> GetBySection(string id)
         {
-            var lessons = db.Lessons.Where(c => c.SectionId == id);
+            var lessons = _db.Lessons.Where(c => c.SectionId == id);
 
             return lessons;
         }
@@ -97,7 +97,7 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

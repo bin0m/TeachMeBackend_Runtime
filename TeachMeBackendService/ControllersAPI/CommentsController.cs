@@ -15,7 +15,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CommentsController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Comments
         [Route("")]

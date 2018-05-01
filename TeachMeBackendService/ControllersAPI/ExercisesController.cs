@@ -19,7 +19,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class ExercisesController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Exercises
         [Route("")]

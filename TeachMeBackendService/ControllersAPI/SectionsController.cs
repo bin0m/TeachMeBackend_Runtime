@@ -20,13 +20,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class SectionsController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/Sections
         [Route("")]
         public IEnumerable<Section> GetSections()
         {
-            var all = db.Sections.OrderBy(x => x.CreatedAt).ToList();
+            var all = _db.Sections.OrderBy(x => x.CreatedAt).ToList();
             all.ForEach(x => x.Progress = CalculateSectionProgress(x.Id));
             return all;
         }
@@ -36,7 +36,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Section))]        
         public IHttpActionResult GetSection(string id)
         {
-            Section section = db.Sections.Find(id);
+            Section section = _db.Sections.Find(id);
             if (section == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(ProgressSectionModel))]
         public IHttpActionResult GetSectionProgress(string id)
         {
-            Section section = db.Sections.Find(id);
+            Section section = _db.Sections.Find(id);
             if (section == null)
             {
                 return NotFound();
@@ -69,14 +69,14 @@ namespace TeachMeBackendService.ControllersAPI
         private ProgressSectionModel CalculateSectionProgress(string id)
         {
             ProgressSectionModel progressSectionModel = new ProgressSectionModel();
-            var lessons = db.Lessons.Where(l => l.SectionId == id).Include(l => l.LessonProgresses);
+            var lessons = _db.Lessons.Where(l => l.SectionId == id).Include(l => l.LessonProgresses);
             progressSectionModel.LessonsNumber = lessons.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
                 var userId = claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value;
                 progressSectionModel.LessonsDone =
                     lessons.Count(l => l.LessonProgresses.Any(p => p.UserId == userId && p.IsDone));
-                var sectionProgress = db.SectionProgresses.FirstOrDefault(p => p.UserId == userId && p.SectionId == id);
+                var sectionProgress = _db.SectionProgresses.FirstOrDefault(p => p.UserId == userId && p.SectionId == id);
                 if (sectionProgress != null)
                 {
                     progressSectionModel.IsDone = sectionProgress.IsDone;
@@ -101,11 +101,11 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest();
             }
 
-            db.Entry(section).State = EntityState.Modified;
+            _db.Entry(section).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -137,11 +137,11 @@ namespace TeachMeBackendService.ControllersAPI
                 section.Id = Guid.NewGuid().ToString("N");
             }
 
-            db.Sections.Add(section);
+            _db.Sections.Add(section);
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -179,7 +179,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/courses/{id}/sections")]
         public IQueryable<Section> GetByCourse(string id)
         {
-            var sections = db.Sections.Where(c => c.CourseId == id);
+            var sections = _db.Sections.Where(c => c.CourseId == id);
 
             return sections;
         }
@@ -188,14 +188,14 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool SectionExists(string id)
         {
-            return db.Sections.Count(e => e.Id == id) > 0;
+            return _db.Sections.Count(e => e.Id == id) > 0;
         }
     }
 }
