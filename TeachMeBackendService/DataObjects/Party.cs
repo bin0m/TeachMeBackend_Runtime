@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace TeachMeBackendService.DataObjects
 {
-    public class Group : EntityData
+    [Table("Parties")]
+    public class Party : EntityData
     {
         [StringLength(128)]
         public string Name { get; set; }
@@ -37,10 +39,10 @@ namespace TeachMeBackendService.DataObjects
         // parent Specialty link
         public Specialty Specialty { get; set; }
 
-        // Children GroupUsers
-        public List<GroupUser> GroupUsers { get; set; }
+        // Children PartyUsers
+        public List<PartyUser> PartyUsers { get; set; }
 
-        // Children GroupStudyPrograms
-        public List<GroupStudyProgram> GroupStudyPrograms { get; set; }
+        // Children PartyStudyPrograms
+        public List<PartyStudyProgram> PartyStudyPrograms { get; set; }
     }
 }

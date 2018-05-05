@@ -101,34 +101,34 @@
     <Node Id="dbo.Faculties_Name" Category="Field Optional" Bounds="2799.30900139135,534.716206317484,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
     <Node Id="dbo.Faculties_UpdatedAt" Category="Field Optional" Bounds="2719.30899650853,646.636372333109,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
     <Node Id="dbo.Faculties_Version" Category="Field" Bounds="2881.00575106583,534.716206317484,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.GroupStudyPrograms" Category="Table" Bounds="1900.35241268485,452.76306004149,271.006911621093,197.880416221786" Group="Expanded" Label="dbo.GroupStudyPrograms" UseManualLocation="True" />
-    <Node Id="dbo.GroupStudyPrograms_CreatedAt" Category="Field" Bounds="2013.89241919527,548.723232292364,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.GroupStudyPrograms_Deleted" Category="Field" Bounds="2090.07599097261,492.763164543341,61.2833333333333,25.9599999999999" Description="bit" Label="Deleted" />
-    <Node Id="dbo.GroupStudyPrograms_GroupId" Category="Field Foreign" Bounds="1920.35256486584,548.723232292364,63.54,25.96" Description="nvarchar(128)" Label="GroupId" />
-    <Node Id="dbo.GroupStudyPrograms_Id" Category="Field Primary" Bounds="1920.35242326428,492.763164543341,50,25.9599999999999" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.GroupStudyPrograms_StudyProgramId" Category="Field Foreign" Bounds="2028.03929826428,604.683315300177,105.97,25.96" Description="nvarchar(128)" Label="StudyProgramId" />
-    <Node Id="dbo.GroupStudyPrograms_UpdatedAt" Category="Field Optional" Bounds="1920.35241268485,604.683315300177,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.GroupStudyPrograms_Version" Category="Field" Bounds="2000.35263403902,492.763164543341,59.7233333333329,25.9599999999999" Description="rowversion" Label="Version" />
-    <Node Id="dbo.GroupUsers" Category="Table" Bounds="1849.45960099865,202.52130159304,298.027208333331,197.880455762904" Group="Expanded" Label="dbo.GroupUsers" UseManualLocation="True" />
-    <Node Id="dbo.GroupUsers_CreatedAt" Category="Field" Bounds="2054.28347144136,298.481700920294,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.GroupUsers_Deleted" Category="Field" Bounds="1869.45984107027,298.481517814825,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.GroupUsers_GroupId" Category="Field Foreign" Bounds="1960.74331193615,298.481517814825,63.54,25.96" Description="nvarchar(128)" Label="GroupId" />
-    <Node Id="dbo.GroupUsers_Id" Category="Field Primary" Bounds="1869.45960099865,242.521434807013,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.GroupUsers_UpdatedAt" Category="Field Optional" Bounds="1869.45983455985,354.441661857794,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.GroupUsers_UserId" Category="Field Foreign" Bounds="1949.45958309501,242.521434807013,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
-    <Node Id="dbo.GroupUsers_Version" Category="Field" Bounds="2033.50686987886,242.521434807013,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Groups" Category="Table" Bounds="2270.70727881575,380.118699006176,352.704288736979,253.840647387696" Group="Expanded" Label="dbo.Groups" UseManualLocation="True" />
-    <Node Id="dbo.Groups_CreatedAt" Category="Field" Bounds="2388.04760405658,476.078943049144,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
-    <Node Id="dbo.Groups_Deleted" Category="Field" Bounds="2542.1282342194,420.118829523754,61.2833333333333,25.96" Description="bit" Label="Deleted" />
-    <Node Id="dbo.Groups_FacultyId" Category="Field Foreign" Bounds="2290.70760405658,476.078912531566,67.3400000000001,25.96" Description="nvarchar(128)" Label="FacultyId" />
-    <Node Id="dbo.Groups_Id" Category="Field Primary" Bounds="2290.70727881575,420.118799006176,50,25.96" Description="nvarchar(128)" Label="Id" />
-    <Node Id="dbo.Groups_Name" Category="Field Optional" Bounds="2370.70749772851,420.118799006176,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
-    <Node Id="dbo.Groups_SpecialtyId" Category="Field Foreign" Bounds="2491.25097970762,476.078943049145,77.3000000000002,25.96" Description="nvarchar(128)" Label="SpecialtyId" />
-    <Node Id="dbo.Groups_StudyPeriodId" Category="Field Foreign" Bounds="2406.80397287168,587.999246393871,94.5366666666669,25.96" Description="nvarchar(128)" Label="StudyPeriodId" />
-    <Node Id="dbo.Groups_UniversityId" Category="Field Foreign" Bounds="2398.39427723366,532.039102350902,82.27,25.96" Description="nvarchar(128)" Label="UniversityId" />
-    <Node Id="dbo.Groups_UpdatedAt" Category="Field Optional" Bounds="2290.70761056699,532.039102350903,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
-    <Node Id="dbo.Groups_Version" Category="Field" Bounds="2452.40416439518,420.118829523754,59.7233333333334,25.96" Description="rowversion" Label="Version" />
-    <Node Id="dbo.Groups_YearOfStudy" Category="Field" Bounds="2290.70728190104,587.999246393872,86.0966666666668,25.96" Description="int" Label="YearOfStudy" />
+    <Node Id="dbo.PartyStudyPrograms" Category="Table" Bounds="1900.35241268485,452.76306004149,271.006911621093,197.880416221786" Group="Expanded" Label="dbo.PartyStudyPrograms" UseManualLocation="True" />
+    <Node Id="dbo.PartyStudyPrograms_CreatedAt" Category="Field" Bounds="2013.89241919527,548.723232292364,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.PartyStudyPrograms_Deleted" Category="Field" Bounds="2090.07599097261,492.763164543341,61.2833333333333,25.9599999999999" Description="bit" Label="Deleted" />
+    <Node Id="dbo.PartyStudyPrograms_PartyId" Category="Field Foreign" Bounds="1920.35256486584,548.723232292364,63.54,25.96" Description="nvarchar(128)" Label="PartyId" />
+    <Node Id="dbo.PartyStudyPrograms_Id" Category="Field Primary" Bounds="1920.35242326428,492.763164543341,50,25.9599999999999" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.PartyStudyPrograms_StudyProgramId" Category="Field Foreign" Bounds="2028.03929826428,604.683315300177,105.97,25.96" Description="nvarchar(128)" Label="StudyProgramId" />
+    <Node Id="dbo.PartyStudyPrograms_UpdatedAt" Category="Field Optional" Bounds="1920.35241268485,604.683315300177,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.PartyStudyPrograms_Version" Category="Field" Bounds="2000.35263403902,492.763164543341,59.7233333333329,25.9599999999999" Description="rowversion" Label="Version" />
+    <Node Id="dbo.PartyUsers" Category="Table" Bounds="1849.45960099865,202.52130159304,298.027208333331,197.880455762904" Group="Expanded" Label="dbo.PartyUsers" UseManualLocation="True" />
+    <Node Id="dbo.PartyUsers_CreatedAt" Category="Field" Bounds="2054.28347144136,298.481700920294,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.PartyUsers_Deleted" Category="Field" Bounds="1869.45984107027,298.481517814825,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.PartyUsers_PartyId" Category="Field Foreign" Bounds="1960.74331193615,298.481517814825,63.54,25.96" Description="nvarchar(128)" Label="PartyId" />
+    <Node Id="dbo.PartyUsers_Id" Category="Field Primary" Bounds="1869.45960099865,242.521434807013,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.PartyUsers_UpdatedAt" Category="Field Optional" Bounds="1869.45983455985,354.441661857794,77.6866666666667,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.PartyUsers_UserId" Category="Field Foreign" Bounds="1949.45958309501,242.521434807013,54.0466666666666,25.96" Description="nvarchar(128)" Label="UserId" />
+    <Node Id="dbo.PartyUsers_Version" Category="Field" Bounds="2033.50686987886,242.521434807013,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Parties" Category="Table" Bounds="2270.70727881575,380.118699006176,352.704288736979,253.840647387696" Group="Expanded" Label="dbo.Parties" UseManualLocation="True" />
+    <Node Id="dbo.Parties_CreatedAt" Category="Field" Bounds="2388.04760405658,476.078943049144,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
+    <Node Id="dbo.Parties_Deleted" Category="Field" Bounds="2542.1282342194,420.118829523754,61.2833333333333,25.96" Description="bit" Label="Deleted" />
+    <Node Id="dbo.Parties_FacultyId" Category="Field Foreign" Bounds="2290.70760405658,476.078912531566,67.3400000000001,25.96" Description="nvarchar(128)" Label="FacultyId" />
+    <Node Id="dbo.Parties_Id" Category="Field Primary" Bounds="2290.70727881575,420.118799006176,50,25.96" Description="nvarchar(128)" Label="Id" />
+    <Node Id="dbo.Parties_Name" Category="Field Optional" Bounds="2370.70749772851,420.118799006176,51.6966666666667,25.96" Description="nvarchar(128)" Label="Name" />
+    <Node Id="dbo.Parties_SpecialtyId" Category="Field Foreign" Bounds="2491.25097970762,476.078943049145,77.3000000000002,25.96" Description="nvarchar(128)" Label="SpecialtyId" />
+    <Node Id="dbo.Parties_StudyPeriodId" Category="Field Foreign" Bounds="2406.80397287168,587.999246393871,94.5366666666669,25.96" Description="nvarchar(128)" Label="StudyPeriodId" />
+    <Node Id="dbo.Parties_UniversityId" Category="Field Foreign" Bounds="2398.39427723366,532.039102350902,82.27,25.96" Description="nvarchar(128)" Label="UniversityId" />
+    <Node Id="dbo.Parties_UpdatedAt" Category="Field Optional" Bounds="2290.70761056699,532.039102350903,77.6866666666665,25.96" Description="datetime" Label="UpdatedAt" />
+    <Node Id="dbo.Parties_Version" Category="Field" Bounds="2452.40416439518,420.118829523754,59.7233333333334,25.96" Description="rowversion" Label="Version" />
+    <Node Id="dbo.Parties_YearOfStudy" Category="Field" Bounds="2290.70728190104,587.999246393872,86.0966666666668,25.96" Description="int" Label="YearOfStudy" />
     <Node Id="dbo.LessonProgresses" Category="Table" Bounds="794.5343279862,729.507182357465,342.540098470053,253.840521386723" Group="Expanded" Label="dbo.LessonProgresses" UseManualLocation="True" />
     <Node Id="dbo.LessonProgresses_CreatedAt" Category="Field" Bounds="814.534478521441,937.387599968145,73.2033333333334,25.96" Description="datetime" Label="CreatedAt" />
     <Node Id="dbo.LessonProgresses_Deleted" Category="Field" Bounds="904.257997808551,825.46743395252,61.2833333333333,25.96" Description="bit" Label="Deleted" />
@@ -262,9 +262,9 @@
     <Link Source="dbo" Target="dbo.ExerciseStudents" Category="Contains" />
     <Link Source="dbo" Target="dbo.Exercises" Category="Contains" />
     <Link Source="dbo" Target="dbo.Faculties" Category="Contains" />
-    <Link Source="dbo" Target="dbo.GroupStudyPrograms" Category="Contains" />
-    <Link Source="dbo" Target="dbo.GroupUsers" Category="Contains" />
-    <Link Source="dbo" Target="dbo.Groups" Category="Contains" />
+    <Link Source="dbo" Target="dbo.PartyStudyPrograms" Category="Contains" />
+    <Link Source="dbo" Target="dbo.PartyUsers" Category="Contains" />
+    <Link Source="dbo" Target="dbo.Parties" Category="Contains" />
     <Link Source="dbo" Target="dbo.LessonProgresses" Category="Contains" />
     <Link Source="dbo" Target="dbo.Lessons" Category="Contains" />
     <Link Source="dbo" Target="dbo.Pairs" Category="Contains" />
@@ -378,39 +378,39 @@
     <Link Source="dbo.Faculties" Target="dbo.Faculties_Name" Category="Contains" />
     <Link Source="dbo.Faculties" Target="dbo.Faculties_UpdatedAt" Category="Contains" />
     <Link Source="dbo.Faculties" Target="dbo.Faculties_Version" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_CreatedAt" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_Deleted" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_GroupId" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_Id" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_StudyProgramId" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_UpdatedAt" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms" Target="dbo.GroupStudyPrograms_Version" Category="Contains" />
-    <Link Source="dbo.GroupStudyPrograms_GroupId" Target="dbo.Groups_Id" Category="Foreign Key" Label="FK_dbo.GroupStudyPrograms_dbo.Groups_GroupId" />
-    <Link Source="dbo.GroupStudyPrograms_StudyProgramId" Target="dbo.StudyPrograms_Id" Category="Foreign Key" Label="FK_dbo.GroupStudyPrograms_dbo.StudyPrograms_StudyProgramId" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_CreatedAt" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_Deleted" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_GroupId" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_Id" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_UpdatedAt" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_UserId" Category="Contains" />
-    <Link Source="dbo.GroupUsers" Target="dbo.GroupUsers_Version" Category="Contains" />
-    <Link Source="dbo.GroupUsers_GroupId" Target="dbo.Groups_Id" Category="Foreign Key" Label="FK_dbo.GroupUsers_dbo.Groups_GroupId" />
-    <Link Source="dbo.GroupUsers_UserId" Target="dbo.Users_Id" Category="Foreign Key" Label="FK_dbo.GroupUsers_dbo.Users_UserId" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_CreatedAt" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_Deleted" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_FacultyId" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_Id" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_Name" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_SpecialtyId" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_StudyPeriodId" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_UniversityId" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_UpdatedAt" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_Version" Category="Contains" />
-    <Link Source="dbo.Groups" Target="dbo.Groups_YearOfStudy" Category="Contains" />
-    <Link Source="dbo.Groups_FacultyId" Target="dbo.Faculties_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Faculties_FacultyId" />
-    <Link Source="dbo.Groups_SpecialtyId" Target="dbo.Specialties_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Specialties_SpecialtyId" />
-    <Link Source="dbo.Groups_StudyPeriodId" Target="dbo.StudyPeriods_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.StudyPeriods_StudyPeriodId" />
-    <Link Source="dbo.Groups_UniversityId" Target="dbo.Universities_Id" Category="Foreign Key" Label="FK_dbo.Groups_dbo.Universities_UniversityId" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_CreatedAt" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_Deleted" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_PartyId" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_Id" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_StudyProgramId" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms" Target="dbo.PartyStudyPrograms_Version" Category="Contains" />
+    <Link Source="dbo.PartyStudyPrograms_PartyId" Target="dbo.Parties_Id" Category="Foreign Key" Label="FK_dbo.PartyStudyPrograms_dbo.Parties_PartyId" />
+    <Link Source="dbo.PartyStudyPrograms_StudyProgramId" Target="dbo.StudyPrograms_Id" Category="Foreign Key" Label="FK_dbo.PartyStudyPrograms_dbo.StudyPrograms_StudyProgramId" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_CreatedAt" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_Deleted" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_PartyId" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_Id" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_UserId" Category="Contains" />
+    <Link Source="dbo.PartyUsers" Target="dbo.PartyUsers_Version" Category="Contains" />
+    <Link Source="dbo.PartyUsers_PartyId" Target="dbo.Parties_Id" Category="Foreign Key" Label="FK_dbo.PartyUsers_dbo.Parties_PartyId" />
+    <Link Source="dbo.PartyUsers_UserId" Target="dbo.Users_Id" Category="Foreign Key" Label="FK_dbo.PartyUsers_dbo.Users_UserId" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_CreatedAt" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_Deleted" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_FacultyId" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_Id" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_Name" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_SpecialtyId" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_StudyPeriodId" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_UniversityId" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_UpdatedAt" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_Version" Category="Contains" />
+    <Link Source="dbo.Parties" Target="dbo.Parties_YearOfStudy" Category="Contains" />
+    <Link Source="dbo.Parties_FacultyId" Target="dbo.Faculties_Id" Category="Foreign Key" Label="FK_dbo.Parties_dbo.Faculties_FacultyId" />
+    <Link Source="dbo.Parties_SpecialtyId" Target="dbo.Specialties_Id" Category="Foreign Key" Label="FK_dbo.Parties_dbo.Specialties_SpecialtyId" />
+    <Link Source="dbo.Parties_StudyPeriodId" Target="dbo.StudyPeriods_Id" Category="Foreign Key" Label="FK_dbo.Parties_dbo.StudyPeriods_StudyPeriodId" />
+    <Link Source="dbo.Parties_UniversityId" Target="dbo.Universities_Id" Category="Foreign Key" Label="FK_dbo.Parties_dbo.Universities_UniversityId" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_CreatedAt" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Deleted" Category="Contains" />
     <Link Source="dbo.LessonProgresses" Target="dbo.LessonProgresses_Id" Category="Contains" />

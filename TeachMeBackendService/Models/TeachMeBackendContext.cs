@@ -51,10 +51,10 @@ namespace TeachMeBackendService.Models
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<StudyPeriod> StudyPeriods { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<Party> Parties { get; set; }
         public DbSet<StudyProgram> StudyPrograms { get; set; }
-        public DbSet<GroupUser> GroupUsers { get; set; }
-        public DbSet<GroupStudyProgram> GroupStudyPrograms { get; set; }
+        public DbSet<PartyUser> PartyUsers { get; set; }
+        public DbSet<PartyStudyProgram> PartyStudyPrograms { get; set; }
         public DbSet<StudyProgramCourse> StudyProgramCourses { get; set; }
 
 
@@ -208,52 +208,52 @@ namespace TeachMeBackendService.Models
                .HasForeignKey(p => p.UserId)
                 .WillCascadeOnDelete(false);
 
-            // University <1-to-many> Groups
-            modelBuilder.Entity<Group>()
+            // University <1-to-many> Parties
+            modelBuilder.Entity<Party>()
                .HasRequired(p => p.University)
-               .WithMany(l => l.Groups)
+               .WithMany(l => l.Parties)
                .HasForeignKey(p => p.UniversityId);
 
-            // Faculty <01-to-many> Groups
-            modelBuilder.Entity<Group>()
+            // Faculty <01-to-many> Parties
+            modelBuilder.Entity<Party>()
                .HasOptional(c => c.Faculty)
-               .WithMany(p => p.Groups)
+               .WithMany(p => p.Parties)
                .HasForeignKey(c => c.FacultyId);
 
-            // Specialty <1-to-many> Groups
-            modelBuilder.Entity<Group>()
+            // Specialty <1-to-many> Parties
+            modelBuilder.Entity<Party>()
                .HasRequired(p => p.Specialty)
-               .WithMany(l => l.Groups)
+               .WithMany(l => l.Parties)
                .HasForeignKey(p => p.SpecialtyId);
 
-            // StudyPeriod <1-to-many> Groups
-            modelBuilder.Entity<Group>()
+            // StudyPeriod <1-to-many> Parties
+            modelBuilder.Entity<Party>()
                .HasRequired(p => p.StudyPeriod)
-               .WithMany(l => l.Groups)
+               .WithMany(l => l.Parties)
                .HasForeignKey(p => p.StudyPeriodId);
 
-            // Group <1-to-many> GroupUsers
-            modelBuilder.Entity<GroupUser>()
-               .HasRequired(p => p.Group)
-               .WithMany(l => l.GroupUsers)
-               .HasForeignKey(p => p.GroupId);
+            // Party <1-to-many> PartyUsers
+            modelBuilder.Entity<PartyUser>()
+               .HasRequired(p => p.Party)
+               .WithMany(l => l.PartyUsers)
+               .HasForeignKey(p => p.PartyId);
 
-            // User <1-to-many> GroupUsers
-            modelBuilder.Entity<GroupUser>()
+            // User <1-to-many> PartyUsers
+            modelBuilder.Entity<PartyUser>()
                .HasRequired(p => p.User)
-               .WithMany(l => l.GroupUsers)
+               .WithMany(l => l.PartyUsers)
                .HasForeignKey(p => p.UserId);
 
-            // Group <1-to-many> GroupStudyPrograms
-            modelBuilder.Entity<GroupStudyProgram>()
-               .HasRequired(p => p.Group)
-               .WithMany(l => l.GroupStudyPrograms)
-               .HasForeignKey(p => p.GroupId);
+            // Party <1-to-many> PartyStudyPrograms
+            modelBuilder.Entity<PartyStudyProgram>()
+               .HasRequired(p => p.Party)
+               .WithMany(l => l.PartyStudyPrograms)
+               .HasForeignKey(p => p.PartyId);
 
-            // StudyProgram <1-to-many> GroupStudyPrograms
-            modelBuilder.Entity<GroupStudyProgram>()
+            // StudyProgram <1-to-many> PartyStudyPrograms
+            modelBuilder.Entity<PartyStudyProgram>()
                .HasRequired(p => p.StudyProgram)
-               .WithMany(l => l.GroupStudyPrograms)
+               .WithMany(l => l.PartyStudyPrograms)
                .HasForeignKey(p => p.StudyProgramId);
 
             // StudyProgram <1-to-many> StudyProgramCourses

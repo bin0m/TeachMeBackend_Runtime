@@ -18,7 +18,7 @@ namespace TeachMeBackendService.DataObjects
 
         public string Description { get; set; }
 
-        //children Groups
-        public List<Group> Groups { get; set; }
+        //children Parties
+        public List<Party> Parties { get; set; }
     }
 }

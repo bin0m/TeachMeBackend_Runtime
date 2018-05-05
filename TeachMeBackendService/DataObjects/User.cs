@@ -62,8 +62,8 @@ namespace TeachMeBackendService.DataObjects
         // Children CourseProgresses
         public List<CourseProgress> CourseProgresses { get; set; }
 
-        // Children GroupUsers
-        public List<GroupUser> GroupUsers { get; set; }
+        // Children PartyUsers
+        public List<PartyUser> PartyUsers { get; set; }
 
     }
 }

@@ -4,13 +4,13 @@ using System;
 
 namespace TeachMeBackendService.DataObjects
 {
-    public class GroupStudyProgram : EntityData
+    public class PartyStudyProgram : EntityData
     {
-        // parent Group FK
-        public String GroupId { get; set; }
+        // parent Party FK
+        public String PartyId { get; set; }
 
-        // parent Group link
-        public Group Group { get; set; }
+        // parent Party link
+        public Party Party { get; set; }
 
         // parent StudyProgram FK
         public String StudyProgramId { get; set; }

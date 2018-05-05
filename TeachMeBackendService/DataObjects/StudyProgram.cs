@@ -10,8 +10,8 @@ namespace TeachMeBackendService.DataObjects
         [StringLength(128)]
         public string Name { get; set; }
 
-        // Children GroupStudyPrograms
-        public List<GroupStudyProgram> GroupStudyPrograms { get; set; }
+        // Children PartyStudyPrograms
+        public List<PartyStudyProgram> PartyStudyPrograms { get; set; }
 
         // Children StudyProgramCourses
         public List<StudyProgramCourse> StudyProgramCourses { get; set; }

@@ -5,13 +5,13 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace TeachMeBackendService.DataObjects
 {
-    public class GroupUser : EntityData
+    public class PartyUser : EntityData
     {
-        // parent Group FK
-        public String GroupId { get; set; }
+        // parent Party FK
+        public String PartyId { get; set; }
 
-        // parent Group link
-        public Group Group { get; set; }
+        // parent Party link
+        public Party Party { get; set; }
 
         // parent User FK
         public String UserId { get; set; }

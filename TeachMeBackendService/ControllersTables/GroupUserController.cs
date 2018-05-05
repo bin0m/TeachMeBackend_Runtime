@@ -12,43 +12,43 @@ namespace TeachMeBackendService.ControllersTables
 {
     [Authorize]
     [ApiVersionNeutral]
-    [RoutePrefix("tables/GroupUser")]
-    public class GroupUserController : TableController<GroupUser>
+    [RoutePrefix("tables/PartyUser")]
+    public class PartyUserController : TableController<PartyUser>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             TeachMeBackendContext context = new TeachMeBackendContext();
-            DomainManager = new EntityDomainManager<GroupUser>(context, Request);
+            DomainManager = new EntityDomainManager<PartyUser>(context, Request);
         }
 
-        // GET tables/GroupUser
-        public IQueryable<GroupUser> GetAllGroupUser()
+        // GET tables/PartyUser
+        public IQueryable<PartyUser> GetAllPartyUser()
         {
             return Query(); 
         }
 
-        // GET tables/GroupUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public SingleResult<GroupUser> GetGroupUser(string id)
+        // GET tables/PartyUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public SingleResult<PartyUser> GetPartyUser(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/GroupUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<GroupUser> PatchGroupUser(string id, Delta<GroupUser> patch)
+        // PATCH tables/PartyUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task<PartyUser> PatchPartyUser(string id, Delta<PartyUser> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/GroupUser
-        public async Task<IHttpActionResult> PostGroupUser(GroupUser item)
+        // POST tables/PartyUser
+        public async Task<IHttpActionResult> PostPartyUser(PartyUser item)
         {
-            GroupUser current = await InsertAsync(item);
+            PartyUser current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        // DELETE tables/GroupUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task DeleteGroupUser(string id)
+        // DELETE tables/PartyUser/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task DeletePartyUser(string id)
         {
              return DeleteAsync(id);
         }

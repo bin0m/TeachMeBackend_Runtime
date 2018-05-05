@@ -12,43 +12,43 @@ namespace TeachMeBackendService.ControllersTables
 {
     [Authorize]
     [ApiVersionNeutral]
-    [RoutePrefix("tables/GroupStudyProgram")]
-    public class GroupStudyProgramController : TableController<GroupStudyProgram>
+    [RoutePrefix("tables/PartyStudyProgram")]
+    public class PartyStudyProgramController : TableController<PartyStudyProgram>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             TeachMeBackendContext context = new TeachMeBackendContext();
-            DomainManager = new EntityDomainManager<GroupStudyProgram>(context, Request);
+            DomainManager = new EntityDomainManager<PartyStudyProgram>(context, Request);
         }
 
-        // GET tables/GroupStudyProgram
-        public IQueryable<GroupStudyProgram> GetAllGroupStudyProgram()
+        // GET tables/PartyStudyProgram
+        public IQueryable<PartyStudyProgram> GetAllPartyStudyProgram()
         {
             return Query(); 
         }
 
-        // GET tables/GroupStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public SingleResult<GroupStudyProgram> GetGroupStudyProgram(string id)
+        // GET tables/PartyStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public SingleResult<PartyStudyProgram> GetPartyStudyProgram(string id)
         {
             return Lookup(id);
         }
 
-        // PATCH tables/GroupStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<GroupStudyProgram> PatchGroupStudyProgram(string id, Delta<GroupStudyProgram> patch)
+        // PATCH tables/PartyStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task<PartyStudyProgram> PatchPartyStudyProgram(string id, Delta<PartyStudyProgram> patch)
         {
              return UpdateAsync(id, patch);
         }
 
-        // POST tables/GroupStudyProgram
-        public async Task<IHttpActionResult> PostGroupStudyProgram(GroupStudyProgram item)
+        // POST tables/PartyStudyProgram
+        public async Task<IHttpActionResult> PostPartyStudyProgram(PartyStudyProgram item)
         {
-            GroupStudyProgram current = await InsertAsync(item);
+            PartyStudyProgram current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
-        // DELETE tables/GroupStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task DeleteGroupStudyProgram(string id)
+        // DELETE tables/PartyStudyProgram/48D68C86-6EA6-4C25-AA33-223FC9A27959
+        public Task DeletePartyStudyProgram(string id)
         {
              return DeleteAsync(id);
         }
