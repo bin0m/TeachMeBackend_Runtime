@@ -18,13 +18,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CoursesController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/Courses
         [Route("")]
         public IEnumerable<Course> GetCourses()
         {
-            var all = db.Courses.OrderBy(x => x.CreatedAt).ToList();
+            var all = _db.Courses.OrderBy(x => x.CreatedAt).ToList();
             all.ForEach(x => x.Progress = CalculateCourseProgress(x.Id));
             return all;
         }
@@ -34,7 +34,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(Course))]
         public IHttpActionResult GetCourse(string id)
         {
-            Course course = db.Courses.Find(id);
+            Course course = _db.Courses.Find(id);
             if (course == null)
             {
                 return NotFound();
@@ -51,7 +51,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(ProgressCourseModel))]
         public IHttpActionResult GetCourseProgress(string id)
         {
-            Course course = db.Courses.Find(id);
+            Course course = _db.Courses.Find(id);
             if (course == null)
             {
                 return NotFound();
@@ -67,7 +67,7 @@ namespace TeachMeBackendService.ControllersAPI
         private ProgressCourseModel CalculateCourseProgress(string id)
         {
             ProgressCourseModel progressCourseModel = new ProgressCourseModel();
-            var sections = db.Sections.Where(c => c.CourseId == id).Include(c => c.SectionProgresses);
+            var sections = _db.Sections.Where(c => c.CourseId == id).Include(c => c.SectionProgresses);
             progressCourseModel.SectionsNumber = sections.Count();
             if (User is ClaimsPrincipal claimsPrincipal)
             {
@@ -101,11 +101,11 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (isTeacher)
             {
-                var courses = db.Courses.Where(c => c.UserId == usesrId);
+                var courses = _db.Courses.Where(c => c.UserId == usesrId);
                 return courses;
             }
 
-            var query = from course in db.Courses
+            var query = from course in _db.Courses
                         where course.CourseProgresses.Any(c => c.UserId == usesrId && c.IsStarted)
                         select course;
 
@@ -117,7 +117,7 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

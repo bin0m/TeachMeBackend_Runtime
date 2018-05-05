@@ -14,13 +14,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class CommentRatingsController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/CommentRatings
         [Route("")]
         public IQueryable<CommentRating> GetCommentRatings()
         {
-            return db.CommentRatings;
+            return _db.CommentRatings;
         }
 
         // GET: api/CommentRatings/5
@@ -28,7 +28,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(CommentRating))]
         public IHttpActionResult GetCommentRating(string id)
         {
-            CommentRating commentRating = db.CommentRatings.Find(id);
+            CommentRating commentRating = _db.CommentRatings.Find(id);
             if (commentRating == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/comments/{id}/commentratings")]
         public IQueryable<CommentRating> GetBySection(string id)
         {
-            var commentRating = db.CommentRatings.Where(c => c.CommentId == id);
+            var commentRating = _db.CommentRatings.Where(c => c.CommentId == id);
 
             return commentRating;
         }
@@ -50,7 +50,7 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

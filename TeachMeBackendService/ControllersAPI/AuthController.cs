@@ -42,10 +42,6 @@ namespace TeachMeBackendService.ControllersAPI
             {
                 return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         TeachMeBackendContext DbContext => Request.GetOwinContext().Get<TeachMeBackendContext>();

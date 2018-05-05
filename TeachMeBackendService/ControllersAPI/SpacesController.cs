@@ -14,7 +14,7 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class SpacesController : ApiController
     {
-        private TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
 
         // GET: api/Spaces
         [Route("")]

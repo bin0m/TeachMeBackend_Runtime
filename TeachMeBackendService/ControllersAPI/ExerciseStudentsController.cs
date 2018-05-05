@@ -17,13 +17,13 @@ namespace TeachMeBackendService.ControllersAPI
     [Authorize]
     public class ExerciseStudentsController : ApiController
     {
-        private readonly TeachMeBackendContext db = new TeachMeBackendContext();
+        private readonly TeachMeBackendContext _db = new TeachMeBackendContext();
 
         // GET: api/ExerciseStudents
         [Route("")]
         public IQueryable<ExerciseStudent> GetExerciseStudents()
         {
-            return db.ExerciseStudents;
+            return _db.ExerciseStudents;
         }
 
         // GET: api/ExerciseStudents/5
@@ -31,7 +31,7 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(ExerciseStudent))]
         public IHttpActionResult GetExerciseStudent(string id)
         {
-            ExerciseStudent exerciseStudent = db.ExerciseStudents.Find(id);
+            ExerciseStudent exerciseStudent = _db.ExerciseStudents.Find(id);
             if (exerciseStudent == null)
             {
                 return NotFound();
@@ -44,7 +44,7 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("~/api/v{version:ApiVersion}/exercises/{id}/exercisestudents")]
         public IQueryable<ExerciseStudent> GetByExercise(string id)
         {
-            var exerciseStudents = db.ExerciseStudents.Where(c => c.ExerciseId == id);
+            var exerciseStudents = _db.ExerciseStudents.Where(c => c.ExerciseId == id);
 
             return exerciseStudents;
         }
@@ -64,11 +64,11 @@ namespace TeachMeBackendService.ControllersAPI
                 exerciseStudent.Id = Guid.NewGuid().ToString("N");
             }       
     
-            db.ExerciseStudents.Add(exerciseStudent);
+            _db.ExerciseStudents.Add(exerciseStudent);
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -101,7 +101,7 @@ namespace TeachMeBackendService.ControllersAPI
                 return BadRequest();
             }
 
-            var parentInDb = db.ExerciseStudents
+            var parentInDb = _db.ExerciseStudents
                 .SingleOrDefault(p => p.Id == exerciseStudent.Id);
 
             if (parentInDb != null)
@@ -110,11 +110,11 @@ namespace TeachMeBackendService.ControllersAPI
                 exerciseStudent.CreatedAt = parentInDb.CreatedAt;
 
                 // Update parent
-                db.Entry(parentInDb).CurrentValues.SetValues(exerciseStudent);   
+                _db.Entry(parentInDb).CurrentValues.SetValues(exerciseStudent);   
 
                 try
                 {
-                    db.SaveChanges();
+                    _db.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -129,7 +129,7 @@ namespace TeachMeBackendService.ControllersAPI
                 }
             }
 
-            ExerciseStudent freshExerciseStudent = db
+            ExerciseStudent freshExerciseStudent = _db
                 .ExerciseStudents
                 .SingleOrDefault(ex => ex.Id == id);
 
@@ -146,18 +146,18 @@ namespace TeachMeBackendService.ControllersAPI
         [ResponseType(typeof(void))]
         public IHttpActionResult DeleteExerciseStudent(string id)
         {
-            ExerciseStudent exerciseStudent = db.ExerciseStudents.Find(id);
+            ExerciseStudent exerciseStudent = _db.ExerciseStudents.Find(id);
 
             if (exerciseStudent == null)
             {
                 return NotFound();
             }
 
-            db.ExerciseStudents.Remove(exerciseStudent);
+            _db.ExerciseStudents.Remove(exerciseStudent);
 
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -171,14 +171,14 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool ExerciseStudentExists(string id)
         {
-            return db.ExerciseStudents.Count(e => e.Id == id) > 0;
+            return _db.ExerciseStudents.Count(e => e.Id == id) > 0;
         }
     }
 }

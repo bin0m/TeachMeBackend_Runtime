@@ -1,9 +1,6 @@
 ﻿using Microsoft.Azure.Mobile.Server;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using TeachMeBackendService.Models;
 
 
 namespace TeachMeBackendService.DataObjects
@@ -13,8 +10,8 @@ namespace TeachMeBackendService.DataObjects
         [StringLength(128)]
         public string Name { get; set; }
 
-        // Children GroupStudyPrograms
-        public List<GroupStudyProgram> GroupStudyPrograms { get; set; }
+        // Children PartyStudyPrograms
+        public List<PartyStudyProgram> PartyStudyPrograms { get; set; }
 
         // Children StudyProgramCourses
         public List<StudyProgramCourse> StudyProgramCourses { get; set; }

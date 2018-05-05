@@ -5,7 +5,7 @@ namespace TeachMeBackendService.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class UniversitiesFeatureTablesCreation2 : DbMigration
+    public partial class UniversitiesFeatureTablesCreation3 : DbMigration
     {
         public override void Up()
         {
@@ -113,7 +113,7 @@ namespace TeachMeBackendService.Migrations
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
-                "dbo.GroupStudyPrograms",
+                "dbo.PartyStudyPrograms",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128,
@@ -124,7 +124,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        GroupId = c.String(nullable: false, maxLength: 128),
+                        PartyId = c.String(nullable: false, maxLength: 128),
                         StudyProgramId = c.String(nullable: false, maxLength: 128),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
@@ -160,14 +160,14 @@ namespace TeachMeBackendService.Migrations
                             }),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.Parties", t => t.PartyId, cascadeDelete: true)
                 .ForeignKey("dbo.StudyPrograms", t => t.StudyProgramId, cascadeDelete: true)
-                .Index(t => t.GroupId)
+                .Index(t => t.PartyId)
                 .Index(t => t.StudyProgramId)
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
-                "dbo.Groups",
+                "dbo.Parties",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128,
@@ -279,7 +279,7 @@ namespace TeachMeBackendService.Migrations
                 .Index(t => t.CreatedAt, clustered: true);
             
             CreateTable(
-                "dbo.GroupUsers",
+                "dbo.PartyUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128,
@@ -290,7 +290,7 @@ namespace TeachMeBackendService.Migrations
                                     new AnnotationValues(oldValue: null, newValue: "Id")
                                 },
                             }),
-                        GroupId = c.String(nullable: false, maxLength: 128),
+                        PartyId = c.String(nullable: false, maxLength: 128),
                         UserId = c.String(nullable: false, maxLength: 128),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                             annotations: new Dictionary<string, AnnotationValues>
@@ -326,9 +326,9 @@ namespace TeachMeBackendService.Migrations
                             }),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.Parties", t => t.PartyId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.GroupId)
+                .Index(t => t.PartyId)
                 .Index(t => t.UserId)
                 .Index(t => t.CreatedAt, clustered: true);
             
@@ -491,33 +491,33 @@ namespace TeachMeBackendService.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.StudyProgramCourses", "StudyProgramId", "dbo.StudyPrograms");
-            DropForeignKey("dbo.GroupStudyPrograms", "StudyProgramId", "dbo.StudyPrograms");
-            DropForeignKey("dbo.GroupStudyPrograms", "GroupId", "dbo.Groups");
-            DropForeignKey("dbo.Groups", "UniversityId", "dbo.Universities");
-            DropForeignKey("dbo.Groups", "StudyPeriodId", "dbo.StudyPeriods");
-            DropForeignKey("dbo.Groups", "SpecialtyId", "dbo.Specialties");
-            DropForeignKey("dbo.GroupUsers", "UserId", "dbo.Users");
-            DropForeignKey("dbo.GroupUsers", "GroupId", "dbo.Groups");
-            DropForeignKey("dbo.Groups", "FacultyId", "dbo.Faculties");
+            DropForeignKey("dbo.PartyStudyPrograms", "StudyProgramId", "dbo.StudyPrograms");
+            DropForeignKey("dbo.PartyStudyPrograms", "PartyId", "dbo.Parties");
+            DropForeignKey("dbo.Parties", "UniversityId", "dbo.Universities");
+            DropForeignKey("dbo.Parties", "StudyPeriodId", "dbo.StudyPeriods");
+            DropForeignKey("dbo.Parties", "SpecialtyId", "dbo.Specialties");
+            DropForeignKey("dbo.PartyUsers", "UserId", "dbo.Users");
+            DropForeignKey("dbo.PartyUsers", "PartyId", "dbo.Parties");
+            DropForeignKey("dbo.Parties", "FacultyId", "dbo.Faculties");
             DropForeignKey("dbo.StudyProgramCourses", "CourseId", "dbo.Courses");
             DropIndex("dbo.Universities", new[] { "CreatedAt" });
             DropIndex("dbo.Universities", new[] { "Name" });
             DropIndex("dbo.StudyPeriods", new[] { "CreatedAt" });
             DropIndex("dbo.Specialties", new[] { "CreatedAt" });
             DropIndex("dbo.Specialties", new[] { "Name" });
-            DropIndex("dbo.GroupUsers", new[] { "CreatedAt" });
-            DropIndex("dbo.GroupUsers", new[] { "UserId" });
-            DropIndex("dbo.GroupUsers", new[] { "GroupId" });
+            DropIndex("dbo.PartyUsers", new[] { "CreatedAt" });
+            DropIndex("dbo.PartyUsers", new[] { "UserId" });
+            DropIndex("dbo.PartyUsers", new[] { "PartyId" });
             DropIndex("dbo.Faculties", new[] { "CreatedAt" });
             DropIndex("dbo.Faculties", new[] { "Name" });
-            DropIndex("dbo.Groups", new[] { "CreatedAt" });
-            DropIndex("dbo.Groups", new[] { "SpecialtyId" });
-            DropIndex("dbo.Groups", new[] { "FacultyId" });
-            DropIndex("dbo.Groups", new[] { "StudyPeriodId" });
-            DropIndex("dbo.Groups", new[] { "UniversityId" });
-            DropIndex("dbo.GroupStudyPrograms", new[] { "CreatedAt" });
-            DropIndex("dbo.GroupStudyPrograms", new[] { "StudyProgramId" });
-            DropIndex("dbo.GroupStudyPrograms", new[] { "GroupId" });
+            DropIndex("dbo.Parties", new[] { "CreatedAt" });
+            DropIndex("dbo.Parties", new[] { "SpecialtyId" });
+            DropIndex("dbo.Parties", new[] { "FacultyId" });
+            DropIndex("dbo.Parties", new[] { "StudyPeriodId" });
+            DropIndex("dbo.Parties", new[] { "UniversityId" });
+            DropIndex("dbo.PartyStudyPrograms", new[] { "CreatedAt" });
+            DropIndex("dbo.PartyStudyPrograms", new[] { "StudyProgramId" });
+            DropIndex("dbo.PartyStudyPrograms", new[] { "PartyId" });
             DropIndex("dbo.StudyPrograms", new[] { "CreatedAt" });
             DropIndex("dbo.StudyProgramCourses", new[] { "CreatedAt" });
             DropIndex("dbo.StudyProgramCourses", new[] { "CourseId" });
@@ -639,7 +639,7 @@ namespace TeachMeBackendService.Migrations
                         }
                     },
                 });
-            DropTable("dbo.GroupUsers",
+            DropTable("dbo.PartyUsers",
                 removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
                 {
                     {
@@ -717,7 +717,7 @@ namespace TeachMeBackendService.Migrations
                         }
                     },
                 });
-            DropTable("dbo.Groups",
+            DropTable("dbo.Parties",
                 removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
                 {
                     {
@@ -756,7 +756,7 @@ namespace TeachMeBackendService.Migrations
                         }
                     },
                 });
-            DropTable("dbo.GroupStudyPrograms",
+            DropTable("dbo.PartyStudyPrograms",
                 removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
                 {
                     {

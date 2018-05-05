@@ -21,12 +21,12 @@ namespace TeachMeBackendService.ControllersAPI
     public class AuthCustomController : ApiController
     {
         private ApplicationUserManager _userManager;
-        private string signingKey;
-        private string audience;
-        private string issuer;
-        private int jwtTokenExpirationTimeInHours;
+        private readonly string signingKey;
+        private readonly string audience;
+        private readonly string issuer;
+        private readonly int jwtTokenExpirationTimeInHours;
 
-        TeachMeBackendContext dbContext
+        TeachMeBackendContext DbContext
         {
             get
             {
@@ -39,10 +39,6 @@ namespace TeachMeBackendService.ControllersAPI
             get
             {
                 return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
             }
         }
 
@@ -129,7 +125,7 @@ namespace TeachMeBackendService.ControllersAPI
 
             var token = AppServiceLoginHandler.CreateToken(claims, signingKey, audience, issuer, TimeSpan.FromHours(jwtTokenExpirationTimeInHours));
 
-            var user = dbContext.Set<User>().Find(appUser.Id);
+            var user = DbContext.Set<User>().Find(appUser.Id);
 
            return new LoginResult()
             {
@@ -146,7 +142,7 @@ namespace TeachMeBackendService.ControllersAPI
         {
             if (disposing)
             {
-                dbContext.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }
