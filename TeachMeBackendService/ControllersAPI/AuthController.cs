@@ -100,6 +100,7 @@ namespace TeachMeBackendService.ControllersAPI
             switch (ident)
             {
                 case "facebook":
+                    //"access_token": "EAAB6D5R20a0BAFKFcXCZAfiZB1TGyQCvn1RyQ6xEpooCYtX0mZBmhQbxUas58hGAsGbiZAijLya85YGoGAbSrCOgZA2lkQPLuft5ZAGbZBHxS2tWJGnCobibCVbxk66w6ZAyjOlF47PBoJhtmyZAAxDfnnv2CfL5H2osZD"
                     var token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
                     using (HttpClient client = new HttpClient())
                     {
@@ -142,6 +143,7 @@ namespace TeachMeBackendService.ControllersAPI
                         //Create new local account for facebook user
                         var appUser = new ApplicationUser() { UserName = newUser.Email, Email = newUser.Email, FullName = newUser.FullName };
 
+                        // get user's image from Facebook
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
                         {
                             var x = JObject.Parse(await response.Content.ReadAsStringAsync());
@@ -162,6 +164,7 @@ namespace TeachMeBackendService.ControllersAPI
 
                             await UserManager.AddToRoleAsync(appUser.Id, newUser.UserRole.ToString());
 
+                            // Create new Internal User
                             DbContext.Set<User>().Add(newUser);
                             DbContext.SaveChanges();
 
@@ -192,14 +195,13 @@ namespace TeachMeBackendService.ControllersAPI
                         {
                             string message = ex.Message;
                             return BadRequest(message);
-                        }
-
-
-              
+                        }              
                     }
-
-                    // Create Internal User
-                    //var appUser = new ApplicationUser() { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+                    break;
+                case "google":
+                    // Google case
+                default:
+                    // other identity provider
                     break;
             }
             return Ok(newUser);
