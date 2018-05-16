@@ -94,8 +94,10 @@ namespace TeachMeBackendService.ControllersAPI
         [Route("InternalUser", Name = "GetInternalUser")]
         public async Task<IHttpActionResult> GetInternalUser()
         {
-            var serviceUser = User as ClaimsPrincipal;
-            var ident = serviceUser?.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
+            //var serviceUser = User as ClaimsPrincipal;
+            //var ident = serviceUser?.FindFirst("http://schemas.microsoft.com/identity/claims/identityprovider").Value;
+            //For Debug 
+            var ident = "facebook";
             var newUser = new User();
             switch (ident)
             {
@@ -104,19 +106,25 @@ namespace TeachMeBackendService.ControllersAPI
                     var token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
                     using (HttpClient client = new HttpClient())
                     {
-                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "?access_token=" + token))
+                        using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/v3.0/me?fields=id,name,email" + "&access_token=" + token))
                         {
                             var o = JObject.Parse(await response.Content.ReadAsStringAsync());
                             newUser.FacebookId = o["id"].ToString();
                             newUser.Email = o["email"].ToString();
-                            newUser.FullName = o["name"].ToString();
-                            newUser.DateOfBirth = DateTime.Parse(o["birthday"].ToString());
+                            newUser.FullName = o["name"].ToString();                            
                             newUser.RegisterDate = DateTime.Now;
                             newUser.UserRole = UserRole.Student;
+                            JToken birtday = o["birthday"];
+                            if (birtday != null)
+                            {
+                                newUser.DateOfBirth = DateTime.Parse(birtday.ToString());
+                            }
+                            
                         }
 
+
                         // look for existing user with facebook Id
-                        var existingUser = DbContext.Set<User>().Single(u => u.FacebookId == newUser.FacebookId);
+                        var existingUser = DbContext.Set<User>().SingleOrDefault(u => u.FacebookId == newUser.FacebookId);
                         if (existingUser != null)
                         {
                             // user have been registered already via facebook, return user
@@ -135,6 +143,11 @@ namespace TeachMeBackendService.ControllersAPI
                                 existingUser2.FacebookId = newUser.FacebookId;
                                 DbContext.SaveChanges();
                                 return Ok(existingUser2);
+                            }
+                            else
+                            {
+                                //Flaw scenario: AppUser is exist, but inner User is not
+                                //TODO: Anyway create inner user instead throwing an exception
                             }
 
                             //TODO: maybe create new local Auth token instead of automatic token created
@@ -433,7 +446,7 @@ namespace TeachMeBackendService.ControllersAPI
         /// <param name="filePath"></param>
         private void UploadImageToBlob(string filePath)
         {
-            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+            string storageConnectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
