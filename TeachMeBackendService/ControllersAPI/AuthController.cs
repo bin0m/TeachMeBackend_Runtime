@@ -19,6 +19,8 @@ using TeachMeBackendService.DataObjects;
 using TeachMeBackendService.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
+using System.Net;
 
 namespace TeachMeBackendService.ControllersAPI
 {
@@ -34,7 +36,7 @@ namespace TeachMeBackendService.ControllersAPI
         private readonly int _jwtTokenExpirationTimeInHours;
 
         private const string WelcomeEmailSubject = "Welcome to TeachMe!";
-        private const string WelcomeEmailBody = "Hi {0},\n Welcome to the Teachme application - where you can study and teach.\n Your username:{1} \n Good Luck!";
+        private const string WelcomeEmailBody = "Hi {0},\n Welcome to the Teachme application - where you can study and teach.\n Your username: {1} \n Good Luck!";
 
         public ApplicationUserManager UserManager
         {
@@ -114,6 +116,7 @@ namespace TeachMeBackendService.ControllersAPI
                             newUser.FullName = o["name"].ToString();                            
                             newUser.RegisterDate = DateTime.Now;
                             newUser.UserRole = UserRole.Student;
+                            newUser.Login = newUser.Email;                           
                             JToken birtday = o["birthday"];
                             if (birtday != null)
                             {
@@ -160,10 +163,11 @@ namespace TeachMeBackendService.ControllersAPI
                         using (HttpResponseMessage response = await client.GetAsync("https://graph.facebook.com/me" + "/picture?redirect=false&access_token=" + token))
                         {
                             var x = JObject.Parse(await response.Content.ReadAsStringAsync());
-                            var image = (x["data"]["url"].ToString());
+                            var imageUrl = (x["data"]["url"].ToString());
                             //TODO: Upload image to Azure Blob and get some blobPath
-                            UploadImageToBlob(image);
-                            newUser.AvatarPath = image;
+                            var imageName = $"{newUser.Email}_{DateTimeOffset.Now:dd-MM-yyyy_HH:mm:ss.fff}";
+                            UploadImageToBlob(imageUrl, imageName);
+                            newUser.AvatarPath = imageName;
                         }
 
                         try
@@ -178,6 +182,7 @@ namespace TeachMeBackendService.ControllersAPI
                             await UserManager.AddToRoleAsync(appUser.Id, newUser.UserRole.ToString());
 
                             // Create new Internal User
+                            newUser.Id = appUser.Id;
                             DbContext.Set<User>().Add(newUser);
                             DbContext.SaveChanges();
 
@@ -440,11 +445,8 @@ namespace TeachMeBackendService.ControllersAPI
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filePath"></param>
-        private void UploadImageToBlob(string filePath)
+
+        private void UploadImageToBlob(string imageUrl, string newName)
         {
             string storageConnectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
 
@@ -452,11 +454,15 @@ namespace TeachMeBackendService.ControllersAPI
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference("images");
 
-            var blockBlob = container.GetBlockBlobReference("anewblob");
-            // Create or overwrite the "myblob" blob with contents from a local file.
-            using (var fileStream = System.IO.File.OpenRead(filePath))
+            var cblob = container.GetBlockBlobReference(newName);
+            // Create or overwrite the "anewblob" blob with contents from a local file.
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageUrl);
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                blockBlob.UploadFromStream(fileStream);
+                using (Stream inputStream = response.GetResponseStream())
+                {
+                    cblob.UploadFromStream(inputStream);
+                }                  
             }
         }
 
