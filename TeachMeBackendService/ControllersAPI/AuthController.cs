@@ -104,7 +104,7 @@ namespace TeachMeBackendService.ControllersAPI
             switch (ident)
             {
                 case "facebook":
-                    //"access_token": "EAAB6D5R20a0BAFKFcXCZAfiZB1TGyQCvn1RyQ6xEpooCYtX0mZBmhQbxUas58hGAsGbiZAijLya85YGoGAbSrCOgZA2lkQPLuft5ZAGbZBHxS2tWJGnCobibCVbxk66w6ZAyjOlF47PBoJhtmyZAAxDfnnv2CfL5H2osZD"
+                    //"access_token": "EAAB6D5R20a0BAHxCZB4G0cuVZBohbq80VvO98JncZBslEAqtgX3Eud7nRXT10RqNUvL9JktHoMYT2bbheL4ajBHEFxqJMMpOYT6mJZBeZAvoDbftCSpIIlv5pBE7FgqJAawMLjUeZCtKJFZChu0xHCDrL0G3GwEwMEZD"
                     var token = Request.Headers.GetValues("X-MS-TOKEN-FACEBOOK-ACCESS-TOKEN").FirstOrDefault();
                     using (HttpClient client = new HttpClient())
                     {
