@@ -14,10 +14,13 @@ namespace TeachMeBackendService.Tests
         }
 
         [Test]
-        public void TestGet()
+        public void TestPost()
         {
-           // var result = valuesController.Get();
-           // Assert.AreEqual(result, "Hello from localhost");
+           var result = valuesController.Post();
+           Assert.AreEqual(result, "Hello World!");
         }
+
+       
+
     }
 }
