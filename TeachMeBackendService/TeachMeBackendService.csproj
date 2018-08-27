@@ -147,7 +147,7 @@
       <HintPath>..\packages\WindowsAzure.Storage.9.1.1\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -217,6 +217,7 @@
     <Compile Include="ControllersAPI\SectionsController.cs" />
     <Compile Include="ControllersAPI\UsersController.cs" />
     <Compile Include="ControllersTables\AnswerController.cs" />
+    <Compile Include="ControllersTables\BaseController.cs" />
     <Compile Include="ControllersTables\CommentController.cs" />
     <Compile Include="ControllersTables\CommentRatingController.cs" />
     <Compile Include="ControllersTables\CourseController.cs" />

@@ -16,14 +16,8 @@ namespace TeachMeBackendService.ControllersTables
  //   [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
     [ApiVersionNeutral]
     [Authorize]
-    public class TodoItemController : TableController<TodoItem>
-    {
-        protected override void Initialize(HttpControllerContext controllerContext)
-        {
-            base.Initialize(controllerContext);
-            TeachMeBackendContext context = new TeachMeBackendContext();
-            DomainManager = new EntityDomainManager<TodoItem>(context, Request);
-        }
+    public class TodoItemController : BaseController<TodoItem>
+    {   
 
         // GET tables/TodoItem
   //      [Route("")]
