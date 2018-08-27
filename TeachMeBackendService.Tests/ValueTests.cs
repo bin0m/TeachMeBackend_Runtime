@@ -6,18 +6,18 @@ namespace TeachMeBackendService.Tests
     [TestFixture]
     public class ValueTests
     {
-        private readonly ValuesController valuesController;
+        private readonly ValuesController _valuesController;
 
         public ValueTests()
         {
-            valuesController = new ValuesController();
+            _valuesController = new ValuesController();
         }
 
         [Test]
         public void TestPost()
         {
-           var result = valuesController.Post();
-           Assert.AreEqual(result, "Hello World!");
+           var result = _valuesController.Post();
+           Assert.AreEqual("Hello World!", result);
         }
 
        

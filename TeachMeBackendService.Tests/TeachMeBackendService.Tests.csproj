@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelperTest.cs" />
+    <Compile Include="TodoItemTests.cs" />
     <Compile Include="ValueTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
