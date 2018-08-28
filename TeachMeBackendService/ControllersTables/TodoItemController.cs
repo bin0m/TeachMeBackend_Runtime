@@ -14,8 +14,8 @@ namespace TeachMeBackendService.ControllersTables
 {
  //   [ApiVersion("1.0")]   
  //   [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
-    [ApiVersionNeutral]
-    [Authorize]
+ //   [ApiVersionNeutral]
+ //  [Authorize]
     public class TodoItemController : BaseController<TodoItem>
     {   
 

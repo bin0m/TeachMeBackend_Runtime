@@ -1,8 +1,13 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Azure.Mobile.Server;
+using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Web.Http;
 using TeachMeBackendService.ControllersTables;
+using TeachMeBackendService.DataObjects;
+using TeachMeBackendService.Models;
 
 namespace TeachMeBackendService.Tests
 {
@@ -12,21 +17,19 @@ namespace TeachMeBackendService.Tests
         private readonly TodoItemController _controller;
 
 
-        //public TodoItemTests()
-        //{
-        //    AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory()); // See 1*
-        //    WebApiConfig.Register(); // See 2*
+        public TodoItemTests()
+        {
+            //AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory()); // See 1*
+            //WebApiConfig.Register(); // See 2*
 
-        //    _controller = new TodoItemController();
-        //    var context = new mdaviestestContext();
-        //    _controller.DomainManager = (
-        //        new EntityDomainManager<TodoItem>(
-        //            context,
-        //            new HttpRequestMessage(),
-        //            new ApiServices(new HttpConfiguration())
-        //        )
-        //    );
-        //}
+            _controller = new TodoItemController();
+            _controller.SetDomainManager(
+                new EntityDomainManager<TodoItem>(
+                    new TeachMeBackendContext(),
+                    new HttpRequestMessage())
+                );
+           
+        }
 
 
         [Test]
