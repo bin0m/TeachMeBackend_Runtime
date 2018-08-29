@@ -16,11 +16,21 @@ namespace TeachMeBackendService.ControllersTables
  //   [RoutePrefix("api/v{version:ApiVersion}/todoitem")]
  //   [ApiVersionNeutral]
  //  [Authorize]
-    public class TodoItemController : BaseController<TodoItem>
-    {   
+    public class TodoItemController : TableController<TodoItem>
+    {
+        protected override void Initialize(HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+            TeachMeBackendContext context = new TeachMeBackendContext();
+            DomainManager = new EntityDomainManager<TodoItem>(context, Request);
+        }
 
+        public void SetDomainManager(EntityDomainManager<TodoItem> domainManager)
+        {
+            DomainManager = domainManager;
+        }
         // GET tables/TodoItem
-  //      [Route("")]
+        //      [Route("")]
         public IQueryable<TodoItem> GetAllTodoItems()
         {
             var query = Query();
